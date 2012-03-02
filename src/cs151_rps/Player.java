@@ -4,7 +4,7 @@
  */
 package cs151_rps;
 
-import cs151_rps.GameObject;
+//import cs151_rps.GameObject;
 
 /**
  * Abstraction of a player (human or automaton)
@@ -12,6 +12,17 @@ import cs151_rps.GameObject;
  * @author bwormley
  */
 public abstract class Player {
+	
+	private String name;
+	public Player(String name)
+	{
+		name = name;
+	}
+	
+	public String getName()
+	{
+		return name;
+	}
     
     /**
      * queryThrow() - query for a player's throw for one round
