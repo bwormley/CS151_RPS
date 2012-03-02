@@ -30,6 +30,11 @@ public class ComputerPlayer extends Player
 			
 		
 	}	//end of queryThrow
+        
+        ComputerPlayer( String name )
+        {
+            super( name );
+        }
 
 	
 }	//end of ComputerPlayer

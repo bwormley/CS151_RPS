@@ -49,6 +49,11 @@ public class UserPlayer extends Player
 		
 
 	}	//end of queryThrow
+        
+        UserPlayer( String name )
+        {
+            super( name );
+        }
 
 
 }	//end of UserPlayer
