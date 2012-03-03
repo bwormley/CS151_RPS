@@ -5,21 +5,35 @@
  */
 package cs151_rps;
 
+import java.lang.Integer;
+import static cs151_rps.MessageType.*;
+
+
 public class Scorecard {
     private int playerOneScore = 0; 
-    private int playerTwoSocre = 0; 
-    private int numofTies = 0; 
+    private int playerTwoScore = 0; 
+    private int numOfTies = 0; 
+    private Message message;
+    private Player playerOne;
+    private Player playerTwo;
+    
+    public Scorecard( Message message, Player playerOne, Player playerTwo )
+    {
+        this.message = message;
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
+    }
     
     public void setPlayerOneScore (int userScore) {
         playerOneScore = userScore; 
     }
     
     public void setPlayerTwoScore(int computerScore) {
-        playerTwoSocre = computerScore; 
+        playerTwoScore = computerScore; 
     }
     
-    public void setNumofTies(int ties) {
-        numofTies = ties; 
+    public void setNumOfTies(int ties) {
+        numOfTies = ties; 
     }
     
     public int getPlayerOneScore() {
@@ -27,13 +41,16 @@ public class Scorecard {
     }
     
     public int getPlayerTwoScore () {
-        return playerTwoSocre; 
+        return playerTwoScore; 
     }
     
-    public int getNumofTies() {
-        return numofTies; 
+    public int getNumOfTies() {
+        return numOfTies; 
     }
     
     public void displayScore() {
+        System.out.print( playerOne.getName() + " " + message.getMessage(WINS) + ": " + playerOneScore + ", " );
+        System.out.print( playerTwo.getName() + " " + message.getMessage(WINS) + ": " + playerTwoScore + ", " );
+        System.out.println( message.getMessage(TIES) + ": " + numOfTies );
     }
 }

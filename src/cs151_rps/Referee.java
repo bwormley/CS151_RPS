@@ -9,7 +9,12 @@ public class Referee {
     
     public enum Winner {PLAYER1, PLAYER2, TIE}
     
-    Scorecard thescoreCard = new Scorecard(); 
+    Scorecard thescoreCard;
+    
+    public Referee( Scorecard scorecard )
+    {
+        this.thescoreCard = scorecard;
+    }
     
     public Winner determineWinner (GameObject playerOne, GameObject playerTwo){
         if (playerOne.equals(GameObject.ROCK) && playerTwo.equals(GameObject.ROCK)) {
@@ -102,7 +107,7 @@ public class Referee {
             case PLAYER2:
                 thescoreCard.setPlayerTwoScore(thescoreCard.getPlayerTwoScore()+1);
             case TIE:
-                thescoreCard.setNumofTies(thescoreCard.getNumofTies() + 1);
+                thescoreCard.setNumOfTies(thescoreCard.getNumOfTies() + 1);
         }
     }
 }
