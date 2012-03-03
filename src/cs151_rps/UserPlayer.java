@@ -13,10 +13,9 @@ import cs151_rps.GameObject;
 public class UserPlayer extends Player 
 {
 	
-	public UserPlayer(String name, Scorecard score) 
+	public UserPlayer(String name) 
 	{
-		super(name, score);
-		
+		super(name);
 	}
 
 	/**

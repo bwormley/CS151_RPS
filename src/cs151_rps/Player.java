@@ -15,11 +15,15 @@ public abstract class Player {
 	
 	private String name;
 	protected Scorecard score;
-	public Player(String name, Scorecard score)
+	public Player(String name)
 	{
-		name = name;
-		score = score;
+		this.name = name;
 	}
+        
+        public void setScorecard( Scorecard scorecard )
+        {
+            score = scorecard;
+        }
 	
 	public String getName()
 	{

@@ -31,9 +31,9 @@ public class ComputerPlayer extends Player
 		
 	}	//end of queryThrow
         
-        ComputerPlayer( String name, Scorecard score )
+        ComputerPlayer( String name )
         {
-            super( name, score );
+            super( name );
         }
 
 	

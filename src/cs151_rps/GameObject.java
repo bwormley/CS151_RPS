@@ -1,10 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cs151_rps;
 
 /**
+ * This class enumerates all the gestures that a player displays in this game.
  *
  * @author bwormley
  */
