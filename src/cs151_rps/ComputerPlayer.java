@@ -9,7 +9,7 @@ public class ComputerPlayer extends Player
 	 * Finds out a computer's choice. A random decision.
 	 */
 	@Override
-	GameObject queryThrow() 
+	GameObject queryThrow() throws Exception
 	{
 		Random rand = new Random();
 		int choice = rand.nextInt();
@@ -31,9 +31,9 @@ public class ComputerPlayer extends Player
 		
 	}	//end of queryThrow
         
-        ComputerPlayer( String name )
+        ComputerPlayer( String name, Scorecard score )
         {
-            super( name );
+            super( name, score );
         }
 
 	

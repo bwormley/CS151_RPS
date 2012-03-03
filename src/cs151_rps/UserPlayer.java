@@ -13,47 +13,70 @@ import cs151_rps.GameObject;
 public class UserPlayer extends Player 
 {
 	
+	public UserPlayer(String name, Scorecard score) 
+	{
+		super(name, score);
+		
+	}
+
 	/**
 	 * Finds out user's choice and returns it
+	 * @throws Exception 
 	 */
 	@Override
-	GameObject queryThrow() 
+	GameObject queryThrow() throws Exception 
 	{
 		//Prompts for the user's choice
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Enter in your choice: /n" +
-				"1 for rock /n" +
-				"2 for paper /n" +
-				"3 for scissor /n ");
-		int object = 0;
+		Message mess = new Message("English");
+		System.out.println(mess.getMessage(MessageType.PLAY_USAGE));
+		String choice = "";
 		
 		if(scan.hasNext())
 		{
-			object = scan.nextInt();
-			object = object%3;
+			choice = scan.next();
+			choice = choice.trim();
+			
 		}
 		
 		//decides the user's choice
-		if(object == 0)
+		if(choice.equalsIgnoreCase("rock"))
 		{
 			return GameObject.ROCK;
 		}
-		else if(object == 1)
+		else if(choice.equalsIgnoreCase("paper"))
 		{
 			return GameObject.PAPER;
 		}
-		else //default is scissors
+		else if(choice.equalsIgnoreCase("scissors"))//default is scissors
 		{
 			return GameObject.SCISSORS;
+		}
+		else if(choice.equalsIgnoreCase("help"))
+		{
+			System.out.println(mess.getMessage(MessageType.PLAY_USAGE));
+			
+			return null;
+		}
+		else if(choice.equalsIgnoreCase("score"))
+		{
+			System.out.println(	score.getPlayerOneScore());	//output score
+			return null;
+		}
+		else if(choice.equalsIgnoreCase("quit"))
+		{
+			throw new Exception();
+		}
+		else
+		{
+			System.out.println(mess.getMessage(MessageType.INVALID_INPUT));
+			return null;
 		}
 		
 
 	}	//end of queryThrow
         
-        UserPlayer( String name )
-        {
-            super( name );
-        }
+
 
 
 }	//end of UserPlayer

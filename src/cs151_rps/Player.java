@@ -14,9 +14,11 @@ package cs151_rps;
 public abstract class Player {
 	
 	private String name;
-	public Player(String name)
+	protected Scorecard score;
+	public Player(String name, Scorecard score)
 	{
 		name = name;
+		score = score;
 	}
 	
 	public String getName()
@@ -30,7 +32,8 @@ public abstract class Player {
      * Note: this call may block if user input is required
      *
      * @return rock/paper/scissors chosen by the player
+     * @throws Exception 
      */
-    abstract GameObject queryThrow();
+    abstract GameObject queryThrow() throws Exception;
 
 }
