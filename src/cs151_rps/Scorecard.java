@@ -33,4 +33,7 @@ public class Scorecard {
     public int getNumofTies() {
         return numofTies; 
     }
+    
+    public void displayScore() {
+    }
 }
