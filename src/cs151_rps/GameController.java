@@ -18,8 +18,9 @@ public class GameController {
     /**
     * Constructor
     */
-    public GameController()
+    public GameController( int maxRounds )
     {
+        this.maxRounds = maxRounds;
         message = new Message(""); // note: null string signifies default language
     }
 
@@ -91,12 +92,13 @@ public class GameController {
         player1.setScorecard( scorecard );
         player2.setScorecard( scorecard );
         
-        //prompt user for number of rounds
-        System.out.print( message.getMessage(PROMPT_ROUNDS) );
-        Scanner scan = new Scanner(System.in);
-	if(scan.hasNext())
-            maxRounds = scan.nextInt();
-
+        //prompt user for number of rounds if not already added to command line
+        if (maxRounds<=0) {
+            System.out.print( message.getMessage(PROMPT_ROUNDS) );
+            Scanner scan = new Scanner(System.in);
+	    if(scan.hasNext())
+                maxRounds = scan.nextInt();
+        }
         
         // main game loop
         for ( int round=1; round <= maxRounds; round++ ) {
