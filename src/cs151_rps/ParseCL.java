@@ -9,8 +9,7 @@ import java.lang.IllegalArgumentException;
  * 
  * @author: CS151 Team Lunar
  */
-public class ParseCL 
-    extends HashMap<String,Object> 
+public class ParseCL
 {
     public enum ParamType { NONE, INTEGER, STRING }
     /**
