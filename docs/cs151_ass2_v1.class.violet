@@ -154,6 +154,21 @@ Note: All unmarked aggregates are 1:1&lt;/font&gt;
     </void> 
    </object> 
   </void> 
+  <void method="addNode"> 
+   <object class="com.horstmann.violet.ClassNode"> 
+    <void property="name"> 
+     <void property="text"> 
+      <string>ParseCL</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>592.0</double> 
+     <double>173.0</double> 
+    </void> 
+   </object> 
+  </void> 
   <void method="connect"> 
    <object class="com.horstmann.violet.ClassRelationshipEdge"> 
     <void property="bentStyle"> 
