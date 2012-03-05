@@ -6,16 +6,16 @@ package cs151_rps;
 
 import java.util.Scanner;
 
-import cs151_rps.GameObject;
+import static cs151_rps.GameObject.*;
 
 
 
 public class UserPlayer extends Player 
 {
 	
-	public UserPlayer(String name) 
+	public UserPlayer(String name, Message mess ) 
 	{
-		super(name);
+		super(name,mess);
 	}
 
 	/**
@@ -25,57 +25,37 @@ public class UserPlayer extends Player
 	@Override
 	GameObject queryThrow() throws Exception 
 	{
-		//Prompts for the user's choice
-		Scanner scan = new Scanner(System.in);
-		Message mess = new Message("English");
-		System.out.println(mess.getMessage(MessageType.PLAY_USAGE));
-		String choice = "";
 		
-		if(scan.hasNext())
-		{
-			choice = scan.next();
-			choice = choice.trim();
-			
-		}
-		
-		//decides the user's choice
-		if(choice.equalsIgnoreCase("rock"))
-		{
-			return GameObject.ROCK;
-		}
-		else if(choice.equalsIgnoreCase("paper"))
-		{
-			return GameObject.PAPER;
-		}
-		else if(choice.equalsIgnoreCase("scissors"))//default is scissors
-		{
-			return GameObject.SCISSORS;
-		}
-		else if(choice.equalsIgnoreCase("help"))
-		{
-			System.out.println(mess.getMessage(MessageType.PLAY_USAGE));
-			
-			return null;
-		}
-		else if(choice.equalsIgnoreCase("score"))
-		{
-			System.out.println(	score.getPlayerOneScore());	//output score
-			return null;
-		}
-		else if(choice.equalsIgnoreCase("quit"))
-		{
-			throw new Exception();
-		}
-		else
-		{
-			System.out.println(mess.getMessage(MessageType.INVALID_INPUT));
-			return null;
-		}
-		
+		// query for throw, loop until player chooses
+                while (true) {
+
+                    //Prompt for the user's choice
+                    Scanner scan = new Scanner(System.in);
+                    System.out.println(mess.getMessage(MessageType.USER_PROMPT));
+                    int choice = 5;
+                    if(scan.hasNext())
+                        choice = scan.nextInt();
+                    
+                    switch(choice) {
+                        case 1: // ROCK
+                            return GameObject.ROCK;
+                        case 2: // PAPER
+                            return GameObject.PAPER;
+                        case 3: // SCISSORS
+                            return GameObject.SCISSORS;
+                        case 5: // SCORE
+                            score.displayScore();
+                            break;
+                        case 6: // QUIT
+                            throw new Exception("user abort");
+                        default: // INVALID INPUT
+                            System.out.println(mess.getMessage(MessageType.INVALID_INPUT));                        
+                        case 4: // HELP (default)
+                            System.out.println(mess.getMessage(MessageType.HELP));
+                            break;
+                    }
+                }		
 
 	}	//end of queryThrow
-        
-
-
 
 }	//end of UserPlayer

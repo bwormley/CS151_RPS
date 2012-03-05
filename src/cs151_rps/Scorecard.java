@@ -49,8 +49,8 @@ public class Scorecard {
     }
     
     public void displayScore() {
-        System.out.print( playerOne.getName() + " " + message.getMessage(WINS) + ": " + playerOneScore + ", " );
-        System.out.print( playerTwo.getName() + " " + message.getMessage(WINS) + ": " + playerTwoScore + ", " );
-        System.out.println( message.getMessage(TIES) + ": " + numOfTies );
+        System.out.print( playerOne.getName() + " " + message.getMessage(WINS_REPORT) + playerOneScore + ", " );
+        System.out.print( playerTwo.getName() + " " + message.getMessage(WINS_REPORT) + playerTwoScore + ", " );
+        System.out.println( message.getMessage(TIES_REPORT) + numOfTies );
     }
 }

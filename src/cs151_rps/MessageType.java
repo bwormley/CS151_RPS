@@ -11,8 +11,8 @@ package cs151_rps;
 public enum MessageType {
     RUN_USAGE("Usage: rps [-r <number of rounds>]"),
     ROUND("round"),
-    PLAY_USAGE("Enter 1=ROCK, 2=PAPER, 3=SCISSORS, h=help, s=score, q=quit [h]: "),
-    HELP("Scissors beats paper. Papeer beats rock.  Rock beats scissors."),
+    USER_PROMPT("Enter 1=ROCK, 2=PAPER, 3=SCISSORS, 4=help, 5=score, 6=quit [4]: "),
+    HELP("Scissors beats paper. Paper beats rock.  Rock beats scissors."),
     SHOW_SCORE("Score: "),
     PROMPT_NAME("Enter your name: "),
     PROMPT_ROUNDS("Enter the number of rounds you would like to play: "),
@@ -21,8 +21,10 @@ public enum MessageType {
     PAPER("PAPER"),
     SCISSORS("SCISSORS"),
     WELCOME("Welcome to the Lunar Team's Rock/Paper/Scissors game."),
-    WINS("wins!"),
-    TIES("ties"),
+    WINS_ANNOUNCE("wins!"),
+    WINS_REPORT("Wins: "),
+    TIES_ANNOUNCE("ties"),
+    TIES_REPORT("Ties: "),
     QUIT_CONFIRM("Are you sure you want to quit?"),
     WINS_MATCH("wins the match!");
     

@@ -17,11 +17,13 @@ public class GameController {
     
     /**
     * Constructor
+    *
+    * @param maxRounds number of rounds for this match, as (typically) input from CL.  If 0, user is prompted.
     */
     public GameController( int maxRounds )
     {
         this.maxRounds = maxRounds;
-        message = new Message(""); // note: null string signifies default language
+        message = new Message(null); // note: null string signifies default locale
     }
 
     /**
@@ -61,6 +63,9 @@ public class GameController {
     private GameObject player1Throw;
     private GameObject player2Throw;
     
+    /**
+     * Main controlling method for the game
+     */
     public void main()
     {
         // Welcome, and acquire user's name 
@@ -77,8 +82,8 @@ public class GameController {
         
         // instantiate human and AI players
         try {
-            player1 = new UserPlayer(playerName);
-            player2 = new ComputerPlayer("The Computer");
+            player1 = new UserPlayer(playerName,message);
+            player2 = new ComputerPlayer("The Computer",message);
         }
         catch (Exception e) {
             System.out.println("Error:  Exception: " + e );
@@ -108,22 +113,22 @@ public class GameController {
                 player2Throw = player2.queryThrow();
             }
             catch (Exception e) {
-                System.out.println( "Error: Exceptoin: " + e );
+                System.out.println( "Error: Exception: " + e );
                 // TODO: fatal error: abort here, with specific cosolation.
             }
             Referee.Winner winner = referee.determineWinner( player1Throw, player2Throw );
             if (winner==Referee.Winner.PLAYER1)
-                System.out.println( player1.getName() + " " + message.getMessage(WINS));
+                System.out.println( player1.getName() + " " + message.getMessage(WINS_ANNOUNCE));
             else if (winner==Referee.Winner.PLAYER2)
-                System.out.println( player2.getName() + " " + message.getMessage(WINS));
+                System.out.println( player2.getName() + " " + message.getMessage(WINS_ANNOUNCE));
             else 
-                System.out.println( player1.getName() + " " + message.getMessage(TIES) + " " + player2.getName() );
+                System.out.println( player1.getName() + " " + message.getMessage(TIES_ANNOUNCE) + " " + player2.getName() );
 
             scorecard.displayScore();
             
         }
         
-        // display winner of the match
+        // TODO: display winner of the match
                                                     
     }
     

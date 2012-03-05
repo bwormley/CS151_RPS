@@ -14,10 +14,12 @@ package cs151_rps;
 public abstract class Player {
 	
 	private String name;
+        protected Message mess;
 	protected Scorecard score;
-	public Player(String name)
+	public Player(String name, Message mess)
 	{
 		this.name = name;
+                this.mess = mess;
 	}
         
         public void setScorecard( Scorecard scorecard )
