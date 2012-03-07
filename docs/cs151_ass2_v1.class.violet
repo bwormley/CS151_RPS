@@ -38,7 +38,7 @@ Note: All unmarked aggregates are 1:1&lt;/font&gt;
    <object id="ClassNode1" class="com.horstmann.violet.ClassNode"> 
     <void property="methods"> 
      <void property="text"> 
-      <string>Player factory();</string> 
+      <string>+ &lt;u&gt;Player factory();&lt;/u&gt;</string> 
      </void> 
     </void> 
     <void property="name"> 
@@ -118,7 +118,7 @@ Note: All unmarked aggregates are 1:1&lt;/font&gt;
    <object id="ClassNode6" class="com.horstmann.violet.ClassNode"> 
     <void property="methods"> 
      <void property="text"> 
-      <string>Message factory();</string> 
+      <string>+ &lt;u&gt;Message factory();&lt;/u&gt;</string> 
      </void> 
     </void> 
     <void property="name"> 
@@ -153,8 +153,8 @@ Note: All unmarked aggregates are 1:1&lt;/font&gt;
    <object id="ClassNode7" class="com.horstmann.violet.ClassNode"> 
     <void property="methods"> 
      <void property="text"> 
-      <string>ThrowGenerator factory();
-queryThrow();</string> 
+      <string>+ &lt;u&gt;ThrowGenerator factory();&lt;/u+ &gt;
++ queryThrow();</string> 
      </void> 
     </void> 
     <void property="name"> 
@@ -174,10 +174,10 @@ queryThrow();</string>
    <object id="ClassNode8" class="com.horstmann.violet.ClassNode"> 
     <void property="methods"> 
      <void property="text"> 
-      <string>UserInput factory();
-GameObject promptUserChoice();
-String promptName();
-int promptNumberOfRounds();
+      <string>+ &lt;u&gt;UserInput factory();&lt;/u&gt;
++ GameObject promptUserChoice();
++ String promptName();
++ int promptNumberOfRounds();
 </string> 
      </void> 
     </void> 
@@ -243,12 +243,12 @@ int promptNumberOfRounds();
    <object id="ClassNode12" class="com.horstmann.violet.ClassNode"> 
     <void property="methods"> 
      <void property="text"> 
-      <string>Output factory();
-displayHelp();
-displayScore();
-displayChoice();
-displayRound();
-displayUserInputError();</string> 
+      <string>+ &lt;u&gt;Output factory();&lt;/u&gt;
++ displayHelp();
++ displayScore();
++ displayChoice();
++ displayRound();
++ displayUserInputError();</string> 
      </void> 
     </void> 
     <void property="name"> 
@@ -438,13 +438,13 @@ displayUserInputError();</string>
      <object class="com.horstmann.violet.BentStyle" field="HVH"/> 
     </void> 
     <void property="endLabel"> 
-     <string>1</string> 
+     <string>2</string> 
     </void> 
     <void property="startArrowHead"> 
      <object class="com.horstmann.violet.ArrowHead" field="DIAMOND"/> 
     </void> 
     <void property="startLabel"> 
-     <string>2</string> 
+     <string>1</string> 
     </void> 
    </object> 
    <object idref="ClassNode0"/> 

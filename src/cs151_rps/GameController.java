@@ -4,7 +4,6 @@
  */
 package cs151_rps;
 
-import static cs151_rps.MessageType.*;
 import java.util.Scanner;
 import java.io.*;
 
@@ -23,7 +22,6 @@ public class GameController {
     public GameController( int maxRounds )
     {
         this.maxRounds = maxRounds;
-        message = new Message(null); // note: null string signifies default locale
     }
 
     /**
@@ -36,11 +34,6 @@ public class GameController {
      */
     private Scorecard scorecard;
     
-    /**
-     * Object that converts a message (enum) into a language-specific string for display.
-     */
-    private Message message;
-
     /**
      * Temp storage for user-inputted name, prior to being embedded in the player object.
      */
@@ -64,13 +57,22 @@ public class GameController {
     private GameObject player2Throw;
     
     /**
+     * Endpoint for all program output (e.g., command line, GUI, remote)
+     */
+    Output endpoint;
+    
+    /**
      * Main controlling method for the game
      */
     public void main()
     {
+        // set up selected input and output endpoints
+        // TODO: endpoint and locale settable from command line
+        endpoint = Output.factory( "CLI", java.util.Locale.ENGLISH );
+        
         // Welcome, and acquire user's name 
-        System.out.print( message.getMessage(WELCOME) );
-        System.out.print( message.getMessage(PROMPT_NAME) );
+        endpoint.displayWelcome();
+        endpoint.displayNamePrompt();
         try {
             InputStreamReader converter = new InputStreamReader(System.in);
             BufferedReader in = new BufferedReader(converter);
@@ -82,24 +84,21 @@ public class GameController {
         
         // instantiate human and AI players
         try {
-            player1 = new UserPlayer(playerName,message);
-            player2 = new ComputerPlayer("The Computer",message);
+            player1 = new UserPlayer(endpoint);
+            player2 = new ComputerPlayer("The Computer",null);
         }
         catch (Exception e) {
             System.out.println("Error:  Exception: " + e );
-            // TODO: fatal error: abort here, with cosolation.
+            // TODO: fatal error instantiating player object: abort here, with consolation.
         }
         
         // instantiate system objects
-        scorecard = new Scorecard( message, player1, player2 );
+        scorecard = new Scorecard( player1, player2 );
         referee = new Referee( scorecard );
-        
-        player1.setScorecard( scorecard );
-        player2.setScorecard( scorecard );
         
         //prompt user for number of rounds if not already added to command line
         if (maxRounds<=0) {
-            System.out.print( message.getMessage(PROMPT_ROUNDS) );
+            endpoint.displayRoundsPrompt();
             Scanner scan = new Scanner(System.in);
 	    if(scan.hasNext())
                 maxRounds = scan.nextInt();
@@ -118,13 +117,15 @@ public class GameController {
             }
             Referee.Winner winner = referee.determineWinner( player1Throw, player2Throw );
             if (winner==Referee.Winner.PLAYER1)
-                System.out.println( player1.getName() + " " + message.getMessage(WINS_ANNOUNCE));
+                endpoint.displayRoundWinner( player1.getName() );
             else if (winner==Referee.Winner.PLAYER2)
-                System.out.println( player2.getName() + " " + message.getMessage(WINS_ANNOUNCE));
+                endpoint.displayRoundWinner( player2.getName() );
             else 
-                System.out.println( player1.getName() + " " + message.getMessage(TIES_ANNOUNCE) + " " + player2.getName() );
+                endpoint.displayRoundTie( player1.getName(), player2.getName() );
 
-            scorecard.displayScore();
+            endpoint.displayScore( player1.getName(), scorecard.getPlayerOneScore(),
+                                   player2.getName(), scorecard.getPlayerTwoScore(),
+                                                      scorecard.getNumOfTies() );
             
         }
         
