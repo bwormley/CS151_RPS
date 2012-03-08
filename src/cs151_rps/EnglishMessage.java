@@ -42,7 +42,7 @@ public class EnglishMessage extends Message
             case QUIT_CONFIRM:       return "Are you sure you want to quit?";
             case MATCH_WIN_ANNOUNCE: return "WINS THE MATCH!";
             case MATCH_TIE_ANNOUNCE: return "The match ends in a TIE!";
-            default:            return "**loc not impl**";
+            default: return "**loc not impl**";
         }
     }
 }

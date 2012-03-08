@@ -13,24 +13,28 @@ package cs151_rps;
  */
 public abstract class Player {
 	
-	private String name;
-        protected Message mess;
-	protected Scorecard score;
-	public Player(String name, Message mess)
+	protected String name;
+        protected Output endpoint;
+
+        public Player(String name, Output endpoint)
 	{
 		this.name = name;
-                this.mess = mess;
+                this.endpoint = endpoint;
 	}
-        
-        public void setScorecard( Scorecard scorecard )
-        {
-            score = scorecard;
-        }
-	
+        	
 	public String getName()
 	{
 		return name;
 	}
+        
+        static public Player factory( String species, String name, Output endpoint )
+        {
+            if (species.equalsIgnoreCase("human"))
+                return new UserPlayer( name, endpoint );
+            if (species.equalsIgnoreCase("computer"))
+                return new ComputerPlayer( name );
+            return null;
+        }
     
     /**
      * queryThrow() - query for a player's throw for one round

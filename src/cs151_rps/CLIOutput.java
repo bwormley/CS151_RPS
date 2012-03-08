@@ -83,6 +83,12 @@ public class CLIOutput extends Output
     {
         // TODO: displayChoice
     }
+    
+    @Override
+    public void displayUserPrompt( String playerName )
+    {
+        System.out.print( playerName + ": " + msg.getMessage(USER_PROMPT) );
+    }
 
     @Override
     public void displayUserInputError()

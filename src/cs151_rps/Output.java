@@ -41,12 +41,14 @@ abstract public class Output
     /**
      * Display a message prompting the user to enter a name/identifier
      */
+    // TODO: which user's name is being asked for? One ro Two?
     abstract public void displayNamePrompt();
     
     /**
      * Display a message prompting the user to enter the number of 
-     * rounds desiredfor the match.
+     * rounds desired for the match.
      */
+    // TODO: which user is being prompted? One or Two?
     abstract public void displayRoundsPrompt();
     
     /**
@@ -104,6 +106,13 @@ abstract public class Output
      */
     abstract public void displayChoice( String playerName, 
                                         GameObject gesture );
+
+    /**
+     * Display a prompt for the user's throw gesture choice
+     * 
+     * @param playerName 
+     */
+    abstract public void displayUserPrompt( String playerName );
     
     /**
      * Display an indication of an input error to the user

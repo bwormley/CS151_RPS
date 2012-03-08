@@ -62,6 +62,11 @@ public class GameController {
     Output endpoint;
     
     /**
+     * Source for all input for user
+     */
+    UserInput source;
+    
+    /**
      * Main controlling method for the game
      */
     public void main()
@@ -69,28 +74,36 @@ public class GameController {
         // set up selected input and output endpoints
         // TODO: endpoint and locale settable from command line
         endpoint = Output.factory( "CLI", java.util.Locale.ENGLISH );
+        //TODO: resolve design ugliness: input here *and* UserPlayer class? wtf?
+        source = UserInput.factory("CLI");
         
         // Welcome, and acquire user's name 
-        endpoint.displayWelcome();
-        endpoint.displayNamePrompt();
         try {
-            InputStreamReader converter = new InputStreamReader(System.in);
-            BufferedReader in = new BufferedReader(converter);
-            playerName = in.readLine();
+            endpoint.displayWelcome();
+            endpoint.displayNamePrompt();
+            playerName = source.getPlayerName();
         }
         catch (Exception e) {
-            System.out.println("Error!  Exception: " + e );
+            System.out.println( "User Input Error: " + e );
+            // TODO graceful exit?
         }
-        
+
         // instantiate human and AI players
+        // TODO: make these types settable from the CLI
         try {
-            player1 = new UserPlayer(endpoint);
-            player2 = new ComputerPlayer("The Computer",null);
+            player1 = Player.factory( "human",    playerName, endpoint );
+            player2 = Player.factory( "computer", "HAL",      null );
         }
         catch (Exception e) {
             System.out.println("Error:  Exception: " + e );
             // TODO: fatal error instantiating player object: abort here, with consolation.
         }
+        
+        // decorate the players as needed
+        // TODO: choose decoration from command line options
+        // TODO: choose decoration types from 'instanceof' determination of classes
+        ((UserPlayer)player1).setInputType("CLI");
+        ((ComputerPlayer)player2).setExperienceLevel("random");
         
         // instantiate system objects
         scorecard = new Scorecard( player1, player2 );
@@ -106,7 +119,8 @@ public class GameController {
         
         // main game loop
         for ( int round=1; round <= maxRounds; round++ ) {
-            
+
+            // get each player's throw
             try {
                 player1Throw = player1.queryThrow();
                 player2Throw = player2.queryThrow();
@@ -115,6 +129,8 @@ public class GameController {
                 System.out.println( "Error: Exception: " + e );
                 // TODO: fatal error: abort here, with specific cosolation.
             }
+
+            // determine the winner, and display it
             Referee.Winner winner = referee.determineWinner( player1Throw, player2Throw );
             if (winner==Referee.Winner.PLAYER1)
                 endpoint.displayRoundWinner( player1.getName() );
@@ -122,7 +138,8 @@ public class GameController {
                 endpoint.displayRoundWinner( player2.getName() );
             else 
                 endpoint.displayRoundTie( player1.getName(), player2.getName() );
-
+            
+            // display match score so far
             endpoint.displayScore( player1.getName(), scorecard.getPlayerOneScore(),
                                    player2.getName(), scorecard.getPlayerTwoScore(),
                                                       scorecard.getNumOfTies() );

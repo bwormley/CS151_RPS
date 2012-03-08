@@ -11,15 +11,21 @@ import java.lang.IllegalArgumentException;
  */
 public class ParseCL
 {
+    
+    /**
+     * Enumerate the different command line parameter types
+     */
     public enum ParamType { NONE, INTEGER, STRING }
+    
     /**
      * Hold the parameters parsed from the command line
      */
-    HashMap<String,Object> param;
+    private HashMap<String,Object> param;
+    
     /**
      * Hold the options available for a command line
      */
-    HashMap<String,ParamType> opt;
+    private HashMap<String,ParamType> opt;
     
     /*
      * Constructor
