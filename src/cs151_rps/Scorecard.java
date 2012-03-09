@@ -6,8 +6,6 @@
 package cs151_rps;
 
 import java.lang.Integer;
-import static cs151_rps.MessageType.*;
-
 
 public class Scorecard {
     private int playerOneScore = 0; 
@@ -17,7 +15,7 @@ public class Scorecard {
     private Player playerOne;
     private Player playerTwo;
     
-    public Scorecard( Message message, Player playerOne, Player playerTwo )
+    public Scorecard( Player playerOne, Player playerTwo )
     {
         this.message = message;
         this.playerOne = playerOne;
@@ -46,11 +44,5 @@ public class Scorecard {
     
     public int getNumOfTies() {
         return numOfTies; 
-    }
-    
-    public void displayScore() {
-        System.out.print( playerOne.getName() + " " + message.getMessage(WINS_REPORT) + playerOneScore + ", " );
-        System.out.print( playerTwo.getName() + " " + message.getMessage(WINS_REPORT) + playerTwoScore + ", " );
-        System.out.println( message.getMessage(TIES_REPORT) + numOfTies );
     }
 }

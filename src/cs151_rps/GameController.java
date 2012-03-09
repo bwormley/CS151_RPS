@@ -4,7 +4,6 @@
  */
 package cs151_rps;
 
-import static cs151_rps.MessageType.*;
 import java.util.Scanner;
 import java.io.*;
 
@@ -23,7 +22,6 @@ public class GameController {
     public GameController( int maxRounds )
     {
         this.maxRounds = maxRounds;
-        message = new Message(null); // note: null string signifies default locale
     }
 
     /**
@@ -36,11 +34,6 @@ public class GameController {
      */
     private Scorecard scorecard;
     
-    /**
-     * Object that converts a message (enum) into a language-specific string for display.
-     */
-    private Message message;
-
     /**
      * Temp storage for user-inputted name, prior to being embedded in the player object.
      */
@@ -64,68 +57,94 @@ public class GameController {
     private GameObject player2Throw;
     
     /**
+     * Endpoint for all program output (e.g., command line, GUI, remote)
+     */
+    Output endpoint;
+    
+    /**
+     * Source for all input for user
+     */
+    UserInput source;
+    
+    /**
      * Main controlling method for the game
      */
     public void main()
     {
+        // set up selected input and output endpoints
+        // TODO: endpoint and locale settable from command line
+        endpoint = Output.factory( "CLI", java.util.Locale.ENGLISH );
+        //TODO: resolve design ugliness: input here *and* UserPlayer class? wtf?
+        source = UserInput.factory("CLI");
+        
         // Welcome, and acquire user's name 
-        System.out.print( message.getMessage(WELCOME) );
-        System.out.print( message.getMessage(PROMPT_NAME) );
         try {
-            InputStreamReader converter = new InputStreamReader(System.in);
-            BufferedReader in = new BufferedReader(converter);
-            playerName = in.readLine();
+            endpoint.displayWelcome();
+            endpoint.displayNamePrompt();
+            playerName = source.getPlayerName();
         }
         catch (Exception e) {
-            System.out.println("Error!  Exception: " + e );
+            System.out.println( "User Input Error: " + e );
+            // TODO graceful exit?
         }
-        
+
         // instantiate human and AI players
+        // TODO: make these types settable from the CLI
         try {
-            player1 = new UserPlayer(playerName,message);
-            player2 = new ComputerPlayer("The Computer",message);
+            player1 = Player.factory( "human",    playerName, endpoint );
+            player2 = Player.factory( "computer", "HAL",      null );
         }
         catch (Exception e) {
             System.out.println("Error:  Exception: " + e );
-            // TODO: fatal error: abort here, with cosolation.
+            // TODO: fatal error instantiating player object: abort here, with consolation.
         }
+        
+        // decorate the players as needed
+        // TODO: choose decoration from command line options
+        // TODO: choose decoration types from 'instanceof' determination of classes
+        ((UserPlayer)player1).setInputType("CLI");
+        ((ComputerPlayer)player2).setExperienceLevel("random");
         
         // instantiate system objects
-        scorecard = new Scorecard( message, player1, player2 );
+        scorecard = new Scorecard( player1, player2 );
         referee = new Referee( scorecard );
         
-        player1.setScorecard( scorecard );
-        player2.setScorecard( scorecard );
-        
-        //prompt user for number of rounds if not already added to command line
-        if (maxRounds<=0) {
-            System.out.print( message.getMessage(PROMPT_ROUNDS) );
-            Scanner scan = new Scanner(System.in);
-	    if(scan.hasNext())
-                maxRounds = scan.nextInt();
-        }
+        // default to 5 rounds if not entered on command line
+        if (maxRounds<=0)
+            maxRounds = 5;
         
         // main game loop
         for ( int round=1; round <= maxRounds; round++ ) {
+
+            // start new round; annouonce round number
+            endpoint.displayNewRound();
+            endpoint.displayRound( round, maxRounds );
             
+            // get each player's throw
             try {
                 player1Throw = player1.queryThrow();
+                endpoint.displayThrow( player1.getName(), player1Throw );
                 player2Throw = player2.queryThrow();
+                endpoint.displayThrow( player2.getName(), player2Throw );
             }
             catch (Exception e) {
                 System.out.println( "Error: Exception: " + e );
                 // TODO: fatal error: abort here, with specific cosolation.
             }
+
+            // determine the winner, and display it
             Referee.Winner winner = referee.determineWinner( player1Throw, player2Throw );
             if (winner==Referee.Winner.PLAYER1)
-                System.out.println( player1.getName() + " " + message.getMessage(WINS_ANNOUNCE));
+                endpoint.displayRoundWinner( player1.getName() );
             else if (winner==Referee.Winner.PLAYER2)
-                System.out.println( player2.getName() + " " + message.getMessage(WINS_ANNOUNCE));
+                endpoint.displayRoundWinner( player2.getName() );
             else 
-                System.out.println( player1.getName() + " " + message.getMessage(TIES_ANNOUNCE) + " " + player2.getName() );
-
-            scorecard.displayScore();
+                endpoint.displayRoundTie( player1.getName(), player2.getName() );
             
+            // display match score so far
+            endpoint.displayScore( player1.getName(), scorecard.getPlayerOneScore(),
+                                   player2.getName(), scorecard.getPlayerTwoScore(),
+                                                      scorecard.getNumOfTies() );
         }
         
         // TODO: display winner of the match
