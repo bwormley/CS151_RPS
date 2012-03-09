@@ -87,7 +87,7 @@ public class CLIOutput extends Output
     @Override
     public void displayMatchIsTie()
     {
-    	System.out.println(msg.getMessage(MATCH_TIE_ANNOUNCE))
+    	System.out.println(msg.getMessage(MATCH_TIE_ANNOUNCE));
     }
 
     @Override
