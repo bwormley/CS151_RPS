@@ -65,7 +65,9 @@ abstract public class Message {
         ROUND_TIE_REPORT,
         QUIT_CONFIRM,
         MATCH_WIN_ANNOUNCE,
-        MATCH_TIE_ANNOUNCE
+        MATCH_TIE_ANNOUNCE,
+        GESTURE_VERB,
+        SCORE_HEADER,
     }
 
     /**

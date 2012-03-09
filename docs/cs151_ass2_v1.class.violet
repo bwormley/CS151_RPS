@@ -56,6 +56,11 @@ Note: All unmarked aggregates are 1:1&lt;/font&gt;
   </void> 
   <void method="addNode"> 
    <object id="ClassNode2" class="com.horstmann.violet.ClassNode"> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>+ setExperience( String level );</string> 
+     </void> 
+    </void> 
     <void property="name"> 
      <void property="text"> 
       <string>ComputerPlayer</string> 
@@ -71,6 +76,11 @@ Note: All unmarked aggregates are 1:1&lt;/font&gt;
   </void> 
   <void method="addNode"> 
    <object id="ClassNode3" class="com.horstmann.violet.ClassNode"> 
+    <void property="methods"> 
+     <void property="text"> 
+      <string>+ setInputType( String source );</string> 
+     </void> 
+    </void> 
     <void property="name"> 
      <void property="text"> 
       <string>UserPlayer</string> 
@@ -80,7 +90,7 @@ Note: All unmarked aggregates are 1:1&lt;/font&gt;
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
      <double>616.0</double> 
-     <double>496.0</double> 
+     <double>495.0</double> 
     </void> 
    </object> 
   </void> 
@@ -175,9 +185,8 @@ Note: All unmarked aggregates are 1:1&lt;/font&gt;
     <void property="methods"> 
      <void property="text"> 
       <string>+ &lt;u&gt;UserInput factory();&lt;/u&gt;
-+ GameObject promptUserChoice();
-+ String promptName();
-+ int promptNumberOfRounds();
++ int getThrow();
++ String getPlayerName();
 </string> 
      </void> 
     </void> 
@@ -247,8 +256,7 @@ Note: All unmarked aggregates are 1:1&lt;/font&gt;
 + displayHelp();
 + displayScore();
 + displayChoice();
-+ displayRound();
-+ displayUserInputError();</string> 
+   ...</string> 
      </void> 
     </void> 
     <void property="name"> 

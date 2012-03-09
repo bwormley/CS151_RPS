@@ -34,6 +34,19 @@ abstract public class Output
     protected Message msg;
     
     /**
+     * Display start of new round
+     */
+    abstract public void displayNewRound();
+    
+    /**
+     * Display the result of one player's gesture
+     * 
+     * @param name name/identifier of gesturing player
+     * @param gesture rock/paper/scissors
+     */
+    abstract public void displayThrow( String name, GameObject gesture );
+    
+    /**
      * Display the startup welcome message
      */
     abstract public void displayWelcome();
@@ -96,7 +109,7 @@ abstract public class Output
      * 
      * @param round the current round number
      */
-    abstract public void displayRound( long round );
+    abstract public void displayRound( long round, long maxRounds );
     
     /**
      * Display the player's choice (gesture)

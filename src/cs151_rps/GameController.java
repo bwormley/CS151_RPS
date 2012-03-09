@@ -109,21 +109,23 @@ public class GameController {
         scorecard = new Scorecard( player1, player2 );
         referee = new Referee( scorecard );
         
-        //prompt user for number of rounds if not already added to command line
-        if (maxRounds<=0) {
-            endpoint.displayRoundsPrompt();
-            Scanner scan = new Scanner(System.in);
-	    if(scan.hasNext())
-                maxRounds = scan.nextInt();
-        }
+        // default to 5 rounds if not entered on command line
+        if (maxRounds<=0)
+            maxRounds = 5;
         
         // main game loop
         for ( int round=1; round <= maxRounds; round++ ) {
 
+            // start new round; annouonce round number
+            endpoint.displayNewRound();
+            endpoint.displayRound( round, maxRounds );
+            
             // get each player's throw
             try {
                 player1Throw = player1.queryThrow();
+                endpoint.displayThrow( player1.getName(), player1Throw );
                 player2Throw = player2.queryThrow();
+                endpoint.displayThrow( player2.getName(), player2Throw );
             }
             catch (Exception e) {
                 System.out.println( "Error: Exception: " + e );
@@ -143,7 +145,6 @@ public class GameController {
             endpoint.displayScore( player1.getName(), scorecard.getPlayerOneScore(),
                                    player2.getName(), scorecard.getPlayerTwoScore(),
                                                       scorecard.getNumOfTies() );
-            
         }
         
         // TODO: display winner of the match

@@ -17,6 +17,12 @@ public class CLIOutput extends Output
     }
 
     @Override
+    public void displayNewRound()
+    {
+        System.out.println();
+    }
+    
+    @Override
     public void displayHelp()
     {
         System.out.println( msg.getMessage(HELP) );
@@ -29,6 +35,7 @@ public class CLIOutput extends Output
                               long   player2Wins, 
                               long   ties )
     {
+        System.out.print( "   " + msg.getMessage(SCORE_HEADER) + " " );
         System.out.print( player1Name + " " + msg.getMessage(ROUND_WIN_REPORT) + player1Wins + ", " );
         System.out.print( player2Name + " " + msg.getMessage(ROUND_WIN_REPORT) + player2Wins + ", " );
         System.out.println( msg.getMessage(ROUND_TIE_REPORT) + ties );
@@ -43,13 +50,13 @@ public class CLIOutput extends Output
     @Override
     public void displayNamePrompt()
     {
-        System.out.println( msg.getMessage(PROMPT_NAME) );
+        System.out.print( msg.getMessage(PROMPT_NAME) + " " );
     }
 
     @Override
-    public void displayRound( long roundNumber )
+    public void displayRound( long roundNumber, long maxRounds )
     {
-        System.out.println( msg.getMessage(ROUND) + " " + roundNumber );
+        System.out.println( msg.getMessage(ROUND) + " " + roundNumber + "/" + maxRounds );
     }
 
     @Override
@@ -94,6 +101,19 @@ public class CLIOutput extends Output
     public void displayUserInputError()
     {
         // TODO: displayUserInputError
+    }
+    
+    @Override
+    public void displayThrow( String name, GameObject gesture )
+    {
+        System.out.print( name + " " + msg.getMessage(GESTURE_VERB) + " " );
+
+        switch (gesture)
+        {
+            case ROCK     : System.out.println(msg.getMessage(ROCK));     break;
+            case PAPER    : System.out.println(msg.getMessage(PAPER));    break;
+            case SCISSORS : System.out.println(msg.getMessage(SCISSORS)); break;
+        }
     }
 
 }
