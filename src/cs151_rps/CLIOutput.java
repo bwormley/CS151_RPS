@@ -83,6 +83,12 @@ public class CLIOutput extends Output
     {
         System.out.println( playerName + " " + msg.getMessage(MATCH_WIN_ANNOUNCE) );
     }
+    
+    @Override
+    public void displayMatchIsTie()
+    {
+    	System.out.println(msg.getMessage(MATCH_TIE_ANNOUNCE))
+    }
 
     @Override
     public void displayChoice( String playerName, 

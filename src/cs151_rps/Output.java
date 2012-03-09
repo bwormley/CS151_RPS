@@ -83,6 +83,11 @@ abstract public class Output
      * @param playerName
      */
     abstract public void displayMatchWinner( String playerName );
+    
+    /**
+     * Display a message announcing the match ends in a tie
+     */
+    abstract public void displayMatchIsTie( );
 
     /**
      * Display rules for the game

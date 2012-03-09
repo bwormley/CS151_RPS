@@ -147,8 +147,21 @@ public class GameController {
                                                       scorecard.getNumOfTies() );
         }
         
-        // TODO: display winner of the match
-                                                    
+        // display winner of the match
+        if(scorecard.getPlayerOneScore() > scorecard.getPlayerTwoScore())
+        {
+        	endpoint.displayMatchWinner(player1.getName());
+        }
+        else if (scorecard.getPlayerOneScore() < scorecard.getPlayerTwoScore())
+        {
+        	endpoint.displayMatchWinner(player2.getName());
+        }
+        else 
+        {
+        	endpoint.displayMatchIsTie();
+        }
+        
+        
     }
     
 }
