@@ -343,7 +343,7 @@ Note: All unmarked aggregates are 1:1&lt;/font&gt;
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
      <double>1007.0</double> 
-     <double>644.0</double> 
+     <double>639.0</double> 
     </void> 
    </object> 
   </void> 
@@ -374,21 +374,6 @@ Note: All unmarked aggregates are 1:1&lt;/font&gt;
     <void method="setLocation"> 
      <double>83.0</double> 
      <double>596.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object id="ClassNode20" class="com.horstmann.violet.ClassNode"> 
-    <void property="name"> 
-     <void property="text"> 
-      <string>Rockoff</string> 
-     </void> 
-    </void> 
-   </object> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>1065.0</double> 
-     <double>503.0</double> 
     </void> 
    </object> 
   </void> 
@@ -673,36 +658,6 @@ Note: All unmarked aggregates are 1:1&lt;/font&gt;
    </object> 
    <object idref="ClassNode3"/> 
    <object idref="ClassNode8"/> 
-  </void> 
-  <void method="connect"> 
-   <object class="com.horstmann.violet.ClassRelationshipEdge"> 
-    <void property="bentStyle"> 
-     <object class="com.horstmann.violet.BentStyle" field="VHV"/> 
-    </void> 
-    <void property="endArrowHead"> 
-     <object class="com.horstmann.violet.ArrowHead" field="TRIANGLE"/> 
-    </void> 
-    <void property="lineStyle"> 
-     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/> 
-    </void> 
-   </object> 
-   <object idref="ClassNode18"/> 
-   <object idref="ClassNode20"/> 
-  </void> 
-  <void method="connect"> 
-   <object class="com.horstmann.violet.ClassRelationshipEdge"> 
-    <void property="bentStyle"> 
-     <object class="com.horstmann.violet.BentStyle" field="VHV"/> 
-    </void> 
-    <void property="endArrowHead"> 
-     <object class="com.horstmann.violet.ArrowHead" field="TRIANGLE"/> 
-    </void> 
-    <void property="lineStyle"> 
-     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/> 
-    </void> 
-   </object> 
-   <object idref="ClassNode17"/> 
-   <object idref="ClassNode20"/> 
   </void> 
   <void method="connect"> 
    <object class="com.horstmann.violet.ClassRelationshipEdge"> 
