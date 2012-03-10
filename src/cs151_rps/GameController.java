@@ -82,10 +82,16 @@ public class GameController {
             endpoint.displayWelcome();
             endpoint.displayNamePrompt();
             playerName = source.getPlayerName();
+            if(playerName.isEmpty())
+            {
+            	playerName = "player1";
+            }
         }
         catch (Exception e) {
-            System.out.println( "User Input Error: " + e );
-            // TODO graceful exit?
+        	System.out.println( "Quitting..." );
+            System.out.println( "Program has exited" );
+            System.exit(0);
+           
         }
 
         // instantiate human and AI players
@@ -134,6 +140,7 @@ public class GameController {
             	if (e.getMessage().equalsIgnoreCase("score"))
             	{
             		score = true;
+            		round--;
             		            		
             	}
             	else
