@@ -12,14 +12,10 @@ public class Scorecard {
     private int playerTwoScore = 0; 
     private int numOfTies = 0; 
     private Message message;
-    private Player playerOne;
-    private Player playerTwo;
     
-    public Scorecard( Player playerOne, Player playerTwo )
+    public Scorecard()
     {
         this.message = message;
-        this.playerOne = playerOne;
-        this.playerTwo = playerTwo;
     }
     
     public void setPlayerOneScore (int userScore) {
