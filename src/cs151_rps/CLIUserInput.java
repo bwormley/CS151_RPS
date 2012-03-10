@@ -31,7 +31,15 @@ public class CLIUserInput extends UserInput
         Scanner scan = new Scanner(System.in);
         int choice = 5;
         if(scan.hasNext())
+        	try{
             choice = scan.nextInt();
+        	}
+        	catch (Exception e)
+        	{
+        		//Should say invalid input try again
+        		return choice;
+        	}
+
         return choice;
     }
 

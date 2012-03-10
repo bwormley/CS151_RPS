@@ -135,18 +135,19 @@ public class GameController {
                 endpoint.displayThrow( player2.getName(), player2Throw );
             }
             catch (Exception e) {
-            	if (e.getMessage().equalsIgnoreCase("score"))
+            	if (e.getMessage() != null && e.getMessage().equalsIgnoreCase("score"))
             	{
             		score = true;
             		round--;
-            		            		
             	}
-            	else
+            	if(e.getMessage() != null && e.getMessage().equalsIgnoreCase("user abort"))
             	{
             		endpoint.displayQuit();
                 System.exit(0);
                 // fatal error: abort here, with specific cosolation.
             	}
+   
+            		
             }
 
             // determine the winner, and display it
