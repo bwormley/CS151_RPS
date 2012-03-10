@@ -56,9 +56,7 @@ public class UserPlayer extends Player
                 case 3: // SCISSORS
                     return GameObject.SCISSORS;
                 case 5: // SCORE
-                    // TODO: don't know the other player's name here! output.setName() ??
-//                    endpoint.displayScore();
-                    break;
+                	throw new Exception("score");
                 case 6: // QUIT
                     throw new Exception("user abort");
                 default: // INVALID INPUT

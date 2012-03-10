@@ -95,8 +95,10 @@ public class GameController {
             player2 = Player.factory( "computer", "HAL",      null );
         }
         catch (Exception e) {
-            System.out.println("Error:  Exception: " + e );
-            // TODO: fatal error instantiating player object: abort here, with consolation.
+        	System.out.println( "Quitting..." );
+            System.out.println( "Program has exited" );
+            System.exit(0);
+            //  fatal error instantiating player object: abort here, with consolation.
         }
         
         // decorate the players as needed
@@ -120,6 +122,7 @@ public class GameController {
             endpoint.displayNewRound();
             endpoint.displayRound( round, maxRounds );
             
+            boolean score = false;
             // get each player's throw
             try {
                 player1Throw = player1.queryThrow();
@@ -128,11 +131,23 @@ public class GameController {
                 endpoint.displayThrow( player2.getName(), player2Throw );
             }
             catch (Exception e) {
-                System.out.println( "Error: Exception: " + e );
-                // TODO: fatal error: abort here, with specific cosolation.
+            	if (e.getMessage().equalsIgnoreCase("score"))
+            	{
+            		score = true;
+            		            		
+            	}
+            	else
+            	{
+                System.out.println( "Quitting..." );
+                System.out.println( "Program has exited" );
+                System.exit(0);
+                // fatal error: abort here, with specific cosolation.
+            	}
             }
 
             // determine the winner, and display it
+            if(score == false)
+            {
             Referee.Winner winner = referee.determineWinner( player1Throw, player2Throw );
             if (winner==Referee.Winner.PLAYER1)
                 endpoint.displayRoundWinner( player1.getName() );
@@ -140,14 +155,17 @@ public class GameController {
                 endpoint.displayRoundWinner( player2.getName() );
             else 
                 endpoint.displayRoundTie( player1.getName(), player2.getName() );
-            
+            }
+     
             // display match score so far
             endpoint.displayScore( player1.getName(), scorecard.getPlayerOneScore(),
                                    player2.getName(), scorecard.getPlayerTwoScore(),
                                                       scorecard.getNumOfTies() );
+            
         }
         
         // display winner of the match
+        
         if(scorecard.getPlayerOneScore() > scorecard.getPlayerTwoScore())
         {
         	endpoint.displayMatchWinner(player1.getName());
