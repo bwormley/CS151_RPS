@@ -122,4 +122,11 @@ public class CLIOutput extends Output
         }
     }
 
+	@Override
+	public void displayQuit() 
+	{
+		System.out.println(msg.getMessage(QUIT));
+		
+	}
+
 }

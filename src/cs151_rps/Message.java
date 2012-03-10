@@ -68,6 +68,7 @@ abstract public class Message {
         MATCH_TIE_ANNOUNCE,
         GESTURE_VERB,
         SCORE_HEADER,
+        QUIT
     }
 
     /**

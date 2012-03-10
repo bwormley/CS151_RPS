@@ -136,4 +136,9 @@ abstract public class Output
      * Display an indication of an input error to the user
      */
     abstract public void displayUserInputError();
+    
+    /**
+     * Display an indication to the user that the program is quitting
+     */
+    abstract public void displayQuit();
 }

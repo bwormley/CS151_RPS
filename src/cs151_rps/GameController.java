@@ -88,8 +88,7 @@ public class GameController {
             }
         }
         catch (Exception e) {
-        	System.out.println( "Quitting..." );
-            System.out.println( "Program has exited" );
+        	endpoint.displayQuit();
             System.exit(0);
            
         }
@@ -101,8 +100,7 @@ public class GameController {
             player2 = Player.factory( "computer", "HAL",      null );
         }
         catch (Exception e) {
-        	System.out.println( "Quitting..." );
-            System.out.println( "Program has exited" );
+        	endpoint.displayQuit();
             System.exit(0);
             //  fatal error instantiating player object: abort here, with consolation.
         }
@@ -114,7 +112,7 @@ public class GameController {
         ((ComputerPlayer)player2).setExperienceLevel("random");
         
         // instantiate system objects
-        scorecard = new Scorecard();
+        scorecard = new Scorecard( player1, player2 );
         referee = new Referee( scorecard );
         
         // default to 5 rounds if not entered on command line
@@ -145,8 +143,7 @@ public class GameController {
             	}
             	else
             	{
-                System.out.println( "Quitting..." );
-                System.out.println( "Program has exited" );
+            		endpoint.displayQuit();
                 System.exit(0);
                 // fatal error: abort here, with specific cosolation.
             	}

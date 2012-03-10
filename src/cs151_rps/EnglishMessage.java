@@ -44,6 +44,7 @@ public class EnglishMessage extends Message
             case MATCH_TIE_ANNOUNCE: return "The match ends in a TIE!";
             case GESTURE_VERB:       return "gestures";
             case SCORE_HEADER:       return "MATCH STATUS";
+            case QUIT:				 return "Quitting...\nProgram has exited"; 
             default: return "**loc not impl**";
         }
     }
