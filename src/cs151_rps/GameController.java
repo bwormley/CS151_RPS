@@ -112,7 +112,7 @@ public class GameController {
         ((ComputerPlayer)player2).setExperienceLevel("random");
         
         // instantiate system objects
-        scorecard = new Scorecard( player1, player2 );
+        scorecard = new Scorecard();
         referee = new Referee( scorecard );
         
         // default to 5 rounds if not entered on command line
