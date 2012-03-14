@@ -56,6 +56,8 @@ public class GameController {
     private GameObject player1Throw;
     private GameObject player2Throw;
     
+    History history;
+    
     /**
      * Endpoint for all program output (e.g., command line, GUI, remote)
      */
@@ -109,11 +111,12 @@ public class GameController {
         // TODO: choose decoration from command line options
         // TODO: choose decoration types from 'instanceof' determination of classes
         ((UserPlayer)player1).setInputType("CLI");
-        ((ComputerPlayer)player2).setExperienceLevel("random");
+        ((ComputerPlayer)player2).setExperienceLevel("smart");
         
         // instantiate system objects
         scorecard = new Scorecard();
         referee = new Referee( scorecard );
+        history = History.factory("ephemeral");
         
         // default to 5 rounds if not entered on command line
         if (maxRounds<=0)
@@ -146,9 +149,10 @@ public class GameController {
                 System.exit(0);
                 // fatal error: abort here, with specific cosolation.
             	}
-   
-            		
             }
+            
+            // add to history
+            history.addRound( player1Throw, player2Throw );
 
             // determine the winner, and display it
             if(score == false)

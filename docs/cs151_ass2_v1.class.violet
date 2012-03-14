@@ -213,8 +213,8 @@ Note: All unmarked aggregates are 1:1&lt;/font&gt;
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>75.0</double> 
-     <double>681.0</double> 
+     <double>84.0</double> 
+     <double>678.0</double> 
     </void> 
    </object> 
   </void> 
@@ -372,8 +372,8 @@ Note: All unmarked aggregates are 1:1&lt;/font&gt;
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>83.0</double> 
-     <double>596.0</double> 
+     <double>76.0</double> 
+     <double>572.0</double> 
     </void> 
    </object> 
   </void> 
@@ -670,6 +670,18 @@ Note: All unmarked aggregates are 1:1&lt;/font&gt;
    </object> 
    <object idref="ClassNode13"/> 
    <object idref="ClassNode12"/> 
+  </void> 
+  <void method="connect"> 
+   <object class="com.horstmann.violet.ClassRelationshipEdge"> 
+    <void property="bentStyle"> 
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/> 
+    </void> 
+    <void property="startArrowHead"> 
+     <object class="com.horstmann.violet.ArrowHead" field="DIAMOND"/> 
+    </void> 
+   </object> 
+   <object idref="ClassNode19"/> 
+   <object idref="ClassNode9"/> 
   </void> 
  </object> 
 </java> 

@@ -12,8 +12,8 @@ abstract public class ThrowGenerator {
         // TODO: implement smarter Throw Generators
         if (level.equalsIgnoreCase("random"))
             return new RandomThrowGenerator();
-//        if (level.equalsIgnoreCase("Smart"))
-//            return new SmartThrowGenerator();
+        if (level.equalsIgnoreCase("Smart"))
+            return new SmartThrowGenerator();
 //        if (level.equalsIgnoreCase("expert"))
 //            return new ExpertThrowGenerator();
         

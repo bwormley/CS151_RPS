@@ -16,8 +16,7 @@ public class RandomThrowGenerator extends ThrowGenerator
     GameObject queryThrow() throws Exception
     {
         Random rand = new Random();
-        int choice = rand.nextInt();
-        choice = choice%3;
+        int choice = rand.nextInt(3);
 
         if(choice == 1)
         {
