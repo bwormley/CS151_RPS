@@ -58,12 +58,14 @@ public class ParseCL
     {
         for ( int ix = 0; ix<args.length; ix++ ) {
             String key = args[ix];
-            String val;
+            String val = "";
             if (!opt.containsKey(key))
                 throw new IllegalArgumentException(key+" not valid");
-            if (opt.get(key)!=ParamType.NONE && ix+1>=args.length)
-                throw new IllegalArgumentException(key+" requires an argument, which is missing");
-            val = args[++ix];
+            if (opt.get(key)!=ParamType.NONE) {
+                if (ix+1>=args.length)
+                    throw new IllegalArgumentException(key+" requires an argument, which is missing");
+                val = args[++ix];
+            }
             param.put( key, val );
         }
     }
@@ -82,13 +84,23 @@ public class ParseCL
     /**
      * return value of an integer option
      * 
-     * @param key
-     * @return 
+     * @param key expected on command line
+     * @return integer value parsed from string
+     * @throws IllegalArgumentException which wraps a NumberFormatException
      */
-    public int getIntParam( String key )
+    public int getIntParam( String key ) throws IllegalArgumentException
     {
-        if (param.containsKey(key))
-            return Integer.parseInt((String)param.get(key));
-        return 0;
+        int result = 0;
+        
+        if (param.containsKey(key)) {
+            try {
+                result = Integer.parseInt((String)param.get(key));
+            }
+            catch (NumberFormatException e) {
+                throw new IllegalArgumentException(key+" requires numeric argument.\n"+e.toString());
+            }
+        }
+
+        return result;
     }
 }
