@@ -1,5 +1,7 @@
-package cs151_rps;
+package cs151_rps.io;
 
+import cs151_rps.GameObject;
+import cs151_rps.io.CLIOutput;
 import java.util.Locale;
 
 /**

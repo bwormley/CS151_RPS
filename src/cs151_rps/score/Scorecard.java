@@ -3,8 +3,9 @@
  * Members: Raman Kaur, Brett Wormley, Swathi Kotturu, Akashaya Singh
  * Rock Paper Scissors 
  */
-package cs151_rps;
+package cs151_rps.score;
 
+import cs151_rps.io.Message;
 import java.lang.Integer;
 
 public class Scorecard {

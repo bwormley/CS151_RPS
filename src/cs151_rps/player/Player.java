@@ -2,9 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cs151_rps;
+package cs151_rps.player;
 
 //import cs151_rps.GameObject;
+
+import cs151_rps.GameObject;
+import cs151_rps.io.Output;
+
 
 /**
  * Abstraction of a player (human or automaton)
@@ -44,6 +48,6 @@ public abstract class Player {
      * @return rock/paper/scissors chosen by the player
      * @throws Exception 
      */
-    abstract GameObject queryThrow() throws Exception;
+    abstract public GameObject queryThrow() throws Exception;
 
 }

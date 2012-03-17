@@ -1,7 +1,8 @@
-package cs151_rps;
+package cs151_rps.io;
 
+import cs151_rps.GameObject;
 import java.util.Locale;
-import static cs151_rps.Message.ID.*;
+import static cs151_rps.io.Message.ID.*;
 
 /**
  * Handle all output for the Command Line Interface endpoint

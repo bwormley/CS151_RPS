@@ -1,4 +1,4 @@
-package cs151_rps;
+package cs151_rps.io;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

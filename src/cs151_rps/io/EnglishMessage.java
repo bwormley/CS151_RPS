@@ -1,6 +1,6 @@
-package cs151_rps;
+package cs151_rps.io;
 
-import static cs151_rps.Message.ID.*;
+import static cs151_rps.io.Message.ID.*;
 
 /**
  * English localization: Implement English string associations with message IDs.

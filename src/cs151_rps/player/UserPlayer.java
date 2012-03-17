@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cs151_rps;
+package cs151_rps.player;
 
-import java.util.Scanner;
-
-import static cs151_rps.GameObject.*;
+import cs151_rps.GameObject;
+import cs151_rps.io.Output;
+import cs151_rps.io.UserInput;
 
 
 
@@ -23,7 +23,7 @@ public class UserPlayer extends Player
      * 
      * @param inputType 
      */
-    void setInputType( String inputType )
+    public void setInputType( String inputType )
     {
         source = UserInput.factory( inputType ); 
     }
@@ -31,7 +31,7 @@ public class UserPlayer extends Player
     /**
      * The input source object
      */
-    UserInput source;
+    private UserInput source;
 
     /**
      * Finds out user's choice and returns it

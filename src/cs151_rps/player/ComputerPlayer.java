@@ -1,6 +1,7 @@
-package cs151_rps;
+package cs151_rps.player;
 
-import java.util.Random;
+import cs151_rps.GameObject;
+import cs151_rps.play.ThrowGenerator;
 
 /**
  * This class implements a derivation of a Player actor as an automaton, with selectable experience levels
@@ -31,8 +32,9 @@ public class ComputerPlayer extends Player
      * @return rock|paper|scissors
      * @throws Exception if the actor requests to quit
      */
+    
     @Override
-    GameObject queryThrow() throws Exception
+    public GameObject queryThrow() throws Exception
     {
         return throwGen.queryThrow();
     }

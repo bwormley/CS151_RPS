@@ -1,5 +1,6 @@
-package cs151_rps;
+package cs151_rps.play;
 
+import cs151_rps.GameObject;
 import java.util.Random;
 
 /**
@@ -13,7 +14,7 @@ public class RandomThrowGenerator extends ThrowGenerator
      * Finds out a computer's choice. A random decision.
      */
     @Override
-    GameObject queryThrow() throws Exception
+    public GameObject queryThrow() throws Exception
     {
         Random rand = new Random();
         int choice = rand.nextInt();

@@ -1,4 +1,6 @@
-package cs151_rps;
+package cs151_rps.play;
+
+import cs151_rps.GameObject;
 
 /**
  * Abstraction of a gesture generator, for creating generators of varying expertise
@@ -26,5 +28,5 @@ abstract public class ThrowGenerator {
      * 
      * @return rock|paper|scissors
      */
-    abstract GameObject queryThrow() throws Exception;
+    abstract public GameObject queryThrow() throws Exception;
 }

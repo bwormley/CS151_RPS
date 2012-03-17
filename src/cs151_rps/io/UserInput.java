@@ -1,4 +1,4 @@
-package cs151_rps;
+package cs151_rps.io;
 
 /**
  * Abstraction for generic input for the game
@@ -31,13 +31,13 @@ abstract public class UserInput {
      * 
      * @return 0..5
      */
-    abstract int getThrow();
+    abstract public int getThrow();
     
     /**
      * Query the proper name/identifier for a player
      * 
      * @return 
      */
-    abstract String getPlayerName() throws Exception;
+    abstract public String getPlayerName() throws Exception;
     
 }
