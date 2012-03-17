@@ -103,4 +103,24 @@ public class ParseCL
 
         return result;
     }
+    
+    /**
+     * return string associated with a parameter which required an option
+     * 
+     * @param key
+     * @return the option
+     * @throws IllegalArgumentException if argument not on command line
+     * Note: test for existence with getParam()
+     */
+    public String getStringParam( String key ) throws IllegalArgumentException
+    {
+        String result;
+        
+        if (!param.containsKey(key))
+            throw new IllegalArgumentException( key+" requires string argument");
+        result = (String)param.get(key);
+        if (result==null)
+            throw new IllegalArgumentException( key+" has null argument" );
+        return result;
+    }
 }

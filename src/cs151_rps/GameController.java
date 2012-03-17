@@ -19,9 +19,10 @@ public class GameController {
     *
     * @param maxRounds number of rounds for this match, as (typically) input from CL.  If 0, user is prompted.
     */
-    public GameController( int maxRounds )
+    public GameController( int maxRounds, String level )
     {
         this.maxRounds = maxRounds;
+        this.level = level;
     }
 
     /**
@@ -43,6 +44,11 @@ public class GameController {
      * Input by the user, the number of rounds to play in this match.
      */
     private int maxRounds;
+    
+    /**
+     * Indication of experience level for computer player
+     */
+    String level;
     
     /**
      * The actors in the game.
