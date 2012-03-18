@@ -1,5 +1,5 @@
 
-
+package cs151_rps.heuristics;  
 
 /* The analysis will cretae a hashmap of strings. 
  * In hasmap, the keys will be strings and the value will be the number
