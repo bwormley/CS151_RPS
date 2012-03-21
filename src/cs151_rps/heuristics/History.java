@@ -12,29 +12,65 @@ import cs151_rps.GameObject;
  * prediction of the human player.  This only requires keeping a fixed number of 
  * previous gestures, rather than the complete history of gestures.
  * 
+ * This is a singleton class which creates a single instance of one of its  
+ * subclasses via a factory.  The first instantiation designates which subclass 
+ * to create; any subsequent requests for instantiation return the same 
+ * subclass (same object), no matter what subclass was requested.
+ * 
  * @author Team Lunar
  */
 abstract public class History {
     
     /**
-     * Fatory design pattern which builds a subclass that implements a specific 
-     * History persistence model
+     * Constructor (protected from being used outside the class)
+     */
+    protected History() 
+    {
+        _instance = null;
+        archive = "";
+    }
+    
+    /**
+     * Override clone to ensure we stay a singleton
+     * 
+     * @return never called
+     * @throws CloneNotSupportedException 
+     */
+    @Override
+    public Object clone() throws CloneNotSupportedException
+    {
+        throw new CloneNotSupportedException();
+    }
+    
+    /**
+     * the Singleton instance for this hierarchy
+     */
+    static History _instance = null;
+    
+    /**
+     * Mash-up of Singleton and Factory design patterns: builds a subclass that 
+     * implements a specific History persistence model.  Since it is a 
+     * singleton, the reference to the created object is available anywhere in 
+     * the program.
      * 
      * @param type what persistence model to use
      * @return the object implementing the requested model
      */
-    static public History factory( String type )
+    public static synchronized History factory( String type )
     {
 // TODO: update factory when another subclass is available 
+        if (_instance==null) {
 //        if (type.equalsIgnoreCase("ShortTerm"))
-            return new ShortTermHistory();
+            _instance = new ShortTermHistory();
+        }
+        return _instance;
     }
     
     /**
      * Maximum number of gestures saved in archive, and retrievable 
      * by getLastMoves
      */
-    protected int MAX_DEPTH = 20;
+    protected int MAX_DEPTH = 8;
     
     /**
      * Ephemeral storage for the latest gestures in the game

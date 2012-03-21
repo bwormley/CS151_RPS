@@ -16,7 +16,7 @@ class ShortTermHistory extends History {
     /**
      * Constructor
      */
-    public ShortTermHistory() 
+    protected ShortTermHistory() 
     {
         super();
         // this subclass does not persist its archive
