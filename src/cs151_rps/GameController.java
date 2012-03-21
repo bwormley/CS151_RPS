@@ -104,6 +104,10 @@ public class GameController {
            
         }
 
+        // instantiate system objects
+        scorecard = new Scorecard();
+        referee = new Referee( scorecard, "shortTerm" );
+        
         // instantiate human and AI players
         // TODO: make these types settable from the CLI
         try {
@@ -121,10 +125,6 @@ public class GameController {
         // TODO: choose decoration types from 'instanceof' determination of classes
         ((UserPlayer)player1).setInputType("CLI");
         ((ComputerPlayer)player2).setExperienceLevel("random");
-        
-        // instantiate system objects
-        scorecard = new Scorecard();
-        referee = new Referee( scorecard );
         
         // default to 5 rounds if not entered on command line
         if (maxRounds<=0)

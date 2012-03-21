@@ -6,57 +6,44 @@
 package cs151_rps.score;
 
 import cs151_rps.GameObject;
+import cs151_rps.heuristics.History;
+
+import static cs151_rps.GameObject.*;
 
 public class Referee { 
     
     public enum Winner {PLAYER1, PLAYER2, TIE}
     
+    /**
+     * Keeps track of players moves, depending on the persistence model
+     */
+    History history = null;
+    
     Scorecard thescoreCard;
     
-    public Referee( Scorecard scorecard )
+    
+    public Referee( Scorecard scorecard, String persistenceModel )
     {
         this.thescoreCard = scorecard;
+        history = History.factory( persistenceModel );
     }
     
     public Winner determineWinner (GameObject playerOne, GameObject playerTwo){
-        if (playerOne.equals(GameObject.ROCK) && playerTwo.equals(GameObject.ROCK)) {
-            updateScore(Winner.TIE); 
-            return Winner.TIE; 
-        }
-        else if (playerOne.equals(GameObject.ROCK) && playerTwo.equals(GameObject.PAPER)) {
-            updateScore(Winner.PLAYER2); 
-            return Winner.PLAYER2;
-        }
-        else if (playerOne.equals(GameObject.ROCK) && playerTwo.equals(GameObject.SCISSORS)) {
-            updateScore(Winner.PLAYER1); 
-            return Winner.PLAYER1;
-        }
-        else if (playerOne.equals(GameObject.PAPER) && playerTwo.equals(GameObject.ROCK)) {
-            updateScore(Winner.PLAYER1); 
-            return Winner.PLAYER1;
-        }
-        else if (playerOne.equals(GameObject.PAPER) && playerTwo.equals(GameObject.PAPER)) {
-            updateScore(Winner.TIE); 
-            return Winner.TIE;
-        }
-        else if (playerOne.equals(GameObject.PAPER) && playerTwo.equals(GameObject.SCISSORS)) {
-            updateScore(Winner.PLAYER2); 
-            return Winner.PLAYER2;
-        }
-        else if (playerOne.equals(GameObject.SCISSORS) && playerTwo.equals(GameObject.ROCK)) {
-            updateScore(Winner.PLAYER2); 
-            return Winner.PLAYER2;
-        }
-        else if (playerOne.equals(GameObject.SCISSORS) && playerTwo.equals(GameObject.PAPER)) {
-            updateScore(Winner.PLAYER1); 
-            return Winner.PLAYER1;
-        }
-        else //if playerOne.equals(GameObject.SCISSORS) && playerTwo.equals(GameObject.SCISSORS) 
-        {
-            updateScore(Winner.TIE); 
-            return Winner.TIE;
-        }
         
+        // keep track of a history of moves
+        if (history != null)
+            history.addRound( playerOne, playerTwo );
+        
+        // determine who won
+        if (playerOne==playerTwo)
+            return Winner.TIE;
+        
+        if (    (playerOne==ROCK     && playerTwo==SCISSORS)
+             || (playerOne==PAPER    && playerTwo==ROCK)
+             || (playerOne==SCISSORS && playerTwo==PAPER) )
+            return Winner.PLAYER1;
+        
+        return Winner.PLAYER2;
     }
     
     public void updateScore(Winner winner) {
