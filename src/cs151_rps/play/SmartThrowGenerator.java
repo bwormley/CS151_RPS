@@ -5,14 +5,14 @@ import cs151_rps.GameObject;
 public class SmartThrowGenerator extends ThrowGenerator
 {
 	private Analysis analysis;
-	private History hist;
+	
 	private RandomThrowGenerator rand;
 	private int n;
 	
 	public SmartThrowGenerator()
 	{
 		analysis = Analysis.factory("shortTerm");
-		hist = History.factory("shortTerm");
+		
 		rand = new RandomThrowGenerator();
 		//default
 		n = 3;
