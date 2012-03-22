@@ -1,6 +1,7 @@
 package cs151_rps.play;
 
 import cs151_rps.GameObject;
+import cs151_rps.heuristics.Analysis;
 
 public class SmartThrowGenerator extends ThrowGenerator
 {
@@ -18,7 +19,7 @@ public class SmartThrowGenerator extends ThrowGenerator
 		n = 3;
 	}
 	
-	public setN(int x)
+	public void setN(int x)
 	{
 		n = x;
 	}
@@ -30,22 +31,22 @@ public class SmartThrowGenerator extends ThrowGenerator
     @Override
 	public GameObject queryThrow() throws Exception
 	{
-		if (analysis.numberOfMovesSoFar <= n) 
+		if (analysis.getNumberOfMovesSoFar() <= n) 
 		{
 			return rand.queryThrow();
 		}
 		else 
 		{
 			//last strings
-			String pastNMoves = analysis.pastNMoves(n);
+			String pastNMoves = analysis.getLastMoves(n);
 			//possible other player's moves
-			String Rnext = lastNMoves + "r";
-			String Pnext = lastNMoves + "p";
-			String Snext = lastNMoves + "s";
+			String Rnext = pastNMoves + "r";
+			String Pnext = pastNMoves + "p";
+			String Snext = pastNMoves + "s";
 			//freq of possible moves
-			int freqOfRNext = analysis.getFreq(Rnext);
-			int freqOfPNext = analysis.getFreq(Pnext);
-			int freqOfSNext = analysis.getFreq(Snext);
+			int freqOfRNext = analysis.frequencyOf(Rnext);
+			int freqOfPNext = analysis.frequencyOf(Pnext);
+			int freqOfSNext = analysis.frequencyOf(Snext);
 
 			/**
 			 * Covers: 
