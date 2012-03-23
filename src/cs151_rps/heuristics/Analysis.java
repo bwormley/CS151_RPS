@@ -69,7 +69,7 @@ abstract public class Analysis {
      * gestures
      * @return a non-negative number of times the pattern appeared
      */
-    abstract int frequencyOf( String pattern );
+    public abstract int frequencyOf( String pattern );
             
     //If the String moves already exist in the map, the value will be incremented
     //by one. Else the moves will be added and the value will be one. 
