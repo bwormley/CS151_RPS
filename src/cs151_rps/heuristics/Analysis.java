@@ -30,8 +30,8 @@ abstract public class Analysis {
      * The analysis is to happen for patterns between these 
      * two lengths, inclusive
      */
-    private final int MIN_DEPTH = 2;
-    private final int MAX_DEPTH = 5;
+    protected final int MIN_DEPTH = 2;
+    protected final int MAX_DEPTH = 5;
     
     /**
      * Create an instance of a subclass to implement a game heuristic.
