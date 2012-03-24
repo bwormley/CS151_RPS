@@ -105,6 +105,7 @@ public class GameController {
         }
 
         // instantiate system objects
+        // Design Pattern: Dependency Injection (Fowler, Type 3)
         scorecard = new Scorecard();
         referee = new Referee( scorecard, "shortTerm" );
         
@@ -121,10 +122,11 @@ public class GameController {
         }
         
         // decorate the players as needed
+        // Design Pattern: Dependency Injection (Fowler, Type 2)
         // TODO: choose decoration from command line options
         // TODO: choose decoration types from 'instanceof' determination of classes
         ((UserPlayer)player1).setInputType("CLI");
-        ((ComputerPlayer)player2).setExperienceLevel("random");
+        ((ComputerPlayer)player2).setExperienceLevel("smart");
         
         // default to 5 rounds if not entered on command line
         if (maxRounds<=0)

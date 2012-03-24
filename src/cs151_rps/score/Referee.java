@@ -6,9 +6,8 @@
 package cs151_rps.score;
 
 import cs151_rps.GameObject;
-import cs151_rps.heuristics.History;
-
 import static cs151_rps.GameObject.*;
+import cs151_rps.heuristics.History;
 
 public class Referee { 
     
