@@ -28,6 +28,7 @@ abstract public class History {
     {
         _instance = null;
         archive = "";
+        archiveModified = false;
     }
     
     /**
@@ -77,6 +78,23 @@ abstract public class History {
      */
     protected String archive;
     
+    /**
+     * Will be set when new history added to archive, cleared when 
+     * upToDate() called
+     */
+    protected boolean archiveModified;
+    
+    /**
+     * Indicates whether the archive has been modified since the last 
+     * call getLastMoves()
+     * 
+     * @return status
+     */
+    public boolean isModified()
+    {
+        return archiveModified;
+    }
+        
     /**
      * Add the two gestures during a single round of RPS to the archive
      * 
