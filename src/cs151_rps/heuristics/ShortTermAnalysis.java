@@ -18,8 +18,8 @@ public class ShortTermAnalysis extends Analysis {
         super(string);
     }
     
-    //add the key in the map if it doesn't exist. 
-    //if it key does exist, increment the value 
+    /* add the key in the map if it doesn't exist. 
+     * if it key does exist, increment the value */
     public void add(String str)
     {
         if(str != null) {
@@ -33,19 +33,24 @@ public class ShortTermAnalysis extends Analysis {
         }
     } //end add 
     
+    /* call the history method to get the last N moves starting from the max
+     * N level to the min N leve */
     @Override
     public void update() 
     {
-        int i = 0; 
-        for (i = MAX_DEPTH; i <= MIN_DEPTH; i++) {
+        int i;  
+        for (i = MAX_DEPTH; i >= MIN_DEPTH; i--) {
             this.add(history.getLastMoves(i)); 
         }
     } //end update 
     
+    /* return the number of time the given pattern ocurred 
+     @param - Example of patters: RPS, SPP, RRPP, SSPPR, etc. . . */
     @Override 
     public int frequencyOf(String pattern)
     {
         int value = shortTerm.get(pattern); 
         return value; 
     }
+    
 }
