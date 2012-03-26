@@ -65,7 +65,7 @@ class ShortTermHistory extends History {
         // retrieve the desired gestures
         if (numberOfMoves>0 && numberOfMoves<=archive.length())
             return archive.substring(archive.length()-numberOfMoves);
-        return null;
+        return "";
     }
 
     

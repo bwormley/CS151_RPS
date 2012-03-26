@@ -31,13 +31,13 @@ public class SmartThrowGenerator extends ThrowGenerator
     @Override
 	public GameObject queryThrow() throws Exception
 	{
-//		if (analysis.getNumberOfMovesSoFar() <= n) 
-//		{
-//			return rand.queryThrow();
-//		}
-//		else 
-//		{
-//			//last strings
+		if (analysis.getArchiveSize() <= n) 
+		{
+			return rand.queryThrow();
+		}
+		else 
+		{
+			//last strings
 			String pastNMoves = analysis.getLastMoves(n);
 			//possible other player's moves
 			String Rnext = pastNMoves + "r";
@@ -74,7 +74,7 @@ public class SmartThrowGenerator extends ThrowGenerator
 				return GameObject.SCISSORS;
 			}
 
-		//}
+		}
 
 	}// end of QueryThrow
 }// end of SmartThrowGenerator

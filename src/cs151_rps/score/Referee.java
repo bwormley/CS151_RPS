@@ -34,14 +34,19 @@ public class Referee {
             history.addRound( playerOne, playerTwo );
         
         // determine who won
-        if (playerOne==playerTwo)
+        if (playerOne==playerTwo) {
+            updateScore( Winner.TIE );
             return Winner.TIE;
+        }
         
         if (    (playerOne==ROCK     && playerTwo==SCISSORS)
              || (playerOne==PAPER    && playerTwo==ROCK)
-             || (playerOne==SCISSORS && playerTwo==PAPER) )
+             || (playerOne==SCISSORS && playerTwo==PAPER) ) {
+            updateScore( Winner.PLAYER1 );
             return Winner.PLAYER1;
+        }
         
+        updateScore( Winner.PLAYER2 );
         return Winner.PLAYER2;
     }
     

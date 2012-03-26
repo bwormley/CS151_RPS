@@ -121,10 +121,10 @@ abstract public class History {
      * with the more recent round last in the sequence.
      * 
      * If there are insufficient stored gestures to satisfy the request to 
-     * getLastMoves(), a null is returned.
+     * getLastMoves(), an empty String is returned.
      * 
      * @param numerOfMoves the number of gestures to be returned, if available
-     * @return a string representing the last gestures, or null if 
+     * @return a string representing the last gestures, or an empty String if 
      * insufficient history
      */
     abstract String getLastMoves( int numberOfMoves );

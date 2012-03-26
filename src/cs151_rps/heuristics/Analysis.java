@@ -41,7 +41,7 @@ abstract public class Analysis {
      */
     public static Analysis factory( String type )
     {
-        return null;
+        return new ShortTermAnalysis(type);
     }
     
     /**
@@ -60,6 +60,16 @@ abstract public class Analysis {
     public String getLastMoves( int numberOfMoves )
     {
         return history.getLastMoves(numberOfMoves);
+    }
+    
+    /**
+     * Return the number of gestures currently saved in the archive
+     * 
+     * @return number of throws available
+     */
+    public int getArchiveSize()
+    {
+        return history.getArchiveSize();
     }
     
     /**

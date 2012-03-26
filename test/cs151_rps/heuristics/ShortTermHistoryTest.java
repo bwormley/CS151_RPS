@@ -58,9 +58,9 @@ public class ShortTermHistoryTest {
         ShortTermHistory instance = new ShortTermHistory();
         
         String result = instance.getLastMoves(0);
-        assertEquals(result, null);
+        assertEquals(result, "");
         result = instance.getLastMoves(1);
-        assertEquals(result, null);
+        assertEquals(result, "");
         
         instance.addRound(ROCK,PAPER);
         result = instance.getLastMoves(1);
@@ -68,7 +68,7 @@ public class ShortTermHistoryTest {
         result = instance.getLastMoves(2);
         assertEquals(result,"Rp");
         result = instance.getLastMoves(3);
-        assertEquals(result,null);
+        assertEquals(result,"");
         
         instance.addRound(SCISSORS,ROCK);
         result = instance.getLastMoves(1);
@@ -80,7 +80,7 @@ public class ShortTermHistoryTest {
         result = instance.getLastMoves(4);
         assertEquals(result,"RpSr");
         result = instance.getLastMoves(5);
-        assertEquals(result,null);
+        assertEquals(result,"");
         
         for ( int ix=0; ix<instance.getMaxArchiveSize()/2; ix++ )
             instance.addRound(PAPER,SCISSORS);
