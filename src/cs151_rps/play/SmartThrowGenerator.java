@@ -9,6 +9,8 @@ public class SmartThrowGenerator extends ThrowGenerator
 	
 	private RandomThrowGenerator rand;
 	private int n;
+	private int MAX_INT;
+	private int MIN_INT;
 	
 	public SmartThrowGenerator()
 	{
@@ -16,12 +18,59 @@ public class SmartThrowGenerator extends ThrowGenerator
 		
 		rand = new RandomThrowGenerator();
 		//default
-		n = 3;
+		MAX_INT = 6;
+		MIN_INT = 3;
+		n = MAX_INT;
 	}
 	
-	public void setN(int x)
+	public void setN(int max, int min)
 	{
-		n = x;
+		MAX_INT = max;
+		MIN_INT = min;
+	}
+	
+	private String BestOf(int n)
+	{
+		//last strings
+		String pastNMoves = analysis.getLastMoves(n);
+		//possible other player's moves
+		String Rnext = pastNMoves + "r";
+		String Pnext = pastNMoves + "p";
+		String Snext = pastNMoves + "s";
+		//freq of possible moves
+		int freqOfRNext = analysis.frequencyOf(Rnext);
+		int freqOfPNext = analysis.frequencyOf(Pnext);
+		int freqOfSNext = analysis.frequencyOf(Snext);
+
+		/**
+		 * Covers: 
+		 * R > P > S 
+		 * R > S > P 
+		 * S > R > P 
+		 * S > P > R 
+		 * P > R > S 
+		 * P > S > R
+		 */
+
+		if (freqOfRNext >= freqOfPNext && freqOfRNext >= freqOfSNext) 
+		{
+			//if rock is most likely to be played -> return paper
+			return "PAPER";//return GameObject.PAPER;
+		} 
+		else if (freqOfSNext >= freqOfPNext && freqOfSNext >= freqOfRNext) 
+		{
+			//if scissors is most likely to be played -> return rock
+			return "ROCK";//return GameObject.ROCK;
+		} 
+		else if (freqOfPNext >= freqOfSNext && freqOfPNext >= freqOfRNext) 
+		{
+			//if paper is most likely to be played -> return scissors
+			return "SCISSORS";//return GameObject.SCISSORS;
+		}
+		else
+		{
+			return "NULL";
+		}
 	}
 	
 	/**
@@ -37,42 +86,17 @@ public class SmartThrowGenerator extends ThrowGenerator
 		}
 		else 
 		{
-			//last strings
-			String pastNMoves = analysis.getLastMoves(n);
-			//possible other player's moves
-			String Rnext = pastNMoves + "r";
-			String Pnext = pastNMoves + "p";
-			String Snext = pastNMoves + "s";
-			//freq of possible moves
-			int freqOfRNext = analysis.frequencyOf(Rnext);
-			int freqOfPNext = analysis.frequencyOf(Pnext);
-			int freqOfSNext = analysis.frequencyOf(Snext);
-
-			/**
-			 * Covers: 
-			 * R > P > S 
-			 * R > S > P 
-			 * S > R > P 
-			 * S > P > R 
-			 * P > R > S 
-			 * P > S > R
-			 */
-
-			if (freqOfRNext >= freqOfPNext && freqOfRNext >= freqOfSNext) 
+			for(n = MAX_INT; n >= MIN_INT; n--)
 			{
-				//if rock is most likely to be played -> return paper
-				return GameObject.PAPER;
-			} 
-			else if (freqOfSNext >= freqOfPNext && freqOfSNext >= freqOfRNext) 
-			{
-				//if scissors is most likely to be played -> return rock
-				return GameObject.ROCK;
-			} 
-			else
-			{
-				//if paper is most likely to be played -> return scissors
-				return GameObject.SCISSORS;
+				String ans = BestOf(n);
+				if(ans.equals("PAPER"))
+					return GameObject.PAPER;
+				if(ans.equals("ROCK"))
+					return GameObject.ROCK;
+				if(ans.equals("SCISSORS"))
+					return GameObject.SCISSORS;
 			}
+			throw new Exception();
 
 		}
 
