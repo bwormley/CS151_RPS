@@ -39,6 +39,9 @@ public class ShortTermAnalysis extends Analysis {
     @Override
     public void update() 
     {
+        if (history.isModified() == true)
+            return; 
+        
         int i;  
         for (i = MAX_DEPTH; i >= MIN_DEPTH; i--) {
             this.add(history.getLastMoves(i)); 
