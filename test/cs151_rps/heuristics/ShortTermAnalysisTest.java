@@ -5,6 +5,7 @@
 package cs151_rps.heuristics;
 
 import cs151_rps.GameObject;
+import java.util.Iterator; 
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -45,6 +46,16 @@ public class ShortTermAnalysisTest {
         st.add("rps"); 
         st.add("pps"); 
         st.add("ssrrr"); 
+        st.add("ssrrr"); 
+        st.add("ssrrr"); 
+        //print the contents in the hashmap
+        System.out.println("Printing the contents of the hashmap:"); 
+        Iterator it = st.shortTerm.keySet().iterator(); 
+        while(it.hasNext()) {
+            String key = (it.next()).toString(); 
+            System.out.println(key+": "+st.shortTerm.get(key)); 
+        }
+        System.out.println("End of printing hashmap\n"); 
         int expFrequency = 2; 
         int frequency = st.frequencyOf("rps"); 
         assertEquals(expFrequency, frequency); 
