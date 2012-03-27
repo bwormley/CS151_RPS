@@ -20,8 +20,9 @@ public class ShortTermAnalysis extends Analysis {
     
     /* add the key in the map if it doesn't exist. 
      * if it key does exist, increment the value */
-    public void add(String str)
+    protected void add(String str)
     {
+        str = str.toLowerCase(); 
         if(str != null) {
             if (!shortTerm.containsKey(str)) 
                 shortTerm.put(str, new Integer(1)); 
@@ -49,7 +50,14 @@ public class ShortTermAnalysis extends Analysis {
     @Override 
     public int frequencyOf(String pattern)
     {
-        int value = shortTerm.get(pattern); 
+        int value; 
+        pattern = pattern.toLowerCase(); 
+        
+        if (shortTerm.containsKey(pattern))
+            value = shortTerm.get(pattern); 
+        else 
+            value = 0; 
+        
         return value; 
     }
     

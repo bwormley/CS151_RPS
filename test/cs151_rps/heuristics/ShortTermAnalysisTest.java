@@ -45,8 +45,9 @@ public class ShortTermAnalysisTest {
         st.add("rps"); 
         st.add("pps"); 
         st.add("ssrrr"); 
+        int expFrequency = 2; 
         int frequency = st.frequencyOf("rps"); 
-        assertTrue(frequency == 2); 
+        assertEquals(expFrequency, frequency); 
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
