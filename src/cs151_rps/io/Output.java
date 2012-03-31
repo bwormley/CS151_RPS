@@ -18,11 +18,11 @@ abstract public class Output
      * @param endpoint one of several possible destinations for program output
      * @param locale designation text localization
      */
-    static public Output factory( String endpoint, Locale locale )
+    static public Output factory( String endpoint, String localeString )
     {
 // TODO: expand endpoint choices when available
         if (endpoint.equalsIgnoreCase("CLI"))
-            return new CLIOutput(locale);
+            return new CLIOutput(localeString);
 //        if (endpoint.equalsIgnoreCase("Swing"))
 //            return new SwingOutput(locale);
 //        if (endpoint.equalsIgnoreCase("Remote"))

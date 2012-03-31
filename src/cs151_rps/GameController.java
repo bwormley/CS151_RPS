@@ -120,7 +120,7 @@ public class GameController {
     public void run()
     {
         // set up selected input and output endpoints
-        endpoint = Output.factory( args.getStringParam(IO_OPTION), null );
+        endpoint = Output.factory( args.getStringParam(IO_OPTION), args.getStringParam(LANG_OPTION) );
         source = UserInput.factory(args.getStringParam(IO_OPTION));
         
         // flexibly provision two players

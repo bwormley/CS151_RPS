@@ -12,9 +12,9 @@ import static cs151_rps.io.Message.ID.*;
 public class CLIOutput extends Output
 {
 
-    CLIOutput( Locale locale )
+    CLIOutput( String localeString )
     {
-        msg = Message.factory(locale);
+        msg = Message.factory(localeString);
     }
 
     @Override

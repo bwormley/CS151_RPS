@@ -24,16 +24,22 @@ abstract public class Message {
      * @param locale the requested localization for all output
      * @return localized Message subclass
      */
-    public static Message factory(Locale locale)
+    public static Message factory(String localeString)
     {
         
         // if needed, get the platform default locale
-        if (locale==null)
-            locale =  Locale.getDefault();
+        if (localeString==null || localeString.isEmpty())
+            localeString = 
+                    Locale.getDefault().getISO3Language()
+                    + "_"
+                    + Locale.getDefault().getISO3Country();
         
         // instantiate the appropriate localized subclass
-        if (locale==Locale.ENGLISH)
+        if (localeString.equals("en_US"))
             return new EnglishMessage();
+        
+        if (localeString.equals("fa_IR"))
+            return new PersianMessage();
         
         // if the locale is not supported, instantiate the application default locale
         return new EnglishMessage();

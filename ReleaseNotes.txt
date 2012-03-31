@@ -50,7 +50,7 @@ PARAMETER                        DESCRIPTION
 -r <rounds>                      default: 32
 --level {random|smart|expert}    sets experience (default: smart)
 --io {cli|swing |remote}         interface (default: cli)
---lang <locale>                  language (default: en-US)
+--lang <locale>                  language (default: en_US)
 --p1 {human,AI}                  Player 1 identity (default: human)
 --p2 {human,AI}                  Player 2 identity {default: AI)
 

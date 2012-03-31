@@ -23,7 +23,7 @@ public final class ParseCL
 "-r <rounds>                      default: 32\n" +
 "--level {random|smart|expert}    sets experience (default: smart)\n" +
 "--io {cli|swing|remote}          interface (default: cli)\n" +
-"--lang <locale>                  language (default: en-US)\n" +
+"--lang <locale>                  language (default: en_US)\n" +
 "--p1 {human,AI}                  Player 1 identity (default: human)\n" +
 "--p2 {human,AI}                  Player 2 identity {default: AI)\n";
 
