@@ -6,6 +6,7 @@ package cs151_rps.player;
 
 import cs151_rps.GameObject;
 import cs151_rps.io.Output;
+import cs151_rps.io.UIO;
 import cs151_rps.io.UserInput;
 
 
@@ -13,26 +14,11 @@ import cs151_rps.io.UserInput;
 public class UserPlayer extends Player 
 {
 	
-    public UserPlayer( String name, Output endpoint ) 
+    public UserPlayer( String name, UIO endpoint ) 
     {
         super(name,endpoint);
     }
-    
-    /**
-     * Instantiate the input source object for this actor
-     * 
-     * @param inputType 
-     */
-    public void setInputType( String inputType )
-    {
-        source = UserInput.factory( inputType ); 
-    }
-    
-    /**
-     * The input source object
-     */
-    private UserInput source;
-
+        
     /**
      * Finds out user's choice and returns it
      * 
@@ -46,7 +32,7 @@ public class UserPlayer extends Player
 
             //Prompt for the user's choice
             endpoint.displayUserPrompt( name );
-            int choice = source.getThrow();
+            int choice = endpoint.getThrow();
             
             switch (choice) {
                 case 1: // ROCK

@@ -8,6 +8,7 @@ package cs151_rps.player;
 
 import cs151_rps.GameObject;
 import cs151_rps.io.Output;
+import cs151_rps.io.UIO;
 
 
 /**
@@ -18,9 +19,9 @@ import cs151_rps.io.Output;
 public abstract class Player {
 	
 	protected String name;
-        protected Output endpoint;
+        protected UIO endpoint;
 
-        public Player(String name, Output endpoint)
+        public Player(String name, UIO endpoint)
 	{
 		this.name = name;
                 this.endpoint = endpoint;
@@ -31,7 +32,7 @@ public abstract class Player {
 		return name;
 	}
         
-        static public Player factory( String species, String name, Output endpoint )
+        static public Player factory( String species, String name, UIO endpoint )
         {
             if (species.equalsIgnoreCase("human"))
                 return new UserPlayer( name, endpoint );

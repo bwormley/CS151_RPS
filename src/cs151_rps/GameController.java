@@ -13,6 +13,7 @@ import cs151_rps.score.Referee;
 import cs151_rps.score.Scorecard;
 
 import static cs151_rps.ParseCL.*;
+import cs151_rps.io.UIO;
 
 /**
  * The top-level class that coordinates interaction among the actors and the underlying system.
@@ -71,17 +72,11 @@ public class GameController {
     /**
      * Endpoint for all program output (e.g., CLI, Swing, Remote)
      */
-    Output endpoint;
-    
-    /**
-     * Source for all input for user
-     */
-    UserInput source;
+    UIO endpoint;
     
     /**
      * Create a Player object based on runtime attributes from the command line
      * 
-     * @param source - object abstracting all output
      * @param endpoint - object abstracting all input
      * @param playerType - human, AI, etc
      * @param inputType - CLI, Swing, etc
@@ -89,8 +84,7 @@ public class GameController {
      * @return provisioned player object of the correct identity
      */
     Player provisionPlayer( 
-            UserInput source, 
-            Output endpoint, 
+            UIO endpoint, 
             String playerType, 
             String inputType, 
             String level  )
@@ -100,15 +94,13 @@ public class GameController {
         {
             endpoint.displayWelcome();
             endpoint.displayNamePrompt();
-            name = source.getPlayerName();
+            name = endpoint.getPlayerName();
             if(name==null || name.isEmpty())
             {
             	name = "PLAYER";
             }
         }
         Player player = Player.factory( playerType, name, endpoint );
-        if (player instanceof UserPlayer)
-             ((UserPlayer)player).setInputType(inputType);
         if (player instanceof ComputerPlayer)
             ((ComputerPlayer)player).setExperienceLevel(level);
        return player;
@@ -120,18 +112,15 @@ public class GameController {
     public void run()
     {
         // set up selected input and output endpoints
-        endpoint = Output.factory( args.getStringParam(IO_OPTION), args.getStringParam(LANG_OPTION) );
-        source = UserInput.factory(args.getStringParam(IO_OPTION));
+        endpoint = UIO.factory( args.getStringParam(IO_OPTION), args.getStringParam(LANG_OPTION) );
         
         // flexibly provision two players
         player1 = provisionPlayer( 
-                source, 
                 endpoint, 
                 args.getStringParam(PLAYER_ONE_OPTION),
                 args.getStringParam(IO_OPTION),
                 args.getStringParam(EXPERIENCE_OPTION) );
         player2 = provisionPlayer( 
-                source, 
                 endpoint, 
                 args.getStringParam(PLAYER_TWO_OPTION),
                 args.getStringParam(IO_OPTION) ,
