@@ -57,7 +57,7 @@
 			Java
 		</plugin>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Fri Mar 30 22:41:17 PDT 2012'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Sat Mar 31 00:39:01 PDT 2012'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.34(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -523,6 +523,14 @@
             <UML:AssociationEnd xmi.id = '-64--88-1-102--7d5931e2:1361a1be7e1:-8000:0000000000000AFD'
               visibility = 'public' isSpecification = 'false' isNavigable = 'true' ordering = 'unordered'
               aggregation = 'aggregate' targetScope = 'instance' changeability = 'changeable'>
+              <UML:AssociationEnd.multiplicity>
+                <UML:Multiplicity xmi.id = '-64--88-1-102-17303e7b:1366153d2aa:-8000:0000000000000E8F'>
+                  <UML:Multiplicity.range>
+                    <UML:MultiplicityRange xmi.id = '-64--88-1-102-17303e7b:1366153d2aa:-8000:0000000000000E8E'
+                      lower = '1' upper = '1'/>
+                  </UML:Multiplicity.range>
+                </UML:Multiplicity>
+              </UML:AssociationEnd.multiplicity>
               <UML:AssociationEnd.participant>
                 <UML:Class xmi.idref = '-64--88-1-102--7d5931e2:1361a1be7e1:-8000:0000000000000AF5'/>
               </UML:AssociationEnd.participant>
@@ -530,6 +538,14 @@
             <UML:AssociationEnd xmi.id = '-64--88-1-102--7d5931e2:1361a1be7e1:-8000:0000000000000AFE'
               visibility = 'public' isSpecification = 'false' isNavigable = 'true' ordering = 'unordered'
               aggregation = 'none' targetScope = 'instance' changeability = 'changeable'>
+              <UML:AssociationEnd.multiplicity>
+                <UML:Multiplicity xmi.id = '-64--88-1-102-17303e7b:1366153d2aa:-8000:0000000000000E91'>
+                  <UML:Multiplicity.range>
+                    <UML:MultiplicityRange xmi.id = '-64--88-1-102-17303e7b:1366153d2aa:-8000:0000000000000E90'
+                      lower = '2' upper = '2'/>
+                  </UML:Multiplicity.range>
+                </UML:Multiplicity>
+              </UML:AssociationEnd.multiplicity>
               <UML:AssociationEnd.participant>
                 <UML:Class xmi.idref = '-64--88-1-102--7d5931e2:1361a1be7e1:-8000:0000000000000AB8'/>
               </UML:AssociationEnd.participant>
@@ -2549,8 +2565,8 @@
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigMultiplicity"
                         ownerhref="-64--88-1-102--7d5931e2:1361a1be7e1:-8000:0000000000000AFE"
-                        angle="225.0"
-                        offset="5" />
+                        angle="223.0"
+                        offset="23" />
       <argouml:pathitem figname="Fig19.5"
                         classname="org.argouml.uml.diagram.ui.PathItemPlacement"
                         figclassname="org.argouml.uml.diagram.ui.FigAssociationEndAnnotation"
