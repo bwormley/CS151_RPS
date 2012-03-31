@@ -9,20 +9,20 @@ import java.util.Locale;
  * @author Team Lunar
  */
 
-abstract public class Output 
+abstract public class UIO 
 {
     
     /**
-     * Create an object that encapsulates all output for the designated endpoint
+     * Create an object that encapsulates all i/o for the designated endpoint
      * 
      * @param endpoint one of several possible destinations for program output
      * @param locale designation text localization
      */
-    static public Output factory( String endpoint, String localeString )
+    static public UIO factory( String endpoint, String localeString )
     {
 // TODO: expand endpoint choices when available
         if (endpoint.equalsIgnoreCase("CLI"))
-            return new CLIOutput(localeString);
+            return new CLI(localeString);
 //        if (endpoint.equalsIgnoreCase("Swing"))
 //            return new SwingOutput(locale);
 //        if (endpoint.equalsIgnoreCase("Remote"))
@@ -143,4 +143,19 @@ abstract public class Output
      * Display an indication to the user that the program is quitting
      */
     abstract public void displayQuit();
+
+    /**
+     * Query the choices for a round: rock/paper/scissors/help/score/quit
+     * 
+     * @return 0..5
+     */
+    abstract public int getThrow();
+    
+    /**
+     * Query the proper name/identifier for a player
+     * 
+     * @return 
+     */
+    abstract public String getPlayerName();
+    
 }

@@ -3,16 +3,19 @@ package cs151_rps.io;
 import cs151_rps.GameObject;
 import java.util.Locale;
 import static cs151_rps.io.Message.ID.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Scanner;
 
 /**
  * Handle all output for the Command Line Interface endpoint
  * 
  * @author Team Lunar
  */
-public class CLIOutput extends Output
+public class CLI extends UIO
 {
 
-    CLIOutput( String localeString )
+    CLI( String localeString )
     {
         msg = Message.factory(localeString);
     }
@@ -129,5 +132,38 @@ public class CLIOutput extends Output
 		System.out.println(msg.getMessage(QUIT));
 		
 	}
+
+    
+    @Override 
+    public String getPlayerName()
+    {
+        try {
+            InputStreamReader converter = new InputStreamReader(System.in);
+            BufferedReader in = new BufferedReader(converter);
+            return in.readLine();
+        }
+        catch (Exception e) {
+            System.out.println("Error!  Exception: " + e );
+        }
+        return null;
+    }
+    
+    @Override
+    public int getThrow()
+    {
+        Scanner scan = new Scanner(System.in);
+        int choice = 5;
+        if(scan.hasNext())
+        	try{
+            choice = scan.nextInt();
+        	}
+        	catch (Exception e)
+        	{
+        		//Should say invalid input try again
+        		return choice;
+        	}
+
+        return choice;
+    }
 
 }
