@@ -35,8 +35,8 @@ public abstract class Player {
         {
             if (species.equalsIgnoreCase("human"))
                 return new UserPlayer( name, endpoint );
-            if (species.equalsIgnoreCase("computer"))
-                return new ComputerPlayer( name );
+            if (species.equalsIgnoreCase("AI"))
+                return new ComputerPlayer();
             return null;
         }
     

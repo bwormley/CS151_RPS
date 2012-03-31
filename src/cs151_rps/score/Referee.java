@@ -32,6 +32,8 @@ public class Referee {
         // keep track of a history of moves
         if (history != null)
             history.addRound( playerOne, playerTwo );
+        // TODO: History wants (human,computer) but we can't guarantee this
+        // TODO: how to turn off history when human experience meaningles (as in Remote Player)
         
         // determine who won
         if (playerOne==playerTwo) {

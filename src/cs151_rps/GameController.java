@@ -12,6 +12,8 @@ import cs151_rps.player.UserPlayer;
 import cs151_rps.score.Referee;
 import cs151_rps.score.Scorecard;
 
+import static cs151_rps.ParseCL.*;
+
 /**
  * The top-level class that coordinates interaction among the actors and the underlying system.
  * 
@@ -20,43 +22,42 @@ import cs151_rps.score.Scorecard;
 public class GameController {
     
     /**
-    * Constructor
+    * Constructor - create a game, and initialize with all parameters 
+    * from the command line
     *
-    * @param maxRounds number of rounds for this match, as (typically) input from CL.  If 0, user is prompted.
+    * @param args parser object that has options found on the command 
+    * line, and defaults
     */
-    public GameController( int maxRounds, String level )
+    public GameController( ParseCL args )
     {
-        this.maxRounds = maxRounds;
-        this.level = level;
+        this.args = args;
     }
+    
+    ParseCL args;
 
     /**
-     * Implements the rules of the game, and updates scorecard for each round.
+     * Implements the rules of the game, updates scorecard for each round, 
+     * and forwards player moves to be archived
      */
     private Referee referee;
     
     /**
-     * Maintains the score for the match.
+     * Maintains the current score for the match
      */
     private Scorecard scorecard;
     
     /**
-     * Temp storage for user-inputted name, prior to being embedded in the player object.
-     */
-    private String playerName;
-    
-    /**
-     * Input by the user, the number of rounds to play in this match.
+     * The number of rounds to play in this match
      */
     private int maxRounds;
     
     /**
      * Indication of experience level for computer player
      */
-    String level;
+    private String level;
     
     /**
-     * The actors in the game.
+     * The two ctors in the game
      */
     private Player player1;
     private Player player2;
@@ -68,7 +69,7 @@ public class GameController {
     private GameObject player2Throw;
     
     /**
-     * Endpoint for all program output (e.g., command line, GUI, remote)
+     * Endpoint for all program output (e.g., CLI, Swing, Remote)
      */
     Output endpoint;
     
@@ -78,59 +79,71 @@ public class GameController {
     UserInput source;
     
     /**
-     * Main controlling method for the game
+     * Create a Player object based on runtime attributes from the command line
+     * 
+     * @param source - object abstracting all output
+     * @param endpoint - object abstracting all input
+     * @param playerType - human, AI, etc
+     * @param inputType - CLI, Swing, etc
+     * @param level - smart, etc
+     * @return provisioned player object of the correct identity
      */
-    public void main()
+    Player provisionPlayer( 
+            UserInput source, 
+            Output endpoint, 
+            String playerType, 
+            String inputType, 
+            String level  )
     {
-        // set up selected input and output endpoints
-        // TODO: endpoint and locale settable from command line
-        endpoint = Output.factory( "CLI", java.util.Locale.ENGLISH );
-        //TODO: resolve design ugliness: input here *and* UserPlayer class? wtf?
-        source = UserInput.factory("CLI");
-        
-        // Welcome, and acquire user's name 
-        try {
+        String name = "";
+        if (playerType.equalsIgnoreCase("human"))
+        {
             endpoint.displayWelcome();
             endpoint.displayNamePrompt();
-            playerName = source.getPlayerName();
-            if(playerName.isEmpty())
+            name = source.getPlayerName();
+            if(name==null || name.isEmpty())
             {
-            	playerName = "player1";
+            	name = "PLAYER";
             }
         }
-        catch (Exception e) {
-        	endpoint.displayQuit();
-            System.exit(0);
-           
-        }
+        Player player = Player.factory( playerType, name, endpoint );
+        if (player instanceof UserPlayer)
+             ((UserPlayer)player).setInputType(inputType);
+        if (player instanceof ComputerPlayer)
+            ((ComputerPlayer)player).setExperienceLevel(level);
+       return player;
+    }
+
+    /**
+     * Main controlling method for the game
+     */
+    public void run()
+    {
+        // set up selected input and output endpoints
+        endpoint = Output.factory( args.getStringParam(IO_OPTION), null );
+        source = UserInput.factory(args.getStringParam(IO_OPTION));
+        
+        // flexibly provision two players
+        player1 = provisionPlayer( 
+                source, 
+                endpoint, 
+                args.getStringParam(PLAYER_ONE_OPTION),
+                args.getStringParam(IO_OPTION),
+                args.getStringParam(EXPERIENCE_OPTION) );
+        player2 = provisionPlayer( 
+                source, 
+                endpoint, 
+                args.getStringParam(PLAYER_TWO_OPTION),
+                args.getStringParam(IO_OPTION) ,
+                args.getStringParam(EXPERIENCE_OPTION) );
 
         // instantiate system objects
         // Design Pattern: Dependency Injection (Fowler, Type 3)
         scorecard = new Scorecard();
-        referee = new Referee( scorecard, "shortTerm" );
+        referee = new Referee( scorecard, args.getStringParam(EXPERIENCE_OPTION) );
         
-        // instantiate human and AI players
-        // TODO: make these types settable from the CLI
-        try {
-            player1 = Player.factory( "human",    playerName, endpoint );
-            player2 = Player.factory( "computer", "HAL",      null );
-        }
-        catch (Exception e) {
-        	endpoint.displayQuit();
-            System.exit(0);
-            //  fatal error instantiating player object: abort here, with consolation.
-        }
-        
-        // decorate the players as needed
-        // Design Pattern: Dependency Injection (Fowler, Type 2)
-        // TODO: choose decoration from command line options
-        // TODO: choose decoration types from 'instanceof' determination of classes
-        ((UserPlayer)player1).setInputType("CLI");
-        ((ComputerPlayer)player2).setExperienceLevel("smart");
-        
-        // default to 5 rounds if not entered on command line
-        if (maxRounds<=0)
-            maxRounds = 5;
+        // initialize any final runtime parameters
+        maxRounds = args.getIntParam(NUM_ROUNDS_OPTION);
         
         // main game loop
         for ( int round=1; round <= maxRounds; round++ ) {

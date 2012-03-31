@@ -44,9 +44,10 @@ public class ComputerPlayer extends Player
          * 
          * @param name Proper Name given to this actor
          */
-        ComputerPlayer( String name )
+        ComputerPlayer()
         {
-            super( name, null );
+            super( null, null );
+            this.name = "HAL";
         }
 
 	

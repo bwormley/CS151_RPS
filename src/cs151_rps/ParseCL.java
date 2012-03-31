@@ -1,16 +1,41 @@
 package cs151_rps;
 
 import java.util.HashMap;
-import java.lang.Integer;
-import java.lang.IllegalArgumentException;
 
 /**
  * Parse a command line for arguments 
  * 
  * @author: CS151 Team Lunar
  */
-public class ParseCL
+public final class ParseCL
 {
+    static public final String NUM_ROUNDS_OPTION = "-r";
+    static public final String EXPERIENCE_OPTION = "--level";
+    static public final String IO_OPTION         = "--io";
+    static public final String LANG_OPTION       = "--lang";
+    static public final String PLAYER_ONE_OPTION = "--p1";
+    static public final String PLAYER_TWO_OPTION = "--p2";
+    
+    static        final String Usage = 
+"Usage: \n" +
+"PARAMETER                        DESCRIPTION\n" +
+"---------                        -----------\n" +
+"-r <rounds>                      default: 32\n" +
+"--level {random|smart|expert}    sets experience (default: smart)\n" +
+"--io {cli|swing|remote}          interface (default: cli)\n" +
+"--lang <locale>                  language (default: en-US)\n" +
+"--p1 {human,AI}                  Player 1 identity (default: human)\n" +
+"--p2 {human,AI}                  Player 2 identity {default: AI)\n";
+
+
+
+    String defaultNumRounds = "32";
+    String defaultLevel     = "smart";
+    String defaultIO        = "cli";
+    String defaultLang      = "";
+    String defaultP1        = "human";
+    String defaultP2        = "AI";
+    
     
     /**
      * Enumerate the different command line parameter types
@@ -34,6 +59,13 @@ public class ParseCL
     {
         param = new HashMap<String,Object>();
         opt = new HashMap<String,ParamType>();
+        
+        setOption( NUM_ROUNDS_OPTION, ParamType.INTEGER );
+        setOption( EXPERIENCE_OPTION, ParamType.STRING );
+        setOption( IO_OPTION,         ParamType.STRING );
+        setOption( LANG_OPTION,       ParamType.STRING );
+        setOption( PLAYER_ONE_OPTION, ParamType.STRING );
+        setOption( PLAYER_TWO_OPTION, ParamType.STRING );
     }
     
     /**
@@ -68,6 +100,25 @@ public class ParseCL
             }
             param.put( key, val );
         }
+        
+        // inspect each potential option, and include a default if one is missing
+        if (!getParam(NUM_ROUNDS_OPTION))
+            param.put(NUM_ROUNDS_OPTION,defaultNumRounds);
+        if (!getParam(EXPERIENCE_OPTION))
+            param.put(EXPERIENCE_OPTION,defaultLevel);
+        if (!getParam(IO_OPTION))
+            param.put(IO_OPTION,defaultIO);
+        if (!getParam(LANG_OPTION))
+            param.put(LANG_OPTION,defaultLang);
+        if (!getParam(PLAYER_ONE_OPTION))
+            param.put(PLAYER_ONE_OPTION,defaultP1);
+        if (!getParam(PLAYER_TWO_OPTION))
+            param.put(PLAYER_TWO_OPTION,defaultP2);
+    }
+    
+    public void displayUsage()
+    {
+        System.out.println(Usage);
     }
     
     /**

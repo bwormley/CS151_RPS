@@ -12,7 +12,7 @@ public class CLIUserInput extends UserInput
 {
     
     @Override 
-    public String getPlayerName() throws Exception
+    public String getPlayerName()
     {
         try {
             InputStreamReader converter = new InputStreamReader(System.in);

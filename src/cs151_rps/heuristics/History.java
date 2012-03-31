@@ -61,7 +61,7 @@ abstract public class History {
     {
 // TODO: update factory when another subclass is available 
         if (_instance==null) {
-//        if (type.equalsIgnoreCase("ShortTerm"))
+//        if (type.equalsIgnoreCase("smart"))
             _instance = new ShortTermHistory();
         }
         return _instance;

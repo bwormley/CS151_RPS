@@ -38,6 +38,6 @@ abstract public class UserInput {
      * 
      * @return 
      */
-    abstract public String getPlayerName() throws Exception;
+    abstract public String getPlayerName();
     
 }
