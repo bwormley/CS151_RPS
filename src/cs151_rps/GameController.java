@@ -4,11 +4,8 @@
  */
 package cs151_rps;
 
-import cs151_rps.io.Output;
-import cs151_rps.io.UserInput;
 import cs151_rps.player.ComputerPlayer;
 import cs151_rps.player.Player;
-import cs151_rps.player.UserPlayer;
 import cs151_rps.score.Referee;
 import cs151_rps.score.Scorecard;
 
