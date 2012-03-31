@@ -1,0 +1,69 @@
+CS 151 Section 2
+Team Lunar
+
+Assignment #4 Release Notes
+
+Added more command line parameters, and Usage-style help, to
+accommodate the flexlibilty needed for the current and future
+assignments.
+
+Added an abstract History class and subclasses, encapsulating whether
+access to 1) no moves, 2) short term history archive, or 3) persistant
+archive, is desired.  Settable from the command line.  History uses
+the Singleton design pattern.
+
+Updated the Referee class to use the appropriate subclass of History,
+to cache moves.
+
+Added an abstract Analysis class and concrete subclass, encapsulating
+heuristics support for guessing a player's next move.
+
+Added a subclass of ThrowGenerator called SmartThrowGenerator, which
+uses the ShortTermAnalysis heuristics with ShortTermHistory caching,
+to guess the player's next move.  Encapsulates the smart throw in just
+one subclass of the ThrowGenerator.
+
+Improved flexibility of settable options, so that the identity of
+players, location of players, method of I/O, language, number of
+rounds, heuristic algorithm, and persistence model are all
+independently settable at runtime, from the command line.
+
+Moved the ParseCL class use into GameController, which now uses it
+directly.  Also, made ParseCL completely encapsulate all command line
+parameters, rather than being a "generic" command line parser.
+
+Consolidated the abstract UserInput and Output classes, for
+simplicity, and in preparation for adding a Swing GUI and potentially
+a Remote Player (a Human-class player with Remote I/O, to play another
+team's project).
+
+Several JUnit tests to validate and regression-test several key
+components.
+
+
+COMMAND LINE PARAMETERS
+
+Usage: 
+
+PARAMETER                        DESCRIPTION
+---------                        -----------
+-r <rounds>                      default: 32
+--level {random|smart|expert}    sets experience (default: smart)
+--io {cli|swing |remote}         interface (default: cli)
+--lang <locale>                  language (default: en-US)
+--p1 {human,AI}                  Player 1 identity (default: human)
+--p2 {human,AI}                  Player 2 identity {default: AI)
+
+So a few sample command lines:
+
+run the Swing interface, human vs. computer, with a Smart computer algorithm
+    --io swing
+
+run the CLI interface with a Random computer algoritm
+    --level random
+
+run a "computer vs computer" game, for 100 rounds
+    --p1 AI --p2 AI -r 100
+
+run the smart algorithm against a remote player
+    --io remote
