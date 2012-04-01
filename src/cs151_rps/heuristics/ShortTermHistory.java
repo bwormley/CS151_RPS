@@ -59,9 +59,6 @@ class ShortTermHistory extends History {
     @Override
     String getLastMoves(int numberOfMoves) 
     {
-        // clear archiveModified bit: caller is now up-to-date
-        archiveModified = false;
-        
         // retrieve the desired gestures
         if (numberOfMoves>0 && numberOfMoves<=archive.length())
             return archive.substring(archive.length()-numberOfMoves);

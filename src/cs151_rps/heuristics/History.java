@@ -86,13 +86,22 @@ abstract public class History {
     
     /**
      * Indicates whether the archive has been modified since the last 
-     * call getLastMoves()
+     * call to upToDate()
      * 
      * @return status
      */
     public boolean isModified()
     {
         return archiveModified;
+    }
+    
+    /**
+     * Indicates that the consumer of history is up to date with the 
+     * latest changes made to the archive
+     */
+    public void upToDate()
+    {
+        archiveModified = false;
     }
         
     /**

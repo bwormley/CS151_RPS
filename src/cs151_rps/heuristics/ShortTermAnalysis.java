@@ -39,13 +39,14 @@ public class ShortTermAnalysis extends Analysis {
     @Override
     public void update() 
     {
-        if (history.archiveModified == true) {
+        if (history.isModified()) {
             int i; 
             for(i = MAX_DEPTH; i >= MIN_DEPTH; i--) {
                 //if(history.getLastMoves(i) != null)
                 this.add(history.getLastMoves(i)); //store the past N moves
             }
         }
+        history.upToDate();
     } //end update 
     
     /* return the number of time the given pattern ocurred 
