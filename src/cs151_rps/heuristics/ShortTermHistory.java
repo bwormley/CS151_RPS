@@ -33,15 +33,7 @@ class ShortTermHistory extends History {
         // set archive as having been modified
         archiveModified = true;
         
-        // add human gesture first
-        switch (humanPlayerGesture)
-        {
-            case ROCK:     archive += "R"; break;
-            case PAPER:    archive += "P"; break;
-            case SCISSORS: archive += "S"; break;
-        }
-        
-        // add computer gesture second
+        // add computer gesture first
         switch (computerPlayerGesture)
         {
             case ROCK:     archive += "r"; break;
@@ -49,6 +41,14 @@ class ShortTermHistory extends History {
             case SCISSORS: archive += "s"; break;
         }
 
+        // add human gesture second
+        switch (humanPlayerGesture)
+        {
+            case ROCK:     archive += "R"; break;
+            case PAPER:    archive += "P"; break;
+            case SCISSORS: archive += "S"; break;
+        }
+        
         // only keep MAX_DEPTH gestures, max
         if (archive.length()>MAX_DEPTH)
             archive = archive.substring(archive.length()-MAX_DEPTH);

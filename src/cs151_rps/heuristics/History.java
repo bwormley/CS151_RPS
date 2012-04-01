@@ -113,11 +113,11 @@ abstract public class History {
      * case letter (r/p/s).
      * 
      * Although an odd number of gestures can be requested, the history is 
-     * accumulated from pairs of gestures, where the human player's gesture 
+     * accumulated from pairs of gestures, where the computer player's gesture 
      * comes first.
      * 
-     * For example, a call of getLastMoves(4) may return "RpSr", representing 
-     * the last two rounds, in the order of (human, computer, human, computer),
+     * For example, a call of getLastMoves(4) may return "rPsR", representing 
+     * the last two rounds, in the order of (computer, human, computer, human),
      * with the more recent round last in the sequence.
      * 
      * If there are insufficient stored gestures to satisfy the request to 
