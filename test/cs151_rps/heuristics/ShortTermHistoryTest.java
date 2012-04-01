@@ -64,21 +64,21 @@ public class ShortTermHistoryTest {
         
         instance.addRound(ROCK,PAPER);
         result = instance.getLastMoves(1);
-        assertEquals(result,"p");
+        assertEquals(result,"R");
         result = instance.getLastMoves(2);
-        assertEquals(result,"Rp");
+        assertEquals(result,"pR");
         result = instance.getLastMoves(3);
         assertEquals(result,"");
         
         instance.addRound(SCISSORS,ROCK);
         result = instance.getLastMoves(1);
-        assertEquals(result,"r");
+        assertEquals(result,"S");
         result = instance.getLastMoves(2);
-        assertEquals(result,"Sr");
+        assertEquals(result,"rS");
         result = instance.getLastMoves(3);
-        assertEquals(result,"pSr");
+        assertEquals(result,"RrS");
         result = instance.getLastMoves(4);
-        assertEquals(result,"RpSr");
+        assertEquals(result,"pRrS");
         result = instance.getLastMoves(5);
         assertEquals(result,"");
         
@@ -86,7 +86,7 @@ public class ShortTermHistoryTest {
             instance.addRound(PAPER,SCISSORS);
         instance.addRound(ROCK,SCISSORS);
         result = instance.getLastMoves(4);
-        assertEquals(result,"PsRs");        
+        assertEquals(result,"sPsR");        
     }
 
     /**
