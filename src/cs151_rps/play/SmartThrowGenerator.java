@@ -28,17 +28,26 @@ public class SmartThrowGenerator extends ThrowGenerator
 		MAX_INT = max;
 		MIN_INT = min;
 	}
-	
+
 	private String BestOf(int n)
 	{
 		//last strings
 		String pastNMoves = analysis.getLastMoves(n);
 		
                 //possible other player's moves
-		String Rnext = pastNMoves + "R";
-		String Pnext = pastNMoves + "P";
-		String Snext = pastNMoves + "S";
-
+		
+                //String Rnext = pastNMoves + "R";
+                String Rnext = pastNMoves.substring(0, n-1); 
+                Rnext = Rnext + "R"; 
+                
+		//String Pnext = pastNMoves + "P";
+                String Pnext = pastNMoves.substring(0, n-1); 
+		Pnext = Pnext + "P"; 
+                
+                //String Snext = pastNMoves + "S";
+                String Snext = pastNMoves.substring(0, n-1); 
+                Snext = Snext + "S"; 
+                
 		//freq of possible moves
 		int freqOfRNext = analysis.frequencyOf(Rnext); 
 		int freqOfPNext = analysis.frequencyOf(Pnext);
