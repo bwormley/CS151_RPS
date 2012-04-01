@@ -28,17 +28,22 @@ public class SmartThrowGenerator extends ThrowGenerator
 		MAX_INT = max;
 		MIN_INT = min;
 	}
-	
+        
 	private String BestOf(int n)
 	{
-		//last strings
-		String pastNMoves = analysis.getLastMoves(n);
-                //System.out.println("getting pastNMoves: "+pastNMoves); 
-		//possible other player's moves
+                // since we're looking for human's next move, but the order 
+                // from the History archive is (computer,human) we need to 
+                // swap the order of the throws to construct the search 
+                // pattern
+		String pastNMoves = analysis.getLastMovesSwapped(n);
+                
+		// now finish constructing patterns for all possible 
+                // human moves
 		String Rnext = pastNMoves + "R";
 		String Pnext = pastNMoves + "P";
 		String Snext = pastNMoves + "S";
-		//freq of possible moves
+                
+		// get the analysis of the frequency of the possible moves
 		int freqOfRNext = analysis.frequencyOf(Rnext); 
 		int freqOfPNext = analysis.frequencyOf(Pnext);
 		int freqOfSNext = analysis.frequencyOf(Snext);
@@ -53,17 +58,17 @@ public class SmartThrowGenerator extends ThrowGenerator
 		 * P > S > R
 		 */
 
-		if (freqOfRNext >= freqOfPNext && freqOfRNext >= freqOfSNext) 
+		if (freqOfRNext>0 && freqOfRNext >= freqOfPNext && freqOfRNext >= freqOfSNext) 
 		{
 			//if rock is most likely to be played -> return paper
 			return "PAPER";//return GameObject.PAPER;
 		} 
-		else if (freqOfSNext >= freqOfPNext && freqOfSNext >= freqOfRNext) 
+		else if (freqOfSNext>0 && freqOfSNext >= freqOfPNext && freqOfSNext >= freqOfRNext) 
 		{
 			//if scissors is most likely to be played -> return rock
 			return "ROCK";//return GameObject.ROCK;
 		} 
-		else if (freqOfPNext >= freqOfSNext && freqOfPNext >= freqOfRNext) 
+		else if (freqOfPNext>0 && freqOfPNext >= freqOfSNext && freqOfPNext >= freqOfRNext) 
 		{
 			//if paper is most likely to be played -> return scissors
 			return "SCISSORS";//return GameObject.SCISSORS;
@@ -79,7 +84,7 @@ public class SmartThrowGenerator extends ThrowGenerator
      * This player's moves are upper case and other player's moves are lower case.
      */
     @Override
-	public GameObject queryThrow() throws Exception
+	public GameObject queryThrow()
 	{
             analysis.update();
             
@@ -99,9 +104,7 @@ public class SmartThrowGenerator extends ThrowGenerator
 				if(ans.equals("SCISSORS"))
 					return GameObject.SCISSORS;
 			}
-			throw new Exception();
-
 		}
-
-	}// end of QueryThrow
+            return rand.queryThrow();
+	}// end of queryThrow
 }// end of SmartThrowGenerator

@@ -14,7 +14,7 @@ public class RandomThrowGenerator extends ThrowGenerator
      * Finds out a computer's choice. A random decision.
      */
     @Override
-    public GameObject queryThrow() throws Exception
+    public GameObject queryThrow()
     {
         Random rand = new Random();
         int choice = rand.nextInt();

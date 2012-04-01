@@ -28,5 +28,5 @@ abstract public class ThrowGenerator {
      * 
      * @return rock|paper|scissors
      */
-    abstract public GameObject queryThrow() throws Exception;
+    abstract public GameObject queryThrow();
 }
