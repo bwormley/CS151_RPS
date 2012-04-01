@@ -33,12 +33,13 @@ public class SmartThrowGenerator extends ThrowGenerator
 	{
 		//last strings
 		String pastNMoves = analysis.getLastMoves(n);
+                //System.out.println("getting pastNMoves: "+pastNMoves); 
 		//possible other player's moves
 		String Rnext = pastNMoves + "r";
 		String Pnext = pastNMoves + "p";
 		String Snext = pastNMoves + "s";
 		//freq of possible moves
-		int freqOfRNext = analysis.frequencyOf(Rnext);
+		int freqOfRNext = analysis.frequencyOf(Rnext); 
 		int freqOfPNext = analysis.frequencyOf(Pnext);
 		int freqOfSNext = analysis.frequencyOf(Snext);
 
@@ -80,7 +81,9 @@ public class SmartThrowGenerator extends ThrowGenerator
     @Override
 	public GameObject queryThrow() throws Exception
 	{
-		if (analysis.getArchiveSize() <= n) 
+            analysis.update();
+            
+            if (analysis.getArchiveSize() <= n) 
 		{
 			return rand.queryThrow();
 		}

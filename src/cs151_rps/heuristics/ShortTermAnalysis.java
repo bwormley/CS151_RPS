@@ -5,6 +5,7 @@
 package cs151_rps.heuristics;
 
 import java.util.HashMap; 
+import java.util.Iterator; 
 
 /**
  *
@@ -22,10 +23,9 @@ public class ShortTermAnalysis extends Analysis {
      * if it key does exist, increment the value */
     protected void add(String str)
     {
-        str = str.toLowerCase(); 
         if(str != null) {
             if (!shortTerm.containsKey(str)) 
-                shortTerm.put(str, new Integer(1)); 
+                shortTerm.put(str, 1); 
             else {
                 int value = shortTerm.get(str);
                 value++; 
@@ -35,16 +35,16 @@ public class ShortTermAnalysis extends Analysis {
     } //end add 
     
     /* call the history method to get the last N moves starting from the max
-     * N level to the min N leve */
+     * N level to the min N level */
     @Override
     public void update() 
     {
-        if (history.isModified() == true)
-            return; 
-        
-        int i;  
-        for (i = MAX_DEPTH; i >= MIN_DEPTH; i--) {
-            this.add(history.getLastMoves(i)); 
+        if (history.archiveModified == true) {
+            int i; 
+            for(i = MAX_DEPTH; i >= MIN_DEPTH; i--) {
+                //if(history.getLastMoves(i) != null)
+                this.add(history.getLastMoves(i)); //store the past N moves
+            }
         }
     } //end update 
     
@@ -54,14 +54,25 @@ public class ShortTermAnalysis extends Analysis {
     public int frequencyOf(String pattern)
     {
         int value; 
-        pattern = pattern.toLowerCase(); 
-        
-        if (shortTerm.containsKey(pattern))
+        if (shortTerm.containsKey(pattern)) {
             value = shortTerm.get(pattern); 
+        }
         else 
             value = 0; 
         
         return value; 
+    } //end method frequencyOf
+    
+    public void printMap(HashMap<String, Integer> map){
+        System.out.println("printing map"); 
+        Iterator it = map.keySet().iterator(); 
+        if (map.isEmpty()) System.out.println("Map is empty"); 
+        while(it.hasNext()) {
+            String key = (it.next()).toString(); 
+            System.out.println(key+": "+map.get(key)); 
+        }
     }
     
-}
+} //end class ShortTermAnalysis 
+
+
