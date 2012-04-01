@@ -46,9 +46,7 @@ public class SmartThrowGenerator extends ThrowGenerator
 		int freqOfRNext = analysis.frequencyOf(Rnext); 
 		int freqOfPNext = analysis.frequencyOf(Pnext);
 		int freqOfSNext = analysis.frequencyOf(Snext);
-                System.out.println("count for "+Rnext+" = "+freqOfRNext); 
-                System.out.println("count for "+Pnext+" = "+freqOfPNext); 
-                System.out.println("count for "+Snext+" = "+freqOfSNext); 
+                 
 		/**
 		 * Covers: 
 		 * R > P > S 
