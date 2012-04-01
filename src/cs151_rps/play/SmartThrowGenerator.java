@@ -18,9 +18,9 @@ public class SmartThrowGenerator extends ThrowGenerator
 		
 		rand = new RandomThrowGenerator();
 		//default
-		MAX_INT = 6;
+		MAX_INT = 5;
 		MIN_INT = 3;
-		n = MAX_INT;
+		n = MIN_INT;
 	}
 	
 	public void setN(int max, int min)
@@ -44,10 +44,11 @@ public class SmartThrowGenerator extends ThrowGenerator
 		String Snext = pastNMoves + "S";
                 
 		// get the analysis of the frequency of the possible moves
+
 		int freqOfRNext = analysis.frequencyOf(Rnext); 
 		int freqOfPNext = analysis.frequencyOf(Pnext);
 		int freqOfSNext = analysis.frequencyOf(Snext);
-
+                 
 		/**
 		 * Covers: 
 		 * R > P > S 

@@ -31,7 +31,7 @@ abstract public class Analysis {
      * two lengths, inclusive
      */
     protected final int MIN_DEPTH = 2;
-    protected final int MAX_DEPTH = 5;
+    protected final int MAX_DEPTH = 6;
     
     /**
      * Create an instance of a subclass to implement a game heuristic.
@@ -60,6 +60,17 @@ abstract public class Analysis {
     public String getLastMoves( int numberOfMoves )
     {
         return history.getLastMoves(numberOfMoves);
+    }
+    
+    /**
+     * Return the last gestures made in the game, with the order swapped
+     * 
+     * @param numberOfMoves number of moves made, 
+     * or null if insufficient history
+     */
+    public String getLastMovesSwapped( int numberOfMoves )
+    {
+        return history.getLastMovesSwapped(numberOfMoves);
     }
     
     /**

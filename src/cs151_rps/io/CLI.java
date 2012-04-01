@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class CLI extends UIO
 {
-
+    
     CLI( String localeString )
     {
         msg = Message.factory(localeString);

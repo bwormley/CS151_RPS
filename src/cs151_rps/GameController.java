@@ -33,12 +33,16 @@ public class GameController {
     
     ParseCL args;
 
+    
+    //private ShortTermHistory history; 
+    
     /**
      * Implements the rules of the game, updates scorecard for each round, 
      * and forwards player moves to be archived
      */
     private Referee referee;
     
+    //updates the map in the short term 
     /**
      * Maintains the current score for the match
      */
@@ -185,15 +189,15 @@ public class GameController {
         
         if(scorecard.getPlayerOneScore() > scorecard.getPlayerTwoScore())
         {
-        	endpoint.displayMatchWinner(player1.getName());
+            endpoint.displayMatchWinner(player1.getName());
         }
         else if (scorecard.getPlayerOneScore() < scorecard.getPlayerTwoScore())
         {
-        	endpoint.displayMatchWinner(player2.getName());
+            endpoint.displayMatchWinner(player2.getName());
         }
         else 
         {
-        	endpoint.displayMatchIsTie();
+            endpoint.displayMatchIsTie();
         }
         
         
