@@ -35,9 +35,9 @@ public class SmartThrowGenerator extends ThrowGenerator
 		String pastNMoves = analysis.getLastMoves(n);
                 //System.out.println("getting pastNMoves: "+pastNMoves); 
 		//possible other player's moves
-		String Rnext = pastNMoves + "r";
-		String Pnext = pastNMoves + "p";
-		String Snext = pastNMoves + "s";
+		String Rnext = pastNMoves + "R";
+		String Pnext = pastNMoves + "P";
+		String Snext = pastNMoves + "S";
 		//freq of possible moves
 		int freqOfRNext = analysis.frequencyOf(Rnext); 
 		int freqOfPNext = analysis.frequencyOf(Pnext);
