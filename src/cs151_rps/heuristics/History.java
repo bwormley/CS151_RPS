@@ -130,6 +130,19 @@ abstract public class History {
     abstract String getLastMoves( int numberOfMoves );
     
     /**
+     * Return the last N gestures made during playing the game, in a swapped order.
+     * 
+     * This function operates similarly to getLastMoves() except the order of 
+     * the moves is (computer,human).  In all other respects it behaves 
+     * identically.
+     * 
+     * @param numberOfMoves the number of gestures to be returned, if available
+     * @return a string representing the last gestures, or an empty String if 
+     * insufficient history
+     */
+    abstract String getLastMovesSwapped( int numberOfMoves );
+    
+    /**
      * Return the number of gestures currently available in the archive
      * 
      * @return 1 or more gestures available for retrieval via the 

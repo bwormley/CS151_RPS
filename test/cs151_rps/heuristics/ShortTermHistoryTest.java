@@ -90,6 +90,47 @@ public class ShortTermHistoryTest {
     }
 
     /**
+     * Test of getLastMovesSwapped method, of class ShortTermHistory.
+     */
+    @Test
+    public void testGetLastMovesSwapped() {
+        System.out.println("getLastMovesSwapped");
+        int numberOfMoves = 0;
+        ShortTermHistory instance = new ShortTermHistory();
+        
+        String result = instance.getLastMovesSwapped(0);
+        assertEquals(result, "");
+        result = instance.getLastMovesSwapped(1);
+        assertEquals(result, "");
+        
+        instance.addRound(ROCK,PAPER);
+        result = instance.getLastMovesSwapped(1);
+        assertEquals(result,"R");
+        result = instance.getLastMovesSwapped(2);
+        assertEquals(result,"pR");
+        result = instance.getLastMovesSwapped(3);
+        assertEquals(result,"");
+        
+        instance.addRound(SCISSORS,ROCK);
+        result = instance.getLastMovesSwapped(1);
+        assertEquals(result,"S");
+        result = instance.getLastMovesSwapped(2);
+        assertEquals(result,"rS");
+        result = instance.getLastMovesSwapped(3);
+        assertEquals(result,"RrS");
+        result = instance.getLastMovesSwapped(4);
+        assertEquals(result,"pRrS");
+        result = instance.getLastMovesSwapped(5);
+        assertEquals(result,"");
+        
+        for ( int ix=0; ix<instance.getMaxArchiveSize()/2; ix++ )
+            instance.addRound(PAPER,SCISSORS);
+        instance.addRound(ROCK,SCISSORS);
+        result = instance.getLastMovesSwapped(4);
+        assertEquals(result,"sPsR");        
+    }
+
+    /**
      * Test of getArchiveSize method, of class ShortTermHistory.
      */
     @Test
