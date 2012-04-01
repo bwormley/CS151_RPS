@@ -67,6 +67,27 @@ class ShortTermHistory extends History {
             return archive.substring(archive.length()-numberOfMoves);
         return "";
     }
+    
+    // algorithm note: get number of moves, rounded up (ie, whole r/p/s rounds), 
+    // then do the swap, then return the subset requested
+    @Override
+    String getLastMovesSwapped(int numberOfMoves)
+    {
+        if (numberOfMoves>0 && (numberOfMoves+numberOfMoves%2)<=archive.length())
+        {
+            String pattern = getLastMoves(numberOfMoves+numberOfMoves%2);
+            char[] patternArray = pattern.toCharArray();
+            int swaps = pattern.length()/2;
+            for ( int i=0; i<swaps; i++ )
+            {
+                char tempChar = patternArray[i*2];
+                patternArray[i*2] = patternArray[i*2+1];
+                patternArray[i*2+1] = tempChar;
+            }
+            return String.copyValueOf( patternArray, numberOfMoves%2, numberOfMoves );
+        }
+        return "";
+    }
 
     
     
