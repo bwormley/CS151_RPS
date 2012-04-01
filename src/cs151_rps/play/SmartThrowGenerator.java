@@ -18,9 +18,9 @@ public class SmartThrowGenerator extends ThrowGenerator
 		
 		rand = new RandomThrowGenerator();
 		//default
-		MAX_INT = 6;
+		MAX_INT = 5;
 		MIN_INT = 3;
-		n = MAX_INT;
+		n = MIN_INT;
 	}
 	
 	public void setN(int max, int min)
@@ -33,16 +33,18 @@ public class SmartThrowGenerator extends ThrowGenerator
 	{
 		//last strings
 		String pastNMoves = analysis.getLastMoves(n);
-                //System.out.println("getting pastNMoves: "+pastNMoves); 
 		//possible other player's moves
 		String Rnext = pastNMoves + "r";
 		String Pnext = pastNMoves + "p";
 		String Snext = pastNMoves + "s";
+
 		//freq of possible moves
 		int freqOfRNext = analysis.frequencyOf(Rnext); 
 		int freqOfPNext = analysis.frequencyOf(Pnext);
 		int freqOfSNext = analysis.frequencyOf(Snext);
-
+                System.out.println("count for "+Rnext+" = "+freqOfRNext); 
+                System.out.println("count for "+Pnext+" = "+freqOfPNext); 
+                System.out.println("count for "+Snext+" = "+freqOfSNext); 
 		/**
 		 * Covers: 
 		 * R > P > S 
@@ -89,8 +91,8 @@ public class SmartThrowGenerator extends ThrowGenerator
 		}
 		else 
 		{
-			for(n = MAX_INT; n >= MIN_INT; n--)
-			{
+			//for(n = MAX_INT; n >= MIN_INT; n--)
+			//{
 				String ans = BestOf(n);
 				if(ans.equals("PAPER"))
 					return GameObject.PAPER;
@@ -98,7 +100,7 @@ public class SmartThrowGenerator extends ThrowGenerator
 					return GameObject.ROCK;
 				if(ans.equals("SCISSORS"))
 					return GameObject.SCISSORS;
-			}
+			//}
 			throw new Exception();
 
 		}
