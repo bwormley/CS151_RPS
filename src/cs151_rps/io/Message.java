@@ -3,7 +3,8 @@ package cs151_rps.io;
 import java.util.Locale;
 
 /**
- * Abstract class which provides message IDs for all displayable messages, allowing subclasses to map IDs to localized strings
+ * Abstract class which provides message IDs for all displayable messages, 
+ * allowing subclasses to map IDs to localized strings
  * 
  * @author Team Lunar
  */

@@ -11,7 +11,6 @@ abstract public class ThrowGenerator {
     
     static public ThrowGenerator factory( String level )
     {
-        // TODO: implement smarter Throw Generators
         if (level.equalsIgnoreCase("random"))
             return new RandomThrowGenerator();
         if (level.equalsIgnoreCase("Smart"))

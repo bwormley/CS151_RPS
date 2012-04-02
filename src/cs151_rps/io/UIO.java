@@ -13,7 +13,7 @@ abstract public class UIO
     /**
      * Create an object that encapsulates all i/o for the designated endpoint
      * 
-     * @param endpoint one of several possible destinations for program output
+     * @param endpoint one of several possible destinations for program i/o
      * @param locale designation text localization
      */
     static public UIO factory( String endpoint, String localeString )

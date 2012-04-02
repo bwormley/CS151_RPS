@@ -1,10 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cs151_rps.player;
-
-//import cs151_rps.GameObject;
 
 import cs151_rps.GameObject;
 import cs151_rps.io.UIO;
@@ -13,7 +7,7 @@ import cs151_rps.io.UIO;
 /**
  * Abstraction of a player (human or automaton)
  * 
- * @author bwormley
+ * @author Team Lunar
  */
 public abstract class Player {
 	

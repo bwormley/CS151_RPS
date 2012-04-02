@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cs151_rps.heuristics;
 
 import java.util.HashMap; 
@@ -9,7 +5,7 @@ import java.util.Iterator;
 
 /**
  *
- * @author Sohi_x2
+ * @author Team Lunar
  */
 public class ShortTermAnalysis extends Analysis {
     public HashMap<String, Integer> shortTerm = new HashMap<String, Integer>();  
