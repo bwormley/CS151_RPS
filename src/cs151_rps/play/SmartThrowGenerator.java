@@ -19,7 +19,7 @@ public class SmartThrowGenerator extends ThrowGenerator
 		rand = new RandomThrowGenerator();
 		//default
 		MAX_INT = 5;
-		MIN_INT = 3;
+		MIN_INT = 2;
 		n = MIN_INT;
 	}
 	
