@@ -31,7 +31,7 @@ abstract public class Analysis {
      * two lengths, inclusive
      */
     protected final int MIN_DEPTH = 2;
-    protected final int MAX_DEPTH = 6;
+    protected final int MAX_DEPTH = 5;
     
     /**
      * Create an instance of a subclass to implement a game heuristic.
