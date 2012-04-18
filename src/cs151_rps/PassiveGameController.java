@@ -55,6 +55,11 @@ public class PassiveGameController {
         maxNumberOfRounds = numberOfRounds;
     }
     
+    //method to return maxNumberOfRounds
+    public int getNumberOfRounds() {
+        return maxNumberOfRounds; 
+    }
+    
     /**
      * called by the VIEW object once the user has chosen an experience level 
      * desired for the AI opponent.  This may be either 'random' or 'smart'
