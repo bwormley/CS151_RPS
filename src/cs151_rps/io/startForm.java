@@ -1,6 +1,11 @@
 
 
+
 package cs151_rps.io;
+
+import cs151_rps.PassiveGameController;
+import java.util.InputMismatchException;
+import javax.swing.JOptionPane;
 
 /* ************************** IMPORTANT **********************************
  * This form is displayed when the mainGameFrame is started.                 *
@@ -18,6 +23,12 @@ public class startForm extends javax.swing.JFrame {
         initComponents();
     }
 
+    //create the PassiveGameController reference to pass human player's info
+    private PassiveGameController passiveController; 
+    
+    //create Message class reference to retreive messages
+    Message message; 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,8 +46,15 @@ public class startForm extends javax.swing.JFrame {
         gameTypeList = new javax.swing.JList();
         startGameButton = new javax.swing.JButton();
         helpButton = new javax.swing.JButton();
+        warningLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jPanel1PropertyChange(evt);
+            }
+        });
 
         roundTtlLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         roundTtlLabel.setText("Number of Rounds: ");
@@ -51,11 +69,21 @@ public class startForm extends javax.swing.JFrame {
         gameTypeLabel.setText("Game Type: ");
 
         gameTypeList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Random ", "Smart " };
+            String[] strings = { "Smart", "Random" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        gameTypeList.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        gameTypeList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        gameTypeList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                gameTypeListValueChanged(evt);
+            }
+        });
+        gameTypeList.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                gameTypeListComponentShown(evt);
+            }
+        });
         jScrollPane2.setViewportView(gameTypeList);
 
         startGameButton.setText("Start Game");
@@ -72,45 +100,50 @@ public class startForm extends javax.swing.JFrame {
             }
         });
 
+        warningLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        warningLabel.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(gameTypeLabel)
-                            .addComponent(roundTtlLabel)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(startGameButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numofRoundsTextField)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addGap(77, 77, 77)
+                .addComponent(startGameButton)
+                .addGap(49, 49, 49)
+                .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addComponent(gameTypeLabel)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(roundTtlLabel)
+                .addGap(18, 18, 18)
+                .addComponent(numofRoundsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addContainerGap()
+                .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(roundTtlLabel)
-                    .addComponent(numofRoundsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(numofRoundsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(roundTtlLabel))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(gameTypeLabel)
-                        .addGap(0, 53, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gameTypeLabel))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(helpButton)
-                    .addComponent(startGameButton))
-                .addGap(22, 22, 22))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(startGameButton)
+                    .addComponent(helpButton))
+                .addGap(31, 31, 31))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -125,9 +158,8 @@ public class startForm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -139,25 +171,63 @@ public class startForm extends javax.swing.JFrame {
 
     private void startGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameButtonActionPerformed
         // TODO add your handling code here:
+        /* if the number of rounds are entered and the gameType is chosen, 
+         * display the mainGameFrame and close this form.
+         * else, display and error message and go back to the startForm. 
+         */
+        String input = numofRoundsTextField.getText(); 
         
-        //display the mainGameFrame and close this form 
-        new mainGameFrame().setVisible(true);
-        this.dispose();
+        //if the user didn't choose gameType, set it to Random
+            if (gameTypeList.getSelectedIndex() == -1)
+                gameTypeList.setSelectedIndex(0);
+            String gameType = (String)(gameTypeList.getSelectedValue()); 
+            
+        try {
+            int rounds = Integer.parseInt(input);
+            
+            //pass the info to PassiveGameController
+            passiveController.setNumberOfRounds(rounds); 
+            passiveController.setGameType(gameType); 
+            
+            //display the mainGameFrame and close this form 
+            new mainGameFrame().setVisible(true);
+            this.dispose();
+        }
+        catch (NumberFormatException nn){
+            warningLabel.setText("Enter valid number of rounds and "
+                    + " choose game Type."); 
+        }
     }//GEN-LAST:event_startGameButtonActionPerformed
 
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_helpButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void gameTypeListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_gameTypeListValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_gameTypeListValueChanged
 
+    private void jPanel1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jPanel1PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1PropertyChange
+
+    private void gameTypeListComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_gameTypeListComponentShown
+        // TODO add your handling code here:
+        gameTypeList.setSelectedIndex(0);
+    }//GEN-LAST:event_gameTypeListComponentShown
+
+    //This method is called by mainGameFrame to run this form
     public void runStartForm() {
+       //This is string array is created because the main methods requires 
+        //a string array of arguments to run the the program
        String args[] = {""}; 
        this.main(args);
     }
     
+    /**
+     * @param args the command line arguments
+     */
+
     public static void main(String args[]) {
         /*
          * Set the Nimbus look and feel
@@ -207,5 +277,6 @@ public class startForm extends javax.swing.JFrame {
     private javax.swing.JTextField numofRoundsTextField;
     private javax.swing.JLabel roundTtlLabel;
     private javax.swing.JButton startGameButton;
+    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }

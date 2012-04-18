@@ -2,6 +2,7 @@
 package cs151_rps.io;
 
 import java.util.Locale;
+import cs151_rps.*; 
 
 /* ************************** IMPORTANT **********************************
  * When mainGameFrame's main method is invoked, the first form               *
@@ -17,7 +18,10 @@ public class mainGameFrame extends javax.swing.JFrame {
     public mainGameFrame() {
         initComponents();
     }
-
+    
+    //create the PassiveGameController reference to pass human player's info
+    private PassiveGameController passiveController; 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,14 +32,12 @@ public class mainGameFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         helpButton = new javax.swing.JButton();
-        rockButton2 = new javax.swing.JButton();
-        rockButton1 = new javax.swing.JButton();
+        scissorsButton = new javax.swing.JButton();
+        paperButton = new javax.swing.JButton();
         rockButton = new javax.swing.JButton();
         computerMoveLabel = new javax.swing.JLabel();
         playerMoveLabel = new javax.swing.JLabel();
-        p1WinsLabel = new javax.swing.JLabel();
-        tiesLabel = new javax.swing.JLabel();
-        p1WinsTtlLabel3 = new javax.swing.JLabel();
+        playerScoreLabel = new javax.swing.JLabel();
         p2WinsTtlLabel = new javax.swing.JLabel();
         tiesTtlLabel = new javax.swing.JLabel();
         p1WinsTtlLabel = new javax.swing.JLabel();
@@ -48,9 +50,16 @@ public class mainGameFrame extends javax.swing.JFrame {
         youWinLabel = new javax.swing.JLabel();
         computerWinsLabel = new javax.swing.JLabel();
         computerPredictionLabel = new javax.swing.JLabel();
+        numOfTiesLabel = new javax.swing.JLabel();
+        computerScoreLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         helpButton.setText("Help");
         helpButton.addActionListener(new java.awt.event.ActionListener() {
@@ -59,17 +68,17 @@ public class mainGameFrame extends javax.swing.JFrame {
             }
         });
 
-        rockButton2.setText("Scissors");
-        rockButton2.addActionListener(new java.awt.event.ActionListener() {
+        scissorsButton.setText("Scissors");
+        scissorsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rockButton2ActionPerformed(evt);
+                scissorsButtonActionPerformed(evt);
             }
         });
 
-        rockButton1.setText("Paper");
-        rockButton1.addActionListener(new java.awt.event.ActionListener() {
+        paperButton.setText("Paper");
+        paperButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rockButton1ActionPerformed(evt);
+                paperButtonActionPerformed(evt);
             }
         });
 
@@ -86,20 +95,11 @@ public class mainGameFrame extends javax.swing.JFrame {
         playerMoveLabel.setText("jLabel1");
         playerMoveLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), null));
 
-        p1WinsLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        p1WinsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1WinsLabel.setText("# of Wins");
-        p1WinsLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        tiesLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        tiesLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tiesLabel.setText("Ties");
-        tiesLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        p1WinsTtlLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        p1WinsTtlLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        p1WinsTtlLabel3.setText("# of Wins");
-        p1WinsTtlLabel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        playerScoreLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        playerScoreLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        playerScoreLabel.setText("0");
+        playerScoreLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        playerScoreLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         p2WinsTtlLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         p2WinsTtlLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -155,6 +155,18 @@ public class mainGameFrame extends javax.swing.JFrame {
         computerPredictionLabel.setText("Computer predicted . . . ");
         computerPredictionLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        numOfTiesLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        numOfTiesLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        numOfTiesLabel.setText("0");
+        numOfTiesLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        numOfTiesLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        computerScoreLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        computerScoreLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        computerScoreLabel1.setText("0");
+        computerScoreLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        computerScoreLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -164,63 +176,66 @@ public class mainGameFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(youWinLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(playerMoveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(p1WinsTtlLabel))
-                            .addComponent(p1WinsLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(p1WinsTtlLabel3)
-                        .addGap(58, 58, 58))
+                                .addGap(47, 47, 47)
+                                .addComponent(rockButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(paperButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(scissorsButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(helpButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(playerMoveLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(youWinLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
-                                .addGap(27, 27, 27)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(rockButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(rockButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(rockButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-                                    .addComponent(helpButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(playerTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(84, 84, 84)
+                                .addComponent(currentRoundLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(playerTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(85, 85, 85)
-                                        .addComponent(ofLabel))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tiesLabel)
-                                        .addComponent(tiesTtlLabel)))
-                                .addGap(18, 18, 18)
-                                .addComponent(totalRoundLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(playerScoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(p1WinsTtlLabel))
+                                .addGap(128, 128, 128)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(computerTitleLabel)
-                                    .addContainerGap())
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGap(15, 15, 15)
-                                    .addComponent(computerMoveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(33, 33, 33)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(computerWinsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(25, 25, 25))))
+                            .addComponent(tiesTtlLabel)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(ofLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(totalRoundLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(181, 181, 181)
+                        .addComponent(numOfTiesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(currentRoundLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(137, 137, 137)
-                        .addComponent(p2WinsTtlLabel)
-                        .addGap(78, 78, 78))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(computerTitleLabel)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(computerMoveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(38, 38, 38))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(computerWinsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(computerScoreLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(p2WinsTtlLabel))
+                        .addGap(88, 88, 88))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(178, 178, 178)
-                .addComponent(roundLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(computerPredictionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(roundLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(computerPredictionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,32 +253,31 @@ public class mainGameFrame extends javax.swing.JFrame {
                         .addComponent(totalRoundLabel)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(p1WinsTtlLabel)
-                        .addComponent(p2WinsTtlLabel))
-                    .addComponent(tiesTtlLabel))
+                    .addComponent(tiesTtlLabel)
+                    .addComponent(p1WinsTtlLabel)
+                    .addComponent(p2WinsTtlLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(p1WinsLabel)
-                        .addComponent(p1WinsTtlLabel3))
-                    .addComponent(tiesLabel))
-                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(playerScoreLabel)
+                    .addComponent(numOfTiesLabel)
+                    .addComponent(computerScoreLabel1))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
+                        .addGap(22, 22, 22)
                         .addComponent(rockButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rockButton1)
+                        .addComponent(paperButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rockButton2)
+                        .addComponent(scissorsButton)
                         .addGap(18, 18, 18)
                         .addComponent(helpButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(playerMoveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(9, 9, 9)
+                        .addComponent(playerMoveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(youWinLabel))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
                         .addComponent(computerMoveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(computerWinsLabel)))
@@ -279,17 +293,26 @@ public class mainGameFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_helpButtonActionPerformed
 
-    private void rockButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rockButton2ActionPerformed
+    private void scissorsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scissorsButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rockButton2ActionPerformed
+        passiveController.humanThrows(GameObject.SCISSORS); 
+    }//GEN-LAST:event_scissorsButtonActionPerformed
 
-    private void rockButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rockButton1ActionPerformed
+    private void paperButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paperButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rockButton1ActionPerformed
+        passiveController.humanThrows(GameObject.PAPER); 
+    }//GEN-LAST:event_paperButtonActionPerformed
 
     private void rockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rockButtonActionPerformed
         // TODO add your handling code here:
+        passiveController.humanThrows(GameObject.ROCK); 
     }//GEN-LAST:event_rockButtonActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        int totalRounds = passiveController.getNumberOfRounds(); 
+        totalRoundLabel.setText(String.valueOf(totalRounds));
+    }//GEN-LAST:event_formComponentShown
 
     /**
      * @param args the command line arguments
@@ -333,28 +356,29 @@ public class mainGameFrame extends javax.swing.JFrame {
                  * when Start Game button is clicked in the startForm */
                 new startForm().runStartForm();
             }
+
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel computerMoveLabel;
     private javax.swing.JLabel computerPredictionLabel;
+    private javax.swing.JLabel computerScoreLabel1;
     private javax.swing.JLabel computerTitleLabel;
     private javax.swing.JLabel computerWinsLabel;
     private javax.swing.JLabel currentRoundLabel;
     private javax.swing.JButton helpButton;
+    private javax.swing.JLabel numOfTiesLabel;
     private javax.swing.JLabel ofLabel;
-    private javax.swing.JLabel p1WinsLabel;
     private javax.swing.JLabel p1WinsTtlLabel;
-    private javax.swing.JLabel p1WinsTtlLabel3;
     private javax.swing.JLabel p2WinsTtlLabel;
+    private javax.swing.JButton paperButton;
     private javax.swing.JLabel playerMoveLabel;
+    private javax.swing.JLabel playerScoreLabel;
     private javax.swing.JLabel playerTitleLabel;
     private javax.swing.JButton rockButton;
-    private javax.swing.JButton rockButton1;
-    private javax.swing.JButton rockButton2;
     private javax.swing.JLabel roundLabel;
-    private javax.swing.JLabel tiesLabel;
+    private javax.swing.JButton scissorsButton;
     private javax.swing.JLabel tiesTtlLabel;
     private javax.swing.JLabel totalRoundLabel;
     private javax.swing.JLabel youWinLabel;
