@@ -6,6 +6,7 @@ import cs151_rps.player.Player;
 import cs151_rps.score.Referee;
 import cs151_rps.score.Scorecard;
 import cs151_rps.io.mainGameFrame;
+import cs151_rps.score.Referee.Winner;
 
 /**
  * PASSIVE GAME CONTROLLER
@@ -69,7 +70,7 @@ public class PassiveGameController extends GameController{
         
         // manage this round of play
         roundNumber++;
-        referee.determineWinner( humanGesture, computerGesture );
+        Winner winner = referee.determineWinner( humanGesture, computerGesture );
         
         // prep results, and return it to the VIEW
         BoxScore score               = new BoxScore();
@@ -82,14 +83,12 @@ public class PassiveGameController extends GameController{
         else
             score.computersPredictedMove = GameObject.PAPER;
         
-        
-        
-        //score.computersPredictedMove = ROCK; // TODO use correct value when available
         score.roundNumber            = roundNumber;
         score.maxNumberOfRounds      = maxNumberOfRounds;
         score.numberOfHumanWins      = scorecard.getPlayerOneScore();
         score.numberOfComputerWins   = scorecard.getPlayerTwoScore();
         score.numberOfTies           = scorecard.getNumOfTies();
+        score.winner                 = winner;
         return score;
     }
     
