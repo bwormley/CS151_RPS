@@ -16,6 +16,7 @@ public class CS151_RPS {
         
         // initialize command line processor with expected arguments
         ParseCL clp = new ParseCL();
+        String type = "active";
         
         try {
             clp.parse(args);
@@ -26,11 +27,15 @@ public class CS151_RPS {
             System.exit(1);
         }
         catch (Exception e) {
+            if(e.getMessage().equals("GUI"))
+                type = "passive";
+            else {
             System.out.println( "UNKNOWN Command line error: " + e );
             clp.displayUsage();
             System.exit(1);
+            }
         }
-        game = new GameController(clp);
+        game = game.factory(type, clp);
         game.run();
     }
 }

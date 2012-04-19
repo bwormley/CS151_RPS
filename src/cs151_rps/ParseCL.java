@@ -86,9 +86,12 @@ public final class ParseCL
      * @throws IllegalArgumentException 
      */
     public void parse( String[] args ) 
-        throws IllegalArgumentException
+        throws IllegalArgumentException, Exception
     {
-        for ( int ix = 0; ix<args.length; ix++ ) {
+        if(args.length == 0) {
+            throw new Exception("GUI");
+        }
+            for ( int ix = 0; ix<args.length; ix++ ) {
             String key = args[ix];
             String val = "";
             if (!opt.containsKey(key))
