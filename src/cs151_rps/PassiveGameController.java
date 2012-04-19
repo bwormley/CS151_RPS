@@ -5,6 +5,7 @@ import cs151_rps.player.ComputerPlayer;
 import cs151_rps.player.Player;
 import cs151_rps.score.Referee;
 import cs151_rps.score.Scorecard;
+import cs151_rps.io.mainGameFrame;
 
 /**
  * PASSIVE GAME CONTROLLER
@@ -16,17 +17,7 @@ import cs151_rps.score.Scorecard;
  *
  * @author Team Lunar
  */
-public class PassiveGameController {
-    
-    /**
-     * The object that determines the winner
-     */
-    private Referee referee;
-    
-    /**
-     * The object that maintains match statistics
-     */
-    private Scorecard scorecard;
+public class PassiveGameController extends GameController{
     
     /**
      * The object that implements the AI player, of selectable degrees 
@@ -34,31 +25,14 @@ public class PassiveGameController {
      */
     private ComputerPlayer computerPlayer;
     
-    /**
-     * the number of rounds to play for this match
-     */
-    private int maxNumberOfRounds;
-    
-    /**
-     * the number of the current round of play
-     */
-    private int roundNumber;
-    
-    /**
-     * called by the VIEW object once the user's desired number of 
-     * rounds is input
-     * 
-     * @param numberOfRounds 
-     */
-    public void setNumberOfRounds( int numberOfRounds )
-    {
-        maxNumberOfRounds = numberOfRounds;
-    }
+    public mainGameFrame gf;
     
     //method to return maxNumberOfRounds
     public int getNumberOfRounds() {
         return maxNumberOfRounds; 
     }
+    
+    
     
     /**
      * called by the VIEW object once the user has chosen an experience level 
@@ -100,13 +74,28 @@ public class PassiveGameController {
         // prep results, and return it to the VIEW
         BoxScore score               = new BoxScore();
         score.computersMove          = computerGesture;
-        score.computersPredictedMove = ROCK; // TODO use correct value when available
+        
+        if(computerGesture == GameObject.PAPER)
+            score.computersPredictedMove = GameObject.ROCK;
+        if(computerGesture == GameObject.ROCK)
+            score.computersPredictedMove = GameObject.SCISSORS;
+        else
+            score.computersPredictedMove = GameObject.PAPER;
+        
+        
+        
+        //score.computersPredictedMove = ROCK; // TODO use correct value when available
         score.roundNumber            = roundNumber;
         score.maxNumberOfRounds      = maxNumberOfRounds;
         score.numberOfHumanWins      = scorecard.getPlayerOneScore();
         score.numberOfComputerWins   = scorecard.getPlayerTwoScore();
         score.numberOfTies           = scorecard.getNumOfTies();
         return score;
+    }
+    
+    public void run()
+    {
+        gf.start();
     }
 
 }
