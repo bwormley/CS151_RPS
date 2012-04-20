@@ -75,14 +75,7 @@ public class PassiveGameController extends GameController{
         // prep results, and return it to the VIEW
         BoxScore score               = new BoxScore();
         score.computersMove          = computerGesture;
-        
-        if(computerGesture == GameObject.PAPER)
-            score.computersPredictedMove = GameObject.ROCK;
-        if(computerGesture == GameObject.ROCK)
-            score.computersPredictedMove = GameObject.SCISSORS;
-        else
-            score.computersPredictedMove = GameObject.PAPER;
-        
+        score.computersPredictedMove = calculatePredictedMove(computerGesture);
         score.roundNumber            = roundNumber;
         score.maxNumberOfRounds      = maxNumberOfRounds;
         score.numberOfHumanWins      = scorecard.getPlayerOneScore();
@@ -90,6 +83,19 @@ public class PassiveGameController extends GameController{
         score.numberOfTies           = scorecard.getNumOfTies();
         score.winner                 = winner;
         return score;
+    }
+    
+    /*This method calculates what the computer predicted the human's move is,
+     * based on the computer's move.
+     */
+    private GameObject calculatePredictedMove(GameObject compGesture)
+    {
+        if(compGesture == GameObject.PAPER)
+            return GameObject.ROCK;
+        if(compGesture == GameObject.ROCK)
+            return GameObject.SCISSORS;
+        else
+            return GameObject.PAPER;
     }
     
     public void run()
