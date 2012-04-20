@@ -79,7 +79,7 @@ public class PassiveGameController extends GameController{
         score.roundNumber            = roundNumber;
         score.maxNumberOfRounds      = maxNumberOfRounds;
         score.numberOfHumanWins      = scorecard.getPlayerOneScore();
-        score.numberOfComputerWins   = scorecard.getPlayerTwoScore();
+        score.numberOfComputerWins   = scorecard.getPlayerTwoScore() - scorecard.getNumOfTies();
         score.numberOfTies           = scorecard.getNumOfTies();
         score.winner                 = winner;
         return score;

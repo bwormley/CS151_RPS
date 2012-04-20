@@ -480,7 +480,8 @@ public class mainGameFrame extends javax.swing.JFrame {
         if (b.roundNumber > passiveController.getNumberOfRounds())
             endGame(); 
         playerScoreLabel.setText(""+b.numberOfHumanWins);
-        computerScoreLabel.setText(""+b.numberOfComputerWins); 
+        computerScoreLabel.setText(""+b.numberOfComputerWins);
+        System.out.println("" + b.numberOfComputerWins);
         numOfTiesLabel.setText(""+b.numberOfTies);
         currentRoundLabel.setText(""+b.roundNumber); 
         displayWinnerLabel(b.winner);
@@ -498,6 +499,7 @@ public class mainGameFrame extends javax.swing.JFrame {
             endGame(); 
         playerScoreLabel.setText(""+b.numberOfHumanWins);
         computerScoreLabel.setText(""+b.numberOfComputerWins); 
+        System.out.println("" + b.numberOfComputerWins);
         numOfTiesLabel.setText(""+b.numberOfTies);
         currentRoundLabel.setText(""+b.roundNumber); 
         computerPredictionLabel.setText("Computer predicted "+b.computersPredictedMove);
@@ -512,6 +514,7 @@ public class mainGameFrame extends javax.swing.JFrame {
             endGame(); 
         playerScoreLabel.setText(""+b.numberOfHumanWins);
         computerScoreLabel.setText(""+b.numberOfComputerWins); 
+        System.out.println("" + b.numberOfComputerWins);
         numOfTiesLabel.setText(""+b.numberOfTies);
         currentRoundLabel.setText(""+b.roundNumber); 
         computerPredictionLabel.setText("Computer predicted "+b.computersPredictedMove);
