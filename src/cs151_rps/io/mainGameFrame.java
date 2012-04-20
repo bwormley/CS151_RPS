@@ -34,7 +34,7 @@ public class mainGameFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
-        jPanel1 = new javax.swing.JPanel();
+        GamePanel = new javax.swing.JPanel();
         playerTitleLabel = new javax.swing.JLabel();
         roundLabel = new javax.swing.JLabel();
         currentRoundLabel = new javax.swing.JLabel();
@@ -47,8 +47,6 @@ public class mainGameFrame extends javax.swing.JFrame {
         playerScoreLabel = new javax.swing.JLabel();
         numOfTiesLabel = new javax.swing.JLabel();
         computerScoreLabel = new javax.swing.JLabel();
-        playerMoveLabel = new javax.swing.JLabel();
-        computerMoveLabel = new javax.swing.JLabel();
         rockButton = new javax.swing.JButton();
         paperButton = new javax.swing.JButton();
         scissorsButton = new javax.swing.JButton();
@@ -56,7 +54,16 @@ public class mainGameFrame extends javax.swing.JFrame {
         youWinLabel = new javax.swing.JLabel();
         computerWinsLabel = new javax.swing.JLabel();
         computerPredictionLabel = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        CompPicturePane = new javax.swing.JLayeredPane();
+        CompPaperLabel = new javax.swing.JLabel();
+        CompScissorsLabel = new javax.swing.JLabel();
+        CompRockLabel = new javax.swing.JLabel();
+        CompThinkingLabel = new javax.swing.JLabel();
+        HumanPicturePane = new javax.swing.JLayeredPane();
+        HumanPaperLabel = new javax.swing.JLabel();
+        HumanScissorsLabel = new javax.swing.JLabel();
+        HumanRockLabel = new javax.swing.JLabel();
+        StartPanel = new javax.swing.JPanel();
         roundTtlLabel = new javax.swing.JLabel();
         numofRoundsTextField = new javax.swing.JTextField();
         gameTypeLabel = new javax.swing.JLabel();
@@ -65,6 +72,9 @@ public class mainGameFrame extends javax.swing.JFrame {
         startGameButton = new javax.swing.JButton();
         helpButton1 = new javax.swing.JButton();
         warningLabel = new javax.swing.JLabel();
+        PaperLabel = new javax.swing.JLabel();
+        RockLabel = new javax.swing.JLabel();
+        ScissorsLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(570, 390));
@@ -75,7 +85,7 @@ public class mainGameFrame extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setVisible(false);
+        GamePanel.setVisible(false);
 
         playerTitleLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         playerTitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -133,12 +143,6 @@ public class mainGameFrame extends javax.swing.JFrame {
         computerScoreLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         computerScoreLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        playerMoveLabel.setText("jLabel1");
-        playerMoveLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), null));
-
-        computerMoveLabel.setText("jLabel1");
-        computerMoveLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), null));
-
         rockButton.setText("Rock");
         rockButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,103 +189,140 @@ public class mainGameFrame extends javax.swing.JFrame {
         computerPredictionLabel.setText("Computer predicted . . . ");
         computerPredictionLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        CompPaperLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs151_rps/io/paper.png"))); // NOI18N
+        PaperLabel.setVisible(false);
+        CompPaperLabel.setBounds(0, 0, 120, 130);
+        CompPicturePane.add(CompPaperLabel, javax.swing.JLayeredPane.PALETTE_LAYER);
+
+        CompScissorsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs151_rps/io/computerScissors.jpg"))); // NOI18N
+        ScissorsLabel.setVisible(false);
+        CompScissorsLabel.setBounds(0, 10, 120, 100);
+        CompPicturePane.add(CompScissorsLabel, javax.swing.JLayeredPane.MODAL_LAYER);
+
+        CompRockLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs151_rps/io/rock.png"))); // NOI18N
+        RockLabel.setVisible(false);
+        CompRockLabel.setBounds(-10, -10, 140, 120);
+        CompPicturePane.add(CompRockLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        CompThinkingLabel.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        CompThinkingLabel.setText("The computer is thinking.....");
+        CompThinkingLabel.setVisible(true);
+        CompThinkingLabel.setBounds(10, 50, 98, 10);
+        CompPicturePane.add(CompThinkingLabel, javax.swing.JLayeredPane.POPUP_LAYER);
+
+        HumanPaperLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs151_rps/io/paper.png"))); // NOI18N
+        PaperLabel.setVisible(false);
+        HumanPaperLabel.setBounds(0, 0, 120, 130);
+        HumanPicturePane.add(HumanPaperLabel, javax.swing.JLayeredPane.PALETTE_LAYER);
+
+        HumanScissorsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs151_rps/io/computerScissors.jpg"))); // NOI18N
+        ScissorsLabel.setVisible(false);
+        HumanScissorsLabel.setBounds(0, 10, 120, 100);
+        HumanPicturePane.add(HumanScissorsLabel, javax.swing.JLayeredPane.MODAL_LAYER);
+
+        HumanRockLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs151_rps/io/rock.png"))); // NOI18N
+        RockLabel.setVisible(false);
+        HumanRockLabel.setBounds(-10, -10, 140, 120);
+        HumanPicturePane.add(HumanRockLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout GamePanelLayout = new javax.swing.GroupLayout(GamePanel);
+        GamePanel.setLayout(GamePanelLayout);
+        GamePanelLayout.setHorizontalGroup(
+            GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(GamePanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(GamePanelLayout.createSequentialGroup()
                         .addComponent(computerPredictionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 90, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(GamePanelLayout.createSequentialGroup()
+                        .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(GamePanelLayout.createSequentialGroup()
+                                .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(GamePanelLayout.createSequentialGroup()
                                         .addComponent(playerTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(105, 105, 105))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(GamePanelLayout.createSequentialGroup()
+                                        .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(playerScoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(p1WinsTtlLabel))
                                         .addGap(128, 128, 128)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(currentRoundLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(GamePanelLayout.createSequentialGroup()
                                         .addGap(44, 44, 44)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(GamePanelLayout.createSequentialGroup()
                                                 .addComponent(ofLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(totalRoundLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addComponent(tiesTtlLabel)))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(GamePanelLayout.createSequentialGroup()
                                         .addGap(35, 35, 35)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(roundLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(numOfTiesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(GamePanelLayout.createSequentialGroup()
+                                .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(youWinLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(playerMoveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(91, 91, 91)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(HumanPicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(99, 99, 99)
+                                .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(paperButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(rockButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(scissorsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(computerMoveLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GamePanelLayout.createSequentialGroup()
+                                .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(computerWinsLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(computerTitleLabel))
+                                    .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(CompPicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(computerTitleLabel)))
                                 .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GamePanelLayout.createSequentialGroup()
+                                .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(computerScoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(p2WinsTtlLabel))
                                 .addGap(56, 56, 56))))))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        GamePanelLayout.setVerticalGroup(
+            GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(GamePanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(roundLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(computerTitleLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(playerTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(ofLabel)
                         .addComponent(currentRoundLabel)
                         .addComponent(totalRoundLabel)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(GamePanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(p1WinsTtlLabel)
                             .addComponent(p2WinsTtlLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(playerScoreLabel)
                             .addComponent(computerScoreLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(playerMoveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(GamePanelLayout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(HumanPicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(youWinLabel))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(computerMoveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(GamePanelLayout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(CompPicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(computerWinsLabel))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(GamePanelLayout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(tiesTtlLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -299,12 +340,12 @@ public class mainGameFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1.setBounds(0, 0, 550, 350);
-        jLayeredPane1.add(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        GamePanel.setBounds(0, 0, 550, 350);
+        jLayeredPane1.add(GamePanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jPanel3.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        StartPanel.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jPanel3PropertyChange(evt);
+                StartPanelPropertyChange(evt);
             }
         });
 
@@ -355,51 +396,57 @@ public class mainGameFrame extends javax.swing.JFrame {
         warningLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         warningLabel.setForeground(new java.awt.Color(255, 0, 0));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout StartPanelLayout = new javax.swing.GroupLayout(StartPanel);
+        StartPanel.setLayout(StartPanelLayout);
+        StartPanelLayout.setHorizontalGroup(
+            StartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(StartPanelLayout.createSequentialGroup()
                 .addGap(77, 77, 77)
                 .addComponent(startGameButton)
                 .addGap(49, 49, 49)
                 .addComponent(helpButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(StartPanelLayout.createSequentialGroup()
                 .addGap(117, 117, 117)
                 .addComponent(gameTypeLabel)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(StartPanelLayout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(roundTtlLabel)
                 .addGap(18, 18, 18)
                 .addComponent(numofRoundsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(StartPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        StartPanelLayout.setVerticalGroup(
+            StartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(StartPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(StartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(numofRoundsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(roundTtlLabel))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(StartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(gameTypeLabel))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(StartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(startGameButton)
                     .addComponent(helpButton1))
                 .addGap(31, 31, 31))
         );
 
-        jPanel3.setBounds(65, 65, 360, 238);
-        jLayeredPane1.add(jPanel3, javax.swing.JLayeredPane.POPUP_LAYER);
+        StartPanel.setBounds(65, 65, 360, 238);
+        jLayeredPane1.add(StartPanel, javax.swing.JLayeredPane.POPUP_LAYER);
+        PaperLabel.setBounds(0, 0, 0, 0);
+        jLayeredPane1.add(PaperLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        RockLabel.setBounds(0, 0, 0, 0);
+        jLayeredPane1.add(RockLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        ScissorsLabel.setBounds(0, 0, 0, 0);
+        jLayeredPane1.add(ScissorsLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -440,6 +487,7 @@ public class mainGameFrame extends javax.swing.JFrame {
         computerPredictionLabel.setText("Computer predicted "+b.computersPredictedMove);
         if (b.roundNumber > passiveController.getNumberOfRounds())
             endGame(); 
+        updatePictures(GameObject.ROCK, b.computersMove);
         
     }//GEN-LAST:event_rockButtonActionPerformed
 
@@ -454,6 +502,7 @@ public class mainGameFrame extends javax.swing.JFrame {
         computerPredictionLabel.setText("Computer predicted "+b.computersPredictedMove);
         if (b.roundNumber > passiveController.getNumberOfRounds())
             endGame(); 
+        updatePictures(GameObject.PAPER, b.computersMove);
     }//GEN-LAST:event_paperButtonActionPerformed
 
     private void scissorsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scissorsButtonActionPerformed
@@ -467,8 +516,35 @@ public class mainGameFrame extends javax.swing.JFrame {
         computerPredictionLabel.setText("Computer predicted "+b.computersPredictedMove);
         if (b.roundNumber > passiveController.getNumberOfRounds())
             endGame(); 
+        updatePictures(GameObject.SCISSORS, b.computersMove);
     }//GEN-LAST:event_scissorsButtonActionPerformed
 
+    private void updatePictures(GameObject hum, GameObject comp)
+    {
+        CompThinkingLabel.setVisible(false);
+        HumanRockLabel.setVisible(false);
+        HumanPaperLabel.setVisible(false);
+        HumanScissorsLabel.setVisible(false);
+        CompRockLabel.setVisible(false);
+        CompPaperLabel.setVisible(false);
+        CompScissorsLabel.setVisible(false);
+        if(hum == GameObject.ROCK)
+            HumanRockLabel.setVisible(true);
+        else if(hum == GameObject.PAPER)
+            HumanPaperLabel.setVisible(true);
+        else
+            HumanScissorsLabel.setVisible(true);
+        
+        if(comp == GameObject.ROCK)
+            CompRockLabel.setVisible(true);
+        else if(comp == GameObject.PAPER)
+            CompPaperLabel.setVisible(true);
+        else
+            CompScissorsLabel.setVisible(true);
+        
+    }
+    
+    
     private void makeWinLabelsInvisible() {
         youWinLabel.setVisible(false);
         computerWinsLabel.setVisible(false);
@@ -542,8 +618,8 @@ public class mainGameFrame extends javax.swing.JFrame {
             totalRoundLabel.setText(""+rounds);
             passiveController.setNumberOfRounds(rounds);
             passiveController.setGameType(gameType); 
-            jPanel3.setVisible(false);
-            jPanel1.setVisible(true); 
+            StartPanel.setVisible(false);
+            GamePanel.setVisible(true); 
         } catch (NumberFormatException nn) {
             warningLabel.setText("Enter valid number of rounds and "
                     + " choose game Type.");
@@ -556,9 +632,9 @@ public class mainGameFrame extends javax.swing.JFrame {
         JOptionPane.showMessageDialog( new javax.swing.JFrame(),message.getMessage(Message.ID.HELP));
     }//GEN-LAST:event_helpButton1ActionPerformed
 
-    private void jPanel3PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jPanel3PropertyChange
+    private void StartPanelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_StartPanelPropertyChange
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel3PropertyChange
+    }//GEN-LAST:event_StartPanelPropertyChange
 
     /**
      * @param args the command line arguments
@@ -650,7 +726,20 @@ public class mainGameFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel computerMoveLabel;
+    private javax.swing.JLabel CompPaperLabel;
+    private javax.swing.JLayeredPane CompPicturePane;
+    private javax.swing.JLabel CompRockLabel;
+    private javax.swing.JLabel CompScissorsLabel;
+    private javax.swing.JLabel CompThinkingLabel;
+    private javax.swing.JPanel GamePanel;
+    private javax.swing.JLabel HumanPaperLabel;
+    private javax.swing.JLayeredPane HumanPicturePane;
+    private javax.swing.JLabel HumanRockLabel;
+    private javax.swing.JLabel HumanScissorsLabel;
+    private javax.swing.JLabel PaperLabel;
+    private javax.swing.JLabel RockLabel;
+    private javax.swing.JLabel ScissorsLabel;
+    private javax.swing.JPanel StartPanel;
     private javax.swing.JLabel computerPredictionLabel;
     private javax.swing.JLabel computerScoreLabel;
     private javax.swing.JLabel computerTitleLabel;
@@ -661,8 +750,6 @@ public class mainGameFrame extends javax.swing.JFrame {
     private javax.swing.JButton helpButton;
     private javax.swing.JButton helpButton1;
     private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel numOfTiesLabel;
     private javax.swing.JTextField numofRoundsTextField;
@@ -670,7 +757,6 @@ public class mainGameFrame extends javax.swing.JFrame {
     private javax.swing.JLabel p1WinsTtlLabel;
     private javax.swing.JLabel p2WinsTtlLabel;
     private javax.swing.JButton paperButton;
-    private javax.swing.JLabel playerMoveLabel;
     private javax.swing.JLabel playerScoreLabel;
     private javax.swing.JLabel playerTitleLabel;
     private javax.swing.JButton rockButton;
@@ -683,4 +769,14 @@ public class mainGameFrame extends javax.swing.JFrame {
     private javax.swing.JLabel warningLabel;
     private javax.swing.JLabel youWinLabel;
     // End of variables declaration//GEN-END:variables
+
+//dont's know why
+
+
+
+
+
+
+
+
 }
