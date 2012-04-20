@@ -602,7 +602,6 @@ public class mainGameFrame extends javax.swing.JFrame {
         BoxScore b = passiveController.humanThrows(gesture);
         playerScoreLabel.setText(""+b.numberOfHumanWins);
         computerScoreLabel.setText(""+b.numberOfComputerWins); 
-        System.out.println("" + b.numberOfComputerWins);
         numOfTiesLabel.setText(""+b.numberOfTies);
         currentRoundLabel.setText(""+b.roundNumber); 
         if (b.computersPredictedMove!=null)
