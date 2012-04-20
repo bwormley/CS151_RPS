@@ -38,6 +38,7 @@ public class Referee {
         // determine who won
         if (playerOne==playerTwo) {
             updateScore( Winner.TIE );
+            return Winner.TIE;
         }
         
         if (    (playerOne==ROCK     && playerTwo==SCISSORS)
