@@ -143,21 +143,21 @@ public class mainGameFrame extends javax.swing.JFrame {
         rockButton.setText("Rock");
         rockButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rockButtonActionPerformed(evt);
+                throwActionPerformed(evt);
             }
         });
 
         paperButton.setText("Paper");
         paperButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                paperButtonActionPerformed(evt);
+                throwActionPerformed(evt);
             }
         });
 
         scissorsButton.setText("Scissors");
         scissorsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                scissorsButtonActionPerformed(evt);
+                throwActionPerformed(evt);
             }
         });
 
@@ -338,7 +338,7 @@ public class mainGameFrame extends javax.swing.JFrame {
                         .addComponent(scissorsButton)
                         .addGap(18, 18, 18)
                         .addComponent(helpButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(computerPredictionLabel)
                 .addContainerGap())
         );
@@ -442,7 +442,7 @@ public class mainGameFrame extends javax.swing.JFrame {
                 .addGap(31, 31, 31))
         );
 
-        StartPanel.setBounds(65, 65, 360, 238);
+        StartPanel.setBounds(65, 65, 356, 247);
         jLayeredPane1.add(StartPanel, javax.swing.JLayeredPane.POPUP_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -471,55 +471,6 @@ public class mainGameFrame extends javax.swing.JFrame {
         String roundsString = String.valueOf(totalRounds); 
         totalRoundLabel.setText(roundsString); 
     }//GEN-LAST:event_formComponentShown
-
-    private void rockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rockButtonActionPerformed
-        // TODO add your handling code here:
-        
-        makeWinLabelsInvisible();
-        BoxScore b = passiveController.humanThrows(GameObject.ROCK);
-        if (b.roundNumber > passiveController.getNumberOfRounds())
-            endGame(); 
-        playerScoreLabel.setText(""+b.numberOfHumanWins);
-        computerScoreLabel.setText(""+b.numberOfComputerWins);
-        System.out.println("" + b.numberOfComputerWins);
-        numOfTiesLabel.setText(""+b.numberOfTies);
-        currentRoundLabel.setText(""+b.roundNumber); 
-        displayWinnerLabel(b.winner);
-        computerPredictionLabel.setText("Computer predicted "+b.computersPredictedMove);
-        
-        updatePictures(GameObject.ROCK, b.computersMove);
-        
-    }//GEN-LAST:event_rockButtonActionPerformed
-
-    private void paperButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paperButtonActionPerformed
-        // TODO add your handling code here:
-        makeWinLabelsInvisible();
-        BoxScore b = passiveController.humanThrows(GameObject.PAPER);
-        if (b.roundNumber > passiveController.getNumberOfRounds())
-            endGame(); 
-        playerScoreLabel.setText(""+b.numberOfHumanWins);
-        computerScoreLabel.setText(""+b.numberOfComputerWins); 
-        System.out.println("" + b.numberOfComputerWins);
-        numOfTiesLabel.setText(""+b.numberOfTies);
-        currentRoundLabel.setText(""+b.roundNumber); 
-        computerPredictionLabel.setText("Computer predicted "+b.computersPredictedMove);
-        updatePictures(GameObject.PAPER, b.computersMove);
-    }//GEN-LAST:event_paperButtonActionPerformed
-
-    private void scissorsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scissorsButtonActionPerformed
-        // TODO add your handling code here:
-        makeWinLabelsInvisible();
-        BoxScore b = passiveController.humanThrows(GameObject.SCISSORS);
-        if (b.roundNumber > passiveController.getNumberOfRounds())
-            endGame(); 
-        playerScoreLabel.setText(""+b.numberOfHumanWins);
-        computerScoreLabel.setText(""+b.numberOfComputerWins); 
-        System.out.println("" + b.numberOfComputerWins);
-        numOfTiesLabel.setText(""+b.numberOfTies);
-        currentRoundLabel.setText(""+b.roundNumber); 
-        computerPredictionLabel.setText("Computer predicted "+b.computersPredictedMove);
-        updatePictures(GameObject.SCISSORS, b.computersMove);
-    }//GEN-LAST:event_scissorsButtonActionPerformed
 
     private void updatePictures(GameObject hum, GameObject comp)
     {
@@ -638,6 +589,28 @@ public class mainGameFrame extends javax.swing.JFrame {
     private void StartPanelPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_StartPanelPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_StartPanelPropertyChange
+
+    // gets called for any throw button selected: ROCK, PAPER, or SCISSORS
+    private void throwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_throwActionPerformed
+        makeWinLabelsInvisible();
+        GameObject gesture;
+        if (evt.getActionCommand().equals("Rock"))
+            gesture = GameObject.ROCK;
+        else if (evt.getActionCommand().equals("Paper"))
+            gesture = GameObject.PAPER;
+        else 
+            gesture = GameObject.SCISSORS;
+        BoxScore b = passiveController.humanThrows(gesture);
+        playerScoreLabel.setText(""+b.numberOfHumanWins);
+        computerScoreLabel.setText(""+b.numberOfComputerWins); 
+        System.out.println("" + b.numberOfComputerWins);
+        numOfTiesLabel.setText(""+b.numberOfTies);
+        currentRoundLabel.setText(""+b.roundNumber); 
+        computerPredictionLabel.setText("Computer predicted "+b.computersPredictedMove);
+        updatePictures(gesture, b.computersMove);
+        if (b.roundNumber >= passiveController.getNumberOfRounds())
+            endGame(); 
+    }//GEN-LAST:event_throwActionPerformed
 
     /**
      * @param args the command line arguments

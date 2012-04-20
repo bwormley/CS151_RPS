@@ -207,7 +207,7 @@
                               <Component id="helpButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="41" max="32767" attributes="0"/>
+                      <EmptySpace pref="20" max="32767" attributes="0"/>
                       <Component id="computerPredictionLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -356,7 +356,7 @@
                 <Property name="text" type="java.lang.String" value="Rock"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rockButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="throwActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="paperButton">
@@ -364,7 +364,7 @@
                 <Property name="text" type="java.lang.String" value="Paper"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="paperButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="throwActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="scissorsButton">
@@ -372,7 +372,7 @@
                 <Property name="text" type="java.lang.String" value="Scissors"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="scissorsButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="throwActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="helpButton">
