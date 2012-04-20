@@ -72,9 +72,6 @@ public class mainGameFrame extends javax.swing.JFrame {
         startGameButton = new javax.swing.JButton();
         helpButton1 = new javax.swing.JButton();
         warningLabel = new javax.swing.JLabel();
-        PaperLabel = new javax.swing.JLabel();
-        RockLabel = new javax.swing.JLabel();
-        ScissorsLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(570, 390));
@@ -190,17 +187,20 @@ public class mainGameFrame extends javax.swing.JFrame {
         computerPredictionLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         CompPaperLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs151_rps/io/paper.png"))); // NOI18N
-        PaperLabel.setVisible(false);
+        CompPaperLabel.setPreferredSize(new java.awt.Dimension(100, 100));
+        CompPaperLabel.setVisible(false);
         CompPaperLabel.setBounds(0, 0, 120, 130);
         CompPicturePane.add(CompPaperLabel, javax.swing.JLayeredPane.PALETTE_LAYER);
 
         CompScissorsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs151_rps/io/computerScissors.jpg"))); // NOI18N
-        ScissorsLabel.setVisible(false);
+        CompScissorsLabel.setPreferredSize(new java.awt.Dimension(100, 100));
+        CompScissorsLabel.setVisible(false);
         CompScissorsLabel.setBounds(0, 10, 120, 100);
         CompPicturePane.add(CompScissorsLabel, javax.swing.JLayeredPane.MODAL_LAYER);
 
         CompRockLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs151_rps/io/rock.png"))); // NOI18N
-        RockLabel.setVisible(false);
+        CompRockLabel.setPreferredSize(new java.awt.Dimension(100, 100));
+        CompRockLabel.setVisible(false);
         CompRockLabel.setBounds(-10, -10, 140, 120);
         CompPicturePane.add(CompRockLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -211,17 +211,20 @@ public class mainGameFrame extends javax.swing.JFrame {
         CompPicturePane.add(CompThinkingLabel, javax.swing.JLayeredPane.POPUP_LAYER);
 
         HumanPaperLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs151_rps/io/paper.png"))); // NOI18N
-        PaperLabel.setVisible(false);
+        HumanPaperLabel.setPreferredSize(new java.awt.Dimension(100, 100));
+        HumanPaperLabel.setVisible(false);
         HumanPaperLabel.setBounds(0, 0, 120, 130);
         HumanPicturePane.add(HumanPaperLabel, javax.swing.JLayeredPane.PALETTE_LAYER);
 
-        HumanScissorsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs151_rps/io/computerScissors.jpg"))); // NOI18N
-        ScissorsLabel.setVisible(false);
+        HumanScissorsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs151_rps/io/humanScissors.jpg"))); // NOI18N
+        HumanScissorsLabel.setPreferredSize(new java.awt.Dimension(100, 100));
+        HumanScissorsLabel.setVisible(false);
         HumanScissorsLabel.setBounds(0, 10, 120, 100);
         HumanPicturePane.add(HumanScissorsLabel, javax.swing.JLayeredPane.MODAL_LAYER);
 
         HumanRockLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs151_rps/io/rock.png"))); // NOI18N
-        RockLabel.setVisible(false);
+        HumanRockLabel.setPreferredSize(new java.awt.Dimension(100, 100));
+        HumanRockLabel.setVisible(false);
         HumanRockLabel.setBounds(-10, -10, 140, 120);
         HumanPicturePane.add(HumanRockLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -265,7 +268,7 @@ public class mainGameFrame extends javax.swing.JFrame {
                             .addGroup(GamePanelLayout.createSequentialGroup()
                                 .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(youWinLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(HumanPicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(HumanPicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(99, 99, 99)
                                 .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(paperButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -314,7 +317,7 @@ public class mainGameFrame extends javax.swing.JFrame {
                         .addGroup(GamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(GamePanelLayout.createSequentialGroup()
                                 .addGap(7, 7, 7)
-                                .addComponent(HumanPicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(HumanPicturePane, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(youWinLabel))
                             .addGroup(GamePanelLayout.createSequentialGroup()
@@ -441,12 +444,6 @@ public class mainGameFrame extends javax.swing.JFrame {
 
         StartPanel.setBounds(65, 65, 360, 238);
         jLayeredPane1.add(StartPanel, javax.swing.JLayeredPane.POPUP_LAYER);
-        PaperLabel.setBounds(0, 0, 0, 0);
-        jLayeredPane1.add(PaperLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        RockLabel.setBounds(0, 0, 0, 0);
-        jLayeredPane1.add(RockLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        ScissorsLabel.setBounds(0, 0, 0, 0);
-        jLayeredPane1.add(ScissorsLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -477,16 +474,18 @@ public class mainGameFrame extends javax.swing.JFrame {
 
     private void rockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rockButtonActionPerformed
         // TODO add your handling code here:
+        
         makeWinLabelsInvisible();
         BoxScore b = passiveController.humanThrows(GameObject.ROCK);
+        if (b.roundNumber > passiveController.getNumberOfRounds())
+            endGame(); 
         playerScoreLabel.setText(""+b.numberOfHumanWins);
         computerScoreLabel.setText(""+b.numberOfComputerWins); 
         numOfTiesLabel.setText(""+b.numberOfTies);
         currentRoundLabel.setText(""+b.roundNumber); 
         displayWinnerLabel(b.winner);
         computerPredictionLabel.setText("Computer predicted "+b.computersPredictedMove);
-        if (b.roundNumber > passiveController.getNumberOfRounds())
-            endGame(); 
+        
         updatePictures(GameObject.ROCK, b.computersMove);
         
     }//GEN-LAST:event_rockButtonActionPerformed
@@ -495,13 +494,13 @@ public class mainGameFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         makeWinLabelsInvisible();
         BoxScore b = passiveController.humanThrows(GameObject.PAPER);
+        if (b.roundNumber > passiveController.getNumberOfRounds())
+            endGame(); 
         playerScoreLabel.setText(""+b.numberOfHumanWins);
         computerScoreLabel.setText(""+b.numberOfComputerWins); 
         numOfTiesLabel.setText(""+b.numberOfTies);
         currentRoundLabel.setText(""+b.roundNumber); 
         computerPredictionLabel.setText("Computer predicted "+b.computersPredictedMove);
-        if (b.roundNumber > passiveController.getNumberOfRounds())
-            endGame(); 
         updatePictures(GameObject.PAPER, b.computersMove);
     }//GEN-LAST:event_paperButtonActionPerformed
 
@@ -509,13 +508,13 @@ public class mainGameFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         makeWinLabelsInvisible();
         BoxScore b = passiveController.humanThrows(GameObject.SCISSORS);
+        if (b.roundNumber > passiveController.getNumberOfRounds())
+            endGame(); 
         playerScoreLabel.setText(""+b.numberOfHumanWins);
         computerScoreLabel.setText(""+b.numberOfComputerWins); 
         numOfTiesLabel.setText(""+b.numberOfTies);
         currentRoundLabel.setText(""+b.roundNumber); 
         computerPredictionLabel.setText("Computer predicted "+b.computersPredictedMove);
-        if (b.roundNumber > passiveController.getNumberOfRounds())
-            endGame(); 
         updatePictures(GameObject.SCISSORS, b.computersMove);
     }//GEN-LAST:event_scissorsButtonActionPerformed
 
@@ -573,6 +572,7 @@ public class mainGameFrame extends javax.swing.JFrame {
             message = "There was a tie!"; 
         
         JOptionPane.showMessageDialog(new javax.swing.JFrame(), message);
+        
     }
     
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
@@ -736,9 +736,6 @@ public class mainGameFrame extends javax.swing.JFrame {
     private javax.swing.JLayeredPane HumanPicturePane;
     private javax.swing.JLabel HumanRockLabel;
     private javax.swing.JLabel HumanScissorsLabel;
-    private javax.swing.JLabel PaperLabel;
-    private javax.swing.JLabel RockLabel;
-    private javax.swing.JLabel ScissorsLabel;
     private javax.swing.JPanel StartPanel;
     private javax.swing.JLabel computerPredictionLabel;
     private javax.swing.JLabel computerScoreLabel;
