@@ -4,6 +4,7 @@ package cs151_rps.io;
 import java.util.Locale;
 import cs151_rps.*; 
 import cs151_rps.score.Referee;
+import javax.swing.JOptionPane;
 
 /* ************************** IMPORTANT **********************************
  * When mainGameFrame's main method is invoked, the first form               *
@@ -474,8 +475,19 @@ public class mainGameFrame extends javax.swing.JFrame {
             computerWinsLabel.setVisible(true); 
     }
     
+    private void endGame(Referee.Winner winner){
+        rockButton.setEnabled(false);
+        paperButton.setEnabled(false); 
+        scissorsButton.setEnabled(false); 
+        String message; 
+        if (winner == Referee.Winner.PLAYER1)
+            message = "Congratulations"; 
+    }
+    
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
         // TODO add your handling code here:
+        EnglishMessage message = new EnglishMessage(); 
+        JOptionPane.showMessageDialog( new javax.swing.JFrame(),message.getMessage(Message.ID.HELP));
     }//GEN-LAST:event_helpButtonActionPerformed
 
     private void numofRoundsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numofRoundsTextFieldActionPerformed
@@ -523,6 +535,8 @@ public class mainGameFrame extends javax.swing.JFrame {
 
     private void helpButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButton1ActionPerformed
         // TODO add your handling code here:
+        EnglishMessage message = new EnglishMessage(); 
+        JOptionPane.showMessageDialog( new javax.swing.JFrame(),message.getMessage(Message.ID.HELP));
     }//GEN-LAST:event_helpButton1ActionPerformed
 
     private void jPanel3PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jPanel3PropertyChange
