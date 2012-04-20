@@ -188,7 +188,7 @@ public class mainGameFrame extends javax.swing.JFrame {
         CompPaperLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs151_rps/io/paper.png"))); // NOI18N
         CompPaperLabel.setPreferredSize(new java.awt.Dimension(100, 100));
         CompPaperLabel.setVisible(false);
-        CompPaperLabel.setBounds(0, 0, 120, 130);
+        CompPaperLabel.setBounds(0, 0, 100, 100);
         CompPicturePane.add(CompPaperLabel, javax.swing.JLayeredPane.PALETTE_LAYER);
 
         CompScissorsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs151_rps/io/computerScissors.jpg"))); // NOI18N
@@ -337,7 +337,7 @@ public class mainGameFrame extends javax.swing.JFrame {
                         .addComponent(scissorsButton)
                         .addGap(18, 18, 18)
                         .addComponent(helpButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(computerPredictionLabel)
                 .addContainerGap())
         );
@@ -441,7 +441,7 @@ public class mainGameFrame extends javax.swing.JFrame {
                 .addGap(31, 31, 31))
         );
 
-        StartPanel.setBounds(65, 65, 356, 247);
+        StartPanel.setBounds(65, 65, 360, 238);
         jLayeredPane1.add(StartPanel, javax.swing.JLayeredPane.POPUP_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
