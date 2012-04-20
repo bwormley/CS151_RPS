@@ -95,7 +95,7 @@ public class mainGameFrame extends javax.swing.JFrame {
 
         currentRoundLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         currentRoundLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        currentRoundLabel.setText("1");
+        currentRoundLabel.setText("0");
 
         ofLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ofLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -518,9 +518,9 @@ public class mainGameFrame extends javax.swing.JFrame {
         int humanScore = Integer.parseInt(playerScoreLabel.getText()); 
         int computerScore = Integer.parseInt(computerScoreLabel.getText()); 
         String message; 
-        if (humanScore > computerScore && humanScore > ties)
+        if (humanScore > computerScore)
             message = "Congratulations. You WON!!!!!!!"; 
-        else if (computerScore > humanScore && computerScore > ties)
+        else if (computerScore > humanScore)
             message = "Sorry. You lost. Computer won."; 
         else 
             message = "There was a tie!"; 
