@@ -207,7 +207,7 @@
                               <Component id="helpButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="20" max="32767" attributes="0"/>
+                      <EmptySpace pref="40" max="32767" attributes="0"/>
                       <Component id="computerPredictionLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -422,7 +422,6 @@
                   <Color blue="0" green="66" red="0" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Computer predicted . . . "/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
               </Properties>
             </Component>

@@ -183,7 +183,6 @@ public class mainGameFrame extends javax.swing.JFrame {
         computerPredictionLabel.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         computerPredictionLabel.setForeground(new java.awt.Color(0, 102, 0));
         computerPredictionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        computerPredictionLabel.setText("Computer predicted . . . ");
         computerPredictionLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         CompPaperLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs151_rps/io/paper.png"))); // NOI18N
@@ -338,7 +337,7 @@ public class mainGameFrame extends javax.swing.JFrame {
                         .addComponent(scissorsButton)
                         .addGap(18, 18, 18)
                         .addComponent(helpButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(computerPredictionLabel)
                 .addContainerGap())
         );
@@ -606,7 +605,8 @@ public class mainGameFrame extends javax.swing.JFrame {
         System.out.println("" + b.numberOfComputerWins);
         numOfTiesLabel.setText(""+b.numberOfTies);
         currentRoundLabel.setText(""+b.roundNumber); 
-        computerPredictionLabel.setText("Computer predicted "+b.computersPredictedMove);
+        if (b.computersPredictedMove!=null)
+            computerPredictionLabel.setText("Computer predicted "+b.computersPredictedMove);
         updatePictures(gesture, b.computersMove);
         if (b.roundNumber >= passiveController.getNumberOfRounds())
             endGame(); 

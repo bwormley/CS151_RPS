@@ -26,6 +26,12 @@ public class PassiveGameController extends GameController{
      */
     private ComputerPlayer computerPlayer;
     
+    /**
+     * determines experience level (heuristic) of AI player.  
+     * May be either "random" or "smart:
+     */
+    private String gameType;
+    
     public mainGameFrame gf;
     
     //method to return maxNumberOfRounds
@@ -43,6 +49,7 @@ public class PassiveGameController extends GameController{
      */
     public void setGameType( String gameType )
     {
+        this.gameType = gameType;
         computerPlayer = (ComputerPlayer) Player.factory( "AI", "HAL", null );
         computerPlayer.setExperienceLevel(gameType);
         scorecard = new Scorecard();
@@ -90,6 +97,8 @@ public class PassiveGameController extends GameController{
      */
     private GameObject calculatePredictedMove(GameObject compGesture)
     {
+        if (gameType.equalsIgnoreCase("random"))
+            return null;
         if(compGesture == GameObject.PAPER)
             return GameObject.ROCK;
         if(compGesture == GameObject.ROCK)
