@@ -438,6 +438,8 @@ public class mainGameFrame extends javax.swing.JFrame {
         currentRoundLabel.setText(""+b.roundNumber); 
         displayWinnerLabel(b.winner);
         computerPredictionLabel.setText("Computer predicted "+b.computersPredictedMove);
+        if (b.roundNumber > passiveController.getNumberOfRounds())
+            endGame(); 
         
     }//GEN-LAST:event_rockButtonActionPerformed
 
@@ -450,6 +452,8 @@ public class mainGameFrame extends javax.swing.JFrame {
         numOfTiesLabel.setText(""+b.numberOfTies);
         currentRoundLabel.setText(""+b.roundNumber); 
         computerPredictionLabel.setText("Computer predicted "+b.computersPredictedMove);
+        if (b.roundNumber > passiveController.getNumberOfRounds())
+            endGame(); 
     }//GEN-LAST:event_paperButtonActionPerformed
 
     private void scissorsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scissorsButtonActionPerformed
@@ -461,6 +465,8 @@ public class mainGameFrame extends javax.swing.JFrame {
         numOfTiesLabel.setText(""+b.numberOfTies);
         currentRoundLabel.setText(""+b.roundNumber); 
         computerPredictionLabel.setText("Computer predicted "+b.computersPredictedMove);
+        if (b.roundNumber > passiveController.getNumberOfRounds())
+            endGame(); 
     }//GEN-LAST:event_scissorsButtonActionPerformed
 
     private void makeWinLabelsInvisible() {
@@ -475,13 +481,22 @@ public class mainGameFrame extends javax.swing.JFrame {
             computerWinsLabel.setVisible(true); 
     }
     
-    private void endGame(Referee.Winner winner){
+    private void endGame(){
         rockButton.setEnabled(false);
         paperButton.setEnabled(false); 
-        scissorsButton.setEnabled(false); 
+        scissorsButton.setEnabled(false);
+        int ties = Integer.parseInt(numOfTiesLabel.getText()); 
+        int humanScore = Integer.parseInt(playerScoreLabel.getText()); 
+        int computerScore = Integer.parseInt(computerScoreLabel.getText()); 
         String message; 
-        if (winner == Referee.Winner.PLAYER1)
-            message = "Congratulations"; 
+        if (humanScore > computerScore && humanScore > ties)
+            message = "Congratulations. You WON!!!!!!!"; 
+        else if (computerScore > humanScore && computerScore > ties)
+            message = "Sorry. You lost. Computer won."; 
+        else 
+            message = "There was a tie!"; 
+        
+        JOptionPane.showMessageDialog(new javax.swing.JFrame(), message);
     }
     
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
@@ -521,6 +536,8 @@ public class mainGameFrame extends javax.swing.JFrame {
         int rounds;
         try {
             rounds = Integer.parseInt(input);
+            if (rounds <= 0)
+                throw new NumberFormatException();  
             //pass the info to PassiveGameController
             totalRoundLabel.setText(""+rounds);
             passiveController.setNumberOfRounds(rounds);
