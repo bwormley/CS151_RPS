@@ -1,0 +1,7 @@
+Now incorporated: quick&dirty integration of Solomon.
+
+Note: to run as a solomon client, use the following command line:
+
+java -jar dist/CS151_RPS.jar cs151_rps.CS151_RPS --p1 AI --p2 remote --level smart -r 128
+
+This forces the computer (AI) to go first.  And Solomon is integrated into a new player type (remote) rather than a new io type.  It is not integrated to work with the passive controller (i.e., the GUI locus of control).
