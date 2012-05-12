@@ -31,6 +31,8 @@ public abstract class Player {
                 return new UserPlayer( name, endpoint );
             if (species.equalsIgnoreCase("AI"))
                 return new ComputerPlayer();
+            if (species.equalsIgnoreCase("remote"))
+                return new RemotePlayer();
             return null;
         }
     

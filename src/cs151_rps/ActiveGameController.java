@@ -11,6 +11,13 @@ import static cs151_rps.score.Referee.Winner.PLAYER1;
 import static cs151_rps.score.Referee.Winner.PLAYER2;
 import cs151_rps.score.Scorecard;
 
+import solomonClientLib.RemotePlayer;
+import solomonserver.Gesture;
+import solomonserver.ResultCode;
+//import solomonserver.Scorecard;
+import static solomonserver.Gesture.*;
+import static solomonserver.ResultCode.*;
+
 /**
  * ROCK-PAPER-SCISSORS: The top-level class that coordinates interaction 
  * among the actors and the underlying system.
@@ -122,7 +129,12 @@ public class ActiveGameController extends GameController    {
         
         // initialize any final runtime parameters
         //maxRounds = args.getIntParam(NUM_ROUNDS_OPTION);
-        this.setNumberOfRounds(args.getIntParam(NUM_ROUNDS_OPTION));
+        setNumberOfRounds(args.getIntParam(NUM_ROUNDS_OPTION));
+        
+        if (args.getStringParam(PLAYER_TWO_OPTION).equalsIgnoreCase("remote")) {
+            RemotePlayer.getInstance().register("Lunar",null);
+            RemotePlayer.getInstance().startMatch(args.getIntParam(NUM_ROUNDS_OPTION));
+        }
         
         // MAIN GAME LOOP
         for ( roundNumber = 1; roundNumber <= maxNumberOfRounds; roundNumber++ ) {
@@ -136,6 +148,15 @@ public class ActiveGameController extends GameController    {
             try {
                 player1Throw = player1.queryThrow();
                 endpoint.displayThrow( player1.getName(), player1Throw );
+                if (args.getStringParam(PLAYER_TWO_OPTION).equalsIgnoreCase("remote")) {
+                    Gesture solThrow = null;
+                    switch (player1Throw) {
+                        case ROCK:     solThrow = Gesture.ROCK;     break;
+                        case PAPER:    solThrow = Gesture.PAPER;    break;
+                        case SCISSORS: solThrow = Gesture.SCISSORS; break;
+                    }
+                    RemotePlayer.getInstance().doGesture(solThrow);
+                }
                 player2Throw = player2.queryThrow();
                 endpoint.displayThrow( player2.getName(), player2Throw );
             }
